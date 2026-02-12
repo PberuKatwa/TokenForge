@@ -11,8 +11,6 @@ export async function evaluateWithGemini(optimizedData: EvalPayload) {
 
   if (!api_key) throw new Error(`NO api key for gemini was found`)
 
-
-
   const genAI = new GoogleGenerativeAI(api_key);
   const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash", // Use flash for speed/cost or pro for deeper reasoning
