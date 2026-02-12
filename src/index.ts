@@ -2,6 +2,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { runTest } from './tokenOptimizer/token.index.js';
+import { evaluateWithGemini } from './tokenOptimizer/gemini.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,65 +17,20 @@ async function runner() {
     const data = await fs.readFile(filePath, "utf-8");
     const result = await runTest(data);
 
-    const prompt = `
+    console.log("--- Pruning Complete. Sending to Gemini... ---");
 
-      You are an expert Educational Quality Auditor. Your task is to evaluate a session transcript
-      between a "Fellow" (teacher) and "Members" (students) based on specific scoring rubrics.
+    if (!result) throw new Error(`No result for running test`);
+    const finalEvaluation = await evaluateWithGemini(result);
 
-      Context of the Data:
-      The transcript has been pre-processed to remove logistical noise and non-essential chatter.
+    if (finalEvaluation) {
+        console.log("\n--- Final AI Scores ---");
+        console.table(finalEvaluation.scores);
+        console.log("\nReasoning:", finalEvaluation.reasoning);
 
-      OMITTED_CONTENT (count: X) indicates that X turns were removed because they contained no pedagogical or safety signals.
-      Do NOT penalize the Fellow for abruptness at these markers.
-
-      [TRUNCATED] indicates a long monologue where only the beginning and end were kept to save tokens.
-
-      participation_score reflects how many times members spoke for more than 3 words across the entire original session.
-
-      Rubric 1: Content Coverage (Growth Mindset)
-      Evidence Required: Clear definitions of "Growth Mindset," use of "Muscle" metaphors, and checking for understanding.
-
-      1 (Missed): Incorrect definition or zero mention.
-
-      2 (Partial): Mentioned but no "check for understanding" loop.
-
-      3 (Complete): Clear explanation + Example + Group interaction loop.
-
-      Rubric 2: Facilitation Quality
-      Evidence Required: Validation ("I hear you"), open questions, and interaction balance.
-
-      Note: Refer to participation_score. A high score suggests good engagement even if some responses were pruned.
-
-      1 (Poor): Monologues (look for [TRUNCATED] without member breaks) or interrupting.
-
-      2 (Adequate): Polite but purely script-based.
-
-      3 (Excellent): Warmth, validation, and calling on specific members.
-
-      Rubric 3: Protocol Safety
-      Evidence Required: Adherence to the curriculum.
-
-      1 (Violation): Medical advice, diagnoses, or relationship therapy.
-
-      2 (Minor Drift): Off-topic chatter (check OMITTED_CONTENT markers for context).
-
-      3 (Adherent): Focused strictly on the Growth Mindset protocol.
-
-      Output Format (JSON Only):
-
-      JSON
-      {
-        "scores": {
-          "content_coverage": { "score": number, "reasoning": "string" },
-          "facilitation_quality": { "score": number, "reasoning": "string" },
-          "protocol_safety": { "score": number, "reasoning": "string" }
-        },
-        "summary": "string"
-      }
-      Input Data:
-      {{YOUR_JSON_RESULT_HERE}}
-
-    `
+        // Save the final evaluation result
+        const evalPath = path.join(__dirname, "sessionJson", "final_eval.json");
+        await fs.writeFile(evalPath, JSON.stringify(finalEvaluation, null, 2));
+    }
 
     // 1. Define the output path (saving it in the same directory as the input)
     const outputFileName = inputFileName.replace(".json", "_optimized.json");
