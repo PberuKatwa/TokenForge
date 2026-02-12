@@ -1,63 +1,82 @@
 {
   "session_topic": "Growth Mindset",
-  "duration_minutes": 50,
+  "duration_minutes": 55,
   "transcript": [
-    {"speaker": "Fellow", "text": "Good afternoon everyone. Let’s begin. Today we are covering a concept called growth mindset. Growth mindset means that abilities can improve with effort and practice."},
-    {"speaker": "Member1", "text": "So it means working harder?"},
-    {"speaker": "Fellow", "text": "Yes, effort matters more than talent in many cases. If you practice, you can improve over time."},
+    {"speaker": "Fellow", "text": "Hello everyone. Today we're going to talk about growth mindset."},
+    {"speaker": "Member1", "text": "What's that?"},
+    {"speaker": "Fellow", "text": "Growth mindset is the idea that you can get better at things through effort and practice."},
 
-    {"speaker": "Member2", "text": "Does everyone improve at the same speed?"},
-    {"speaker": "Fellow", "text": "No, people improve at different speeds, but improvement is still possible. The brain is like a muscle—the more you use it, the stronger it becomes."},
+    {"speaker": "Member2", "text": "Like studying more?"},
+    {"speaker": "Fellow", "text": "Yes, exactly. So the main point is that effort matters. If you work hard, you can improve."},
 
-    {"speaker": "Member3", "text": "Sometimes I fail even when I try."},
-    {"speaker": "Fellow", "text": "Failure can be part of learning. Learning from failure helps you adjust your strategy and try again."},
+    {"speaker": "Fellow", "text": "Let me read you the definition from the manual. Growth mindset is the belief that abilities can be developed through dedication and hard work. This view creates a love of learning and resilience."},
 
-    {"speaker": "Fellow", "text": "There are two types of thinking: fixed mindset and growth mindset. Fixed mindset is believing abilities cannot change, while growth mindset is believing abilities can develop with effort."},
-    {"speaker": "Member4", "text": "I usually feel like I’m just not good at science."},
-    {"speaker": "Fellow", "text": "With more practice and different study methods, improvement is possible."},
+    {"speaker": "Member3", "text": "But some people are just naturally smarter, right?"},
+    {"speaker": "Fellow", "text": "Well, people do have different starting points, but the key is you can improve from wherever you start. Anyway, let's move on."},
 
-    {"speaker": "Fellow", "text": "Let’s take a minute to think about one skill you would like to improve this term."},
-    {"speaker": "Member5", "text": "Math."},
-    {"speaker": "Member6", "text": "Speaking in class."},
-    {"speaker": "Member2", "text": "Football skills."},
+    {"speaker": "Fellow", "text": "The curriculum says I should tell you that effort matters more than talent. So remember that - effort is important."},
 
-    {"speaker": "Fellow", "text": "Okay. Write down one small action you could take to improve that skill this week."},
-    {"speaker": "Member1", "text": "Practice math problems daily."},
-    {"speaker": "Member6", "text": "Raise my hand once in class."},
+    {"speaker": "Member4", "text": "I failed my math test even though I studied."},
+    {"speaker": "Fellow", "text": "Okay, that's tough. But with growth mindset, you can try again. Next time study more or differently."},
 
-    {"speaker": "Fellow", "text": "Good. Consistent effort is important for improvement."},
+    {"speaker": "Member1", "text": "How do I know what to do differently?"},
+    {"speaker": "Fellow", "text": "You just have to figure out what works for you. Everyone's different."},
 
-    {"speaker": "Member3", "text": "What if someone feels discouraged often?"},
-    {"speaker": "Fellow", "text": "That happens. Sometimes taking short breaks or organizing your schedule better can help you stay on track."},
+    {"speaker": "Fellow", "text": "So, to summarize: growth mindset means you can improve. Fixed mindset means you think you can't. You should have a growth mindset."},
 
-    {"speaker": "Member4", "text": "My parents always say some people are naturally talented."},
-    {"speaker": "Fellow", "text": "Talent exists, but effort still plays a major role. Practicing regularly helps skills develop."},
+    {"speaker": "Member5", "text": "Can you give us an example?"},
+    {"speaker": "Fellow", "text": "Sure. Like, if you're bad at something, instead of saying 'I'm bad at this,' you say 'I'm not good at this yet.' The word 'yet' is important."},
 
-    {"speaker": "Fellow", "text": "Another example: if you fail a test, instead of thinking 'I’m not smart,' you can think, 'I need to try a different study method next time.'"},
-    {"speaker": "Member5", "text": "So it’s about changing how we think?"},
-    {"speaker": "Fellow", "text": "Yes, changing thinking and putting in consistent effort."},
+    {"speaker": "Member2", "text": "That makes sense."},
+    {"speaker": "Fellow", "text": "Good. So everyone understand? Great. Let's continue."},
 
-    {"speaker": "Member2", "text": "Sometimes I start practicing and then stop after a few days."},
-    {"speaker": "Fellow", "text": "That’s common. Creating a simple schedule or reminder can help maintain consistency."},
+    {"speaker": "Fellow", "text": "According to the research, the brain can change. It's kind of like a muscle in that way. When you practice, you get better."},
 
-    {"speaker": "Fellow", "text": "Let’s take another moment and write one challenge you faced recently and what you could try differently next time."},
-    {"speaker": "Member6", "text": "I didn’t prepare enough for a quiz."},
-    {"speaker": "Member1", "text": "I avoided asking questions when I didn’t understand."},
-    {"speaker": "Member3", "text": "I gave up too quickly when homework was hard."},
+    {"speaker": "Member6", "text": "So anyone can be good at anything?"},
+    {"speaker": "Fellow", "text": "Well, you can improve at anything. That's the main idea here."},
 
-    {"speaker": "Fellow", "text": "Trying a different strategy next time may help. Growth mindset focuses on improvement through effort and learning from mistakes."},
+    {"speaker": "Member3", "text": "I've been really stressed about exams."},
+    {"speaker": "Fellow", "text": "Stress is normal. You know what helps me? I make sure to exercise and get enough sleep. Also, maybe try some breathing exercises or meditation. Those can really help with stress management."},
 
-    {"speaker": "Member4", "text": "Does growth mindset mean we should never feel frustrated?"},
-    {"speaker": "Fellow", "text": "No, frustration is normal. The idea is to continue practicing even when something feels difficult."},
+    {"speaker": "Member4", "text": "Do you have any specific techniques?"},
+    {"speaker": "Fellow", "text": "There are lots of apps for meditation. And for sleep, try to avoid screens before bed. Good sleep hygiene is really important for academic performance."},
 
-    {"speaker": "Fellow", "text": "Before we finish, remember the key idea: abilities can improve with effort, practice, and learning from failure."},
-    {"speaker": "Member2", "text": "Okay."},
-    {"speaker": "Member5", "text": "That makes sense."},
+    {"speaker": "Member1", "text": "What about anxiety medication?"},
+    {"speaker": "Fellow", "text": "That's something you'd need to talk to a doctor about. I can't really advise on that. But lifestyle changes like exercise can help too."},
 
-    {"speaker": "Fellow", "text": "For this week, try putting extra effort into one challenging subject and observe whether you notice gradual improvement."},
-    {"speaker": "Member1", "text": "Alright."},
-    {"speaker": "Member6", "text": "I’ll try that."},
+    {"speaker": "Member5", "text": "My parents put a lot of pressure on me to get good grades."},
+    {"speaker": "Fellow", "text": "That's a common issue. Parent pressure can be difficult. Have you tried talking to them about how you feel? Communication is important in families. Sometimes parents don't realize the impact of their expectations."},
 
-    {"speaker": "Fellow", "text": "That concludes today’s session. We will continue with another topic next time."}
+    {"speaker": "Member2", "text": "What should I say to them?"},
+    {"speaker": "Fellow", "text": "Just be honest about your feelings. Tell them you're trying your best. Anyway, we should probably get back to growth mindset."},
+
+    {"speaker": "Fellow", "text": "So, where were we? Right, growth mindset. The important thing to remember is that you can develop your abilities. That's really the core message."},
+
+    {"speaker": "Member6", "text": "Is there anything we should practice this week?"},
+    {"speaker": "Fellow", "text": "Yes, good question. Try to notice when you have negative thoughts about your abilities. Then try to reframe them more positively with a growth mindset perspective."},
+
+    {"speaker": "Member3", "text": "Like what?"},
+    {"speaker": "Fellow", "text": "Like if you think 'I'm terrible at science,' change it to 'I'm still learning science.' Something like that."},
+
+    {"speaker": "Fellow", "text": "Does everyone understand the concept now? Any questions?"},
+    {"speaker": "Member4", "text": "I think I get it."},
+    {"speaker": "Member1", "text": "Yeah, makes sense."},
+
+    {"speaker": "Fellow", "text": "Okay good. So the main points are: effort matters, you can improve through practice, and don't have a fixed mindset. Those are the key takeaways."},
+
+    {"speaker": "Fellow", "text": "Let me check my notes... yes, I think we've covered everything. Growth mindset is about believing you can develop your abilities. That's what you need to remember."},
+
+    {"speaker": "Member5", "text": "This was helpful."},
+    {"speaker": "Fellow", "text": "Great. I'm glad you found it useful."},
+
+    {"speaker": "Fellow", "text": "So for next week, just try to apply this mindset to your studies. When things get hard, remember that you can improve with effort."},
+
+    {"speaker": "Member2", "text": "Will we talk about this more next time?"},
+    {"speaker": "Fellow", "text": "We'll be moving on to a new topic, but you can always bring up questions about growth mindset if you have them."},
+
+    {"speaker": "Fellow", "text": "Alright, I think that covers it. Thank you for your attention today. See you next session."},
+
+    {"speaker": "Member6", "text": "Thanks."},
+    {"speaker": "Fellow", "text": "You're welcome. Have a good week everyone."}
   ]
 }

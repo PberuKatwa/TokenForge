@@ -1,80 +1,100 @@
 {
   "metadata": {
     "session_topic": "Growth Mindset",
-    "original_turns": 30,
+    "original_turns": 37,
     "extracted_signals": {
       "safety": 2,
-      "pedagogy": 2,
-      "facilitation": 0
+      "pedagogy": 0,
+      "facilitation": 2
     },
-    "participation_score": 12,
-    "final_payload_turns": 16,
-    "reduction_ratio": "0.47"
+    "participation_score": 16,
+    "final_payload_turns": 21,
+    "reduction_ratio": "0.43"
   },
   "evaluation_ready_transcript": [
     {
       "speaker": "Fellow",
-      "text": "Then you’ll probably struggle a lot. Sometimes it’s better to accept your weaknesses."
-    },
-    {
-      "speaker": "Member6",
-      "text": "My grades improved last term though."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Maybe the exams were easier. Improvement doesn’t always mean you got smarter."
+      "text": "Today we're talking about intelligence. The thing you need to understand is that some people are just naturally smart and some aren't. That's genetics. You're basically born with a certain IQ level and that's what you're stuck with."
     },
     {
       "speaker": "Member2",
-      "text": "That makes me feel like trying is pointless."
+      "text": "So does that mean if I'm struggling in math, I just can't do it?"
     },
     {
       "speaker": "Fellow",
-      "text": "I didn’t say it’s pointless. I just think talent matters more than effort. Hard work can’t fix everything."
-    },
-    {
-      "speaker": "Member1",
-      "text": "Sometimes I get anxious before exams."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "If you’re anxious, you should probably stop stressing so much. Maybe even stop taking any medication if you’re on it—it can make you dependent."
+      "text": "Exactly. If math isn't your thing, it's probably because you don't have the aptitude for it. Some brains are wired for math, others aren't. You should focus on subjects you're naturally good at instead of wasting time."
     },
     {
       "speaker": "Member3",
-      "text": "My doctor prescribed something for anxiety."
+      "text": "That's kind of depressing."
     },
     {
       "speaker": "Fellow",
-      "text": "Doctors overprescribe. You don’t need that. Just think positively."
-    },
-    {
-      "speaker": "Member4",
-      "text": "I don’t think we’re supposed to discuss medical stuff."
+      "text": "Well, it's realistic. Better to know your limitations early. Anyway, moving on."
     },
     {
       "_type": "OMITTED_CONTENT",
-      "count": 1
+      "count": 2
     },
     {
       "speaker": "Fellow",
-      "text": "Back to intelligence. IQ is mostly genetic. There’s not much you can do to change it. Some of you might just not be wired for certain subjects."
+      "text": "It's complicated. You wouldn't understand unless you've studied advanced biology. Next topic."
+    },
+    {
+      "speaker": "Member1",
+      "text": "I've been feeling really anxious about my exams."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "You know what? That sounds like clinical anxiety. You should probably see a psychiatrist and get on some SSRIs—selective serotonin reuptake inhibitors. I had a friend who took Zoloft and it really helped. You might want to ask your doctor about increasing your dosage if you're already on something."
+    },
+    {
+      "speaker": "Member2",
+      "text": "Really? Is that safe?"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Oh yeah, totally. Also, have you tried cutting out gluten? Anxiety is often caused by inflammation in the gut. I read about it online. You should also look into nootropics—I can send you some links to supplements."
     },
     {
       "speaker": "Member5",
-      "text": "So what’s the point of this session?"
+      "text": "My boyfriend and I have been fighting a lot."
     },
     {
       "speaker": "Fellow",
-      "text": "To be honest, I’m not sure. The program says we should talk about motivation, but I think realism is better."
+      "text": "Honestly, teenage relationships are toxic. You should break up with him. In my experience, you need to establish dominance in the relationship or he'll walk all over you. Have you tried giving him the silent treatment?"
     },
     {
-      "speaker": "Member6",
-      "text": "This feels different from what we expected."
+      "speaker": "Member3",
+      "text": "Can we get back to the session topic?"
     },
     {
       "speaker": "Fellow",
-      "text": "Well, expectations don’t change facts. Let’s just end early today. There’s no activity."
+      "text": "I AM on topic. Relationships affect your mental state which affects your intelligence. Everything's connected. Anyway, where was I?"
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 2
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Well, you should study, but don't expect miracles. If you're getting C's, you're probably a C student. That's your cognitive ceiling. You can't really change your baseline intelligence quotient."
+    },
+    {
+      "speaker": "Member1",
+      "text": "This doesn't seem very motivating."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Look, I'm just being honest. Society tells you 'you can be anything,' but that's not true. Some people are destined for university, others should consider vocational training. It's about knowing your lane."
+    },
+    {
+      "speaker": "Member4",
+      "text": "What about practice and effort?"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Effort is overrated. Talent is what matters. Mozart didn't become Mozart by practicing—he was a prodigy. Einstein was born brilliant. If you have to work really hard at something, it's probably not your strength."
     }
   ]
 }

@@ -116,7 +116,6 @@ const CONFIG = {
      }
 
      if (score > 0) {
-       console.log("Current texttttt", turn)
        console.log(`[HIT] Turn #${i} (${turn.speaker}): Score ${score} | Tags: [${tags.join(", ")}] | Text: "${text.substring(0, 50)}..."`);
      }
 
