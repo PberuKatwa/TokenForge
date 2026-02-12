@@ -1,0 +1,244 @@
+{
+  "metadata": {
+    "session_topic": "Growth Mindset",
+    "original_turns": 101,
+    "extracted_signals": {
+      "safety": 0,
+      "pedagogy": 13,
+      "facilitation": 2
+    },
+    "participation_score": 47,
+    "final_payload_turns": 57,
+    "reduction_ratio": "0.44"
+  },
+  "evaluation_ready_transcript": [
+    {
+      "speaker": "Member6",
+      "text": "Four."
+    },
+    {
+      "speaker": "Member3",
+      "text": "Three, I guess."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Nice, thanks for sharing. Today we’re talking about something called a growth mindset. But before that, let’s do a quick icebreaker. Tell us your name and something new you tried recently, even if it didn’t go perfectly."
+    },
+    {
+      "speaker": "Member4",
+      "text": "I’m Amina. I tried cooking chapati by myself… it was not round at all, but it tasted okay."
+    },
+    {
+      "speaker": "Member2",
+      "text": "I’m Brian. I tried learning some guitar chords online. Fingers hurt though."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 2
+    },
+    {
+      "speaker": "Member6",
+      "text": "I’m Esther. I started waking up earlier to read before school."
+    },
+    {
+      "speaker": "Member3",
+      "text": "I’m James. I tried running in the mornings. I stopped after two days."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Those are great examples. Notice something—everyone tried something new, and some parts were difficult. That connects directly to today’s topic: growth mindset. Has anyone heard that phrase before?"
+    },
+    {
+      "speaker": "Member4",
+      "text": "Yes, it means you can improve if you practice."
+    },
+    {
+      "speaker": "Member2",
+      "text": "Like when teachers say effort matters."
+    },
+    {
+      "speaker": "Member3",
+      "text": "But sometimes effort doesn’t work. Some people are just naturally good at things."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Good point, James. Let’s explore that. Growth mindset doesn’t mean everyone becomes the best at everything. It means abilities can improve over time with practice, strategies, and support. For example, someone may not become the fastest runner, but they can become faster than they were before."
+    },
+    {
+      "speaker": "Member5",
+      "text": "So it doesn’t mean everyone gets an A automatically?"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Exactly. It means skills are not fixed. Improvement is possible."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 7
+    },
+    {
+      "speaker": "Member5",
+      "text": "I guess… multiplication tables. I memorized them."
+    },
+    {
+      "speaker": "Member3",
+      "text": "Okay, I did improve at drawing actually."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Great examples. That improvement is evidence of growth mindset in action. Now, let’s talk about two types of thoughts. Fixed mindset thoughts sound like: 'I’m just not smart at this.' Growth mindset thoughts sound like: 'I’m not good at this yet, but I can improve.' What differences do you hear?"
+    },
+    {
+      "speaker": "Member2",
+      "text": "One sounds final, the other sounds temporary."
+    },
+    {
+      "speaker": "Member4",
+      "text": "The second one gives hope."
+    },
+    {
+      "speaker": "Member3",
+      "text": "But what if someone tries many times and still fails?"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Great question. Growth mindset also includes changing strategies—asking for help, trying new methods—not just repeating the same thing."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let’s do a short activity. I’ll give a fixed mindset statement, and you help convert it into a growth mindset statement. First: 'I’m bad at science.'"
+    },
+    {
+      "speaker": "Member6",
+      "text": "I can improve in science if I study differently."
+    },
+    {
+      "speaker": "Member2",
+      "text": "I just need more practice."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 2
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Excellent, Kevin."
+    },
+    {
+      "speaker": "Member1",
+      "text": "Sometimes teachers explain fast and I don’t understand."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That happens. A growth mindset response could be: 'I’ll ask for clarification or review later.' Small steps count."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Now let’s connect this to real life. Where could a growth mindset help you right now—school, friendships, sports, goals?"
+    },
+    {
+      "speaker": "Member6",
+      "text": "For me, preparing for university exams."
+    },
+    {
+      "speaker": "Member5",
+      "text": "Definitely math."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 4
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let’s go deeper. Kevin, you mentioned math. What usually goes through your mind when questions look difficult?"
+    },
+    {
+      "speaker": "Member5",
+      "text": "I just think… I won’t get this anyway."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That’s honest. What could be a growth mindset version of that thought?"
+    },
+    {
+      "speaker": "Member5",
+      "text": "Maybe… 'I can try one step first'."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Perfect."
+    },
+    {
+      "speaker": "Member3",
+      "text": "I still feel some people just learn faster."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That’s true—people start at different levels. Growth mindset isn’t about equal speed; it’s about continuous improvement compared to your past self."
+    },
+    {
+      "speaker": "Member3",
+      "text": "That makes more sense."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let’s do a short reflection. Think quietly for 30 seconds: what is one skill you want to grow this month?"
+    },
+    {
+      "speaker": "Member4",
+      "text": "Improving running stamina."
+    },
+    {
+      "speaker": "Member1",
+      "text": "Confidence speaking."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 20
+    },
+    {
+      "speaker": "Member3",
+      "text": "Try another method."
+    },
+    {
+      "speaker": "Member4",
+      "text": "I can help you practice."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Those are powerful messages. The interesting thing is we often say encouraging things to friends but not to ourselves. Growth mindset includes speaking to ourselves in the same supportive way."
+    },
+    {
+      "speaker": "Member1",
+      "text": "That’s true. I’m usually harder on myself."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Many people are. Changing self-talk is a skill we can practice."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Before we finish, let’s summarize: growth mindset means abilities can develop with effort, learning strategies, and support. Mistakes are not proof that you can’t do something—they are part of learning."
+    },
+    {
+      "speaker": "Member3",
+      "text": "So failure is like feedback."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Exactly."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "For your take-home practice: during the next week, notice one moment when you catch a fixed mindset thought—like 'I can’t do this.' Write it down and replace it with a growth mindset version. Then take one small action related to it."
+    },
+    {
+      "speaker": "Member2",
+      "text": "That sounds manageable."
+    },
+    {
+      "speaker": "Member5",
+      "text": "I’ll try it with math homework."
+    }
+  ]
+}

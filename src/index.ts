@@ -1,26 +1,42 @@
 import * as fs from 'fs/promises';
-import * as path from 'path'; // 1. Import path module
+import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { runTest } from './tokenOptimizer/token.index.js';
 
-// 2. Setup __dirname for ESM (since you are likely using ES Modules with tsx)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function runner() {
   try {
-    // 3. Construct the absolute path to the file in the same directory
-    const filePath = path.join(__dirname, "session1.json");
+    const inputFileName = "session1.json";
+    const filePath = path.join(__dirname, inputFileName);
 
-    console.log(`Reading file from: ${filePath}`); // Debugging line
+    console.log(`Reading file from: ${filePath}`);
 
     const data = await fs.readFile(filePath, "utf-8");
     const result = await runTest(data);
 
-    // console.log(result);
+    // 1. Define the output path (saving it in the same directory as the input)
+    const outputFileName = inputFileName.replace(".json", "_optimized.json");
+    const outputPath = path.join(__dirname, outputFileName);
+
+    // 2. Convert the result object to a pretty-printed JSON string
+    // The 'null, 2' arguments add indentation so it's readable for humans
+    const jsonString = JSON.stringify(result, null, 2);
+
+    // 3. Write to file
+    await fs.writeFile(outputPath, jsonString, "utf-8");
+
+    console.log(`\n✔ Success!`);
+    console.log(`Optimized payload saved to: ${outputPath}`);
+
+    // Optional: Log the reduction ratio to the console for a quick check
+    // if (result.metadata) {
+    //    console.log(`Reduction: ${(parseFloat(result.metadata.reduction_ratio) * 100).toFixed(0)}%`);
+    // }
 
   } catch (error) {
-    console.error(`Error in runner`, error);
+    console.error(`Error in runner:`, error);
   }
 }
 
