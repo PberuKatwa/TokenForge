@@ -3,6 +3,8 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { runTest } from './tokenOptimizer/token.index.js';
 import { evaluateWithGemini } from './tokenOptimizer/gemini.js';
+import { evaluateFullTranscript } from './tokenOptimizer/geminiFull.js';
+import { Session } from './tokenOptimizer/token.pruneLogged.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,24 +12,42 @@ const __dirname = path.dirname(__filename);
 async function runner() {
   try {
     const inputFileName = "sessionFail.json";
+    // const inputFileName = "sessionAverage.json";
+    // const inputFileName = "sessionPerfect.json";
     const filePath = path.join(__dirname, "sessionJson", inputFileName);
 
     console.log(`Reading file from: ${filePath}`);
 
     const data = await fs.readFile(filePath, "utf-8");
+    const unpotimizedSession: Session = JSON.parse(data);
+    console.log("\n================= START UNOPTIMIZED TESTTTTT ========================");
+
+    console.time("Unoptimized Gemini Response Time");
+    const unoptimizedGemini = await evaluateFullTranscript(unpotimizedSession)
+    console.timeEnd("Unoptimized Gemini Response Time");
+
+    console.log("================= END UNOPTIMIZED TESTTTTT ========================");
+
+    if (unoptimizedGemini) {
+      // console.log("unpoptimixedd", unoptimizedGemini)
+    }
+
+
     const result = await runTest(data);
 
-    console.log("--- Pruning Complete. Sending to Gemini... ---");
+    console.log("\n================= START TESTTTTT ========================");
 
     if (!result) throw new Error(`No result for running test`);
     console.time("Gemini Response Time");
     const finalEvaluation = await evaluateWithGemini(result);
     console.timeEnd("Gemini Response Time");
 
+    console.log("================= END TESTTTTT ========================");
+
     if (finalEvaluation) {
       const evalFileName = inputFileName.replace(".json", "_eval.json");
-        console.log("\n--- Final AI Scores ---");
-        console.table(finalEvaluation.scores);
+        // console.log("\n--- Final AI Scores ---");
+        // console.table(finalEvaluation.scores);
         // console.log("\nReasoning:", finalEvaluation.reasoning);
 
         // Save the final evaluation result

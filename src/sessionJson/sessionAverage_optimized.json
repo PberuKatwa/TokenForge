@@ -5,7 +5,7 @@
     "extracted_signals": {
       "safety": 2,
       "pedagogy": 16,
-      "facilitation": 1
+      "facilitation": 0
     },
     "participation_score": 13,
     "final_payload_turns": 47,
@@ -153,8 +153,8 @@
       "text": "Like if you think 'I'm terrible at science,' change it to 'I'm still learning science.' Something like that."
     },
     {
-      "speaker": "Fellow",
-      "text": "Does everyone understand the concept now? Any questions?"
+      "_type": "OMITTED_CONTENT",
+      "count": 1
     },
     {
       "speaker": "Member4",

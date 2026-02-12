@@ -13,6 +13,7 @@ export async function evaluateFullTranscript(session: Session) {
       generationConfig: { responseMimeType: "application/json" }
   });
 
+
   const systemPrompt = `
     You are an expert Educational Quality Auditor.
     Evaluate the FULL, UNEDITED session transcript provided.

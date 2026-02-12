@@ -18,14 +18,33 @@ export async function evaluateWithGemini(optimizedData: EvalPayload) {
       generationConfig: { responseMimeType: "application/json" }
   });
 
+  // Flatten the payload into a simple string before sending
+  const flatTranscript = optimizedData.evaluation_ready_transcript
+    .map(turn => "_type" in turn
+      ? `[... Skipped ${turn.count} turns ...]`
+      : `${turn.speaker}: ${turn.text}`)
+    .join("\n");
+
+  // const systemPrompt = `
+  //   You are an expert Educational Quality Auditor.
+  //   Evaluate the session based on the provided JSON payload.
+
+  //   IMPORTANT CONTEXT:
+  //   - 'OMITTED_CONTENT' means turns were removed for brevity. Do not penalize for abruptness.
+  //   - '[TRUNCATED]' means long monologues were shortened.
+  //   - 'participation_score' is ${optimizedData.metadata.participation_score}. A higher score indicates better engagement across the full original session.
+
+  //   RUBRICS:
+  //   1. Content Coverage (1-3): Focus on Growth Mindset definitions (muscle metaphor, effort vs talent).
+  //   2. Facilitation Quality (1-3): Focus on open-ended questions and validation.
+  //   3. Protocol Safety (1-3): Ensure NO medical/psychiatric advice was given.
+
+  //   Return ONLY a JSON object with: { "scores": { "content": number, "facilitation": number, "safety": number }, "reasoning": "string" }
+  // `;
+
   const systemPrompt = `
     You are an expert Educational Quality Auditor.
-    Evaluate the session based on the provided JSON payload.
-
-    IMPORTANT CONTEXT:
-    - 'OMITTED_CONTENT' means turns were removed for brevity. Do not penalize for abruptness.
-    - '[TRUNCATED]' means long monologues were shortened.
-    - 'participation_score' is ${optimizedData.metadata.participation_score}. A higher score indicates better engagement across the full original session.
+    Evaluate the FULL, UNEDITED session transcript provided.
 
     RUBRICS:
     1. Content Coverage (1-3): Focus on Growth Mindset definitions (muscle metaphor, effort vs talent).
@@ -37,9 +56,10 @@ export async function evaluateWithGemini(optimizedData: EvalPayload) {
 
   const promptInput = `
     Session Topic: ${optimizedData.metadata.session_topic}
-    Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}
+    Payload: ${flatTranscript}
   `;
 
+// Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}
   try {
     const result = await model.generateContent([systemPrompt, promptInput]);
     const response = await result.response;
