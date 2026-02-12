@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 async function runner() {
   try {
-    const inputFileName = "sessionPerfect.json";
+    const inputFileName = "sessionFail.json";
     const filePath = path.join(__dirname, "sessionJson", inputFileName);
 
     console.log(`Reading file from: ${filePath}`);
@@ -25,12 +25,13 @@ async function runner() {
     console.timeEnd("Gemini Response Time");
 
     if (finalEvaluation) {
+      const evalFileName = inputFileName.replace(".json", "_eval.json");
         console.log("\n--- Final AI Scores ---");
         console.table(finalEvaluation.scores);
-        console.log("\nReasoning:", finalEvaluation.reasoning);
+        // console.log("\nReasoning:", finalEvaluation.reasoning);
 
         // Save the final evaluation result
-        const evalPath = path.join(__dirname, "sessionJson", "final_eval.json");
+        const evalPath = path.join(__dirname, "sessionJson", evalFileName);
         await fs.writeFile(evalPath, JSON.stringify(finalEvaluation, null, 2));
     }
 
