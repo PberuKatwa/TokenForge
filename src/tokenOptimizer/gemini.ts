@@ -1,14 +1,24 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { EvalPayload } from "./token.prune.js";
-
-// Initialize Gemini
-const genAI = new GoogleGenerativeAI("YOUR_GEMINI_API_KEY");
-const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash", // Use flash for speed/cost or pro for deeper reasoning
-    generationConfig: { responseMimeType: "application/json" }
-});
+import dotenv from 'dotenv';
+dotenv.config();
 
 export async function evaluateWithGemini(optimizedData: EvalPayload) {
+
+  // Initialize Gemini
+
+  const api_key = process.env.GEMINI_API_KEY;
+
+  if (!api_key) throw new Error(`NO api key for gemini was found`)
+
+
+
+  const genAI = new GoogleGenerativeAI(api_key);
+  const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash", // Use flash for speed/cost or pro for deeper reasoning
+      generationConfig: { responseMimeType: "application/json" }
+  });
+
   const systemPrompt = `
     You are an expert Educational Quality Auditor.
     Evaluate the session based on the provided JSON payload.

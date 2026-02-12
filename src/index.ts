@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 async function runner() {
   try {
-    const inputFileName = "sessionAverage.json";
+    const inputFileName = "sessionPerfect.json";
     const filePath = path.join(__dirname, "sessionJson", inputFileName);
 
     console.log(`Reading file from: ${filePath}`);
