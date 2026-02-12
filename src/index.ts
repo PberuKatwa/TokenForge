@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 async function runner() {
   try {
     const inputFileName = "session1.json";
-    const filePath = path.join(__dirname, inputFileName);
+    const filePath = path.join(__dirname, "sessionJson", inputFileName);
 
     console.log(`Reading file from: ${filePath}`);
 
@@ -18,7 +18,7 @@ async function runner() {
 
     // 1. Define the output path (saving it in the same directory as the input)
     const outputFileName = inputFileName.replace(".json", "_optimized.json");
-    const outputPath = path.join(__dirname, outputFileName);
+    const outputPath = path.join(__dirname, "sessionJson", outputFileName);
 
     // 2. Convert the result object to a pretty-printed JSON string
     // The 'null, 2' arguments add indentation so it's readable for humans
