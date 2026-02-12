@@ -2,6 +2,7 @@
   "metadata": {
     "session_topic": "Growth Mindset",
     "original_turns": 49,
+    "original_word_count": 687,
     "extracted_signals": {
       "safety": 2,
       "pedagogy": 16,
@@ -9,7 +10,8 @@
     },
     "participation_score": 13,
     "final_payload_turns": 47,
-    "reduction_ratio": "0.04"
+    "final_word_count": 634,
+    "word_reduction_ratio": "0.08"
   },
   "evaluation_ready_transcript": [
     {

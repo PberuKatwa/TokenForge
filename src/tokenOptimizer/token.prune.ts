@@ -32,6 +32,7 @@ export type PayloadTurn = ProcessedTurn | OmittedMarker;
 export interface EvalMetadata {
   session_topic: string;
   original_turns: number;
+  original_word_count: number; // New
   extracted_signals: {
     safety: number;
     pedagogy: number;
@@ -39,7 +40,8 @@ export interface EvalMetadata {
   };
   participation_score: number;
   final_payload_turns: number;
-  reduction_ratio: string;
+  final_word_count: number;    // New
+  word_reduction_ratio: string; // New (More accurate than turn reduction)
 }
 
 export interface EvalPayload {
@@ -65,63 +67,51 @@ const CONFIG = {
   MAX_MONOLOGUE_CHARS: 600
 };
 
-// --- Core Logic ---
+/// --- Updated Interfaces ---
 
-/**
- * Optimizes a transcript into a token-efficient payload for LLM analysis.
- */
+
+
+// Helper to count words
+const countWords = (str: string): number => str.trim().split(/\s+/).length;
+
 export function optimizeTranscriptForLLM(session: Session): EvalPayload {
   const { transcript } = session;
   const scoredTurns: ScoredTurn[] = [];
-
   const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
   let participationScore = 0;
+
+  // Track original words
+  let originalWordCount = 0;
 
   // PASS 1: Categorization & Scoring
   for (let i = 0; i < transcript.length; i++) {
     const turn = transcript[i];
     const text = turn.text;
-    const isFellow = turn.speaker === "Fellow";
+    const wordCount = countWords(text);
+    originalWordCount += wordCount;
 
+    const isFellow = turn.speaker === "Fellow";
     let score = 0;
     const tags: string[] = [];
 
-    // Protocol Safety
     if (CONFIG.SAFETY_LEXICON.test(text)) {
-      score += 100;
-      tags.push("SAFETY_CRITICAL");
-      signals.safety++;
+      score += 100; tags.push("SAFETY"); signals.safety++;
     }
-
-    // Content Coverage
     if (isFellow && CONFIG.PEDAGOGY_LEXICON.test(text)) {
-      score += 50;
-      tags.push("PEDAGOGY");
-      signals.pedagogy++;
+      score += 50; tags.push("PEDAGOGY"); signals.pedagogy++;
     }
-
-    // Facilitation Quality
     if (isFellow) {
       if (CONFIG.REFLECTION_PROMPTS.test(text)) {
-        score += 40;
-        tags.push("REFLECTION");
-        signals.facilitation++;
+        score += 40; tags.push("REFLECTION"); signals.facilitation++;
       }
       if (CONFIG.EMPATHY_MARKERS.test(text) || CONFIG.CHECK_FOR_UNDERSTANDING.test(text)) {
-        score += 30;
-        tags.push("FACILITATION");
-        signals.facilitation++;
+        score += 30; tags.push("FACILITATION"); signals.facilitation++;
       }
     }
 
-    // Interaction Check (Metric Support)
-    if (!isFellow && text.split(/\s+/).length > 3) {
-      participationScore++;
-    }
+    if (!isFellow && wordCount > 3) participationScore++;
 
     scoredTurns.push({ ...turn, index: i, score, tags });
-
-    // Reset regex state for global flags
     CONFIG.SAFETY_LEXICON.lastIndex = 0;
     CONFIG.PEDAGOGY_LEXICON.lastIndex = 0;
   }
@@ -140,38 +130,39 @@ export function optimizeTranscriptForLLM(session: Session): EvalPayload {
   const finalPayload: PayloadTurn[] = [];
   const sortedIndices = Array.from(keepIndices).sort((a, b) => a - b);
   let lastIdx = -1;
+  let finalWordCount = 0;
 
   for (const idx of sortedIndices) {
-    // Inject gap marker if content was skipped
     if (lastIdx !== -1 && idx > lastIdx + 1) {
-      finalPayload.push({
-        _type: "OMITTED_CONTENT",
-        count: idx - lastIdx - 1
-      });
+      finalPayload.push({ _type: "OMITTED_CONTENT", count: idx - lastIdx - 1 });
     }
 
     const originalTurn = transcript[idx];
     const processedTurn: ProcessedTurn = { ...originalTurn };
 
-    // Prune very long monologues (preserve start and end)
     if (processedTurn.text.length > CONFIG.MAX_MONOLOGUE_CHARS) {
       const half = Math.floor(CONFIG.MAX_MONOLOGUE_CHARS / 2);
-      processedTurn.text = `${processedTurn.text.slice(0, half)} ... [LONG MONOLOGUE TRUNCATED] ... ${processedTurn.text.slice(-half)}`;
+      processedTurn.text = `${processedTurn.text.slice(0, half)} ... [TRUNCATED] ... ${processedTurn.text.slice(-half)}`;
       processedTurn._compressed = true;
     }
 
+    finalWordCount += countWords(processedTurn.text);
     finalPayload.push(processedTurn);
     lastIdx = idx;
   }
+
+  const reduction = (1 - (finalWordCount / originalWordCount)).toFixed(2);
 
   return {
     metadata: {
       session_topic: session.session_topic,
       original_turns: transcript.length,
+      original_word_count: originalWordCount,
       extracted_signals: signals,
       participation_score: participationScore,
       final_payload_turns: finalPayload.length,
-      reduction_ratio: (1 - (finalPayload.length / transcript.length)).toFixed(2)
+      final_word_count: finalWordCount,
+      word_reduction_ratio: reduction
     },
     evaluation_ready_transcript: finalPayload
   };
