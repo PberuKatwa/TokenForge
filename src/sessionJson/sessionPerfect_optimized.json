@@ -4,12 +4,12 @@
     "original_turns": 120,
     "extracted_signals": {
       "safety": 0,
-      "pedagogy": 37,
-      "facilitation": 16
+      "pedagogy": 36,
+      "facilitation": 6
     },
     "participation_score": 47,
-    "final_payload_turns": 108,
-    "reduction_ratio": "0.10"
+    "final_payload_turns": 103,
+    "reduction_ratio": "0.14"
   },
   "evaluation_ready_transcript": [
     {
@@ -37,8 +37,8 @@
       "text": "Yes, that's a great example. Studying differently or putting in more effort can help you improve."
     },
     {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
+      "speaker": "Member3",
+      "text": "But some people are naturally smarter."
     },
     {
       "speaker": "Fellow",
@@ -69,8 +69,8 @@
       "text": "That's a strong plan. You could also try asking your teacher which specific topics to focus on, or studying with a friend. The key is that failure is part of learning, not the end of it."
     },
     {
-      "speaker": "Member5",
-      "text": "So failure is actually good?"
+      "_type": "OMITTED_CONTENT",
+      "count": 1
     },
     {
       "speaker": "Fellow",
@@ -149,16 +149,8 @@
       "text": "Thanks for jumping in. What small step could help you improve there?"
     },
     {
-      "speaker": "Member4",
-      "text": "Practicing introductions more."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "That's specific and actionable. Great thinking. Starting with one part of the essay, like introductions, is a perfect way to build your skills step by step."
-    },
-    {
-      "speaker": "Member1",
-      "text": "Sometimes I give up too easily."
+      "_type": "OMITTED_CONTENT",
+      "count": 3
     },
     {
       "speaker": "Fellow",
@@ -269,12 +261,8 @@
       "text": "Perfect. You acknowledged the current difficulty but left room for growth. What about the others?"
     },
     {
-      "speaker": "Member6",
-      "text": "Instead of 'I'm not a people person,' maybe 'I'm still developing my social skills'?"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Excellent reframe. And for sports?"
+      "_type": "OMITTED_CONTENT",
+      "count": 2
     },
     {
       "speaker": "Member4",
@@ -298,15 +286,7 @@
     },
     {
       "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Fellow",
-      "text": "That takes courage. Each time you speak up, you're building that skill."
-    },
-    {
-      "speaker": "Member1",
-      "text": "Do five extra practice problems each day for math."
+      "count": 3
     },
     {
       "speaker": "Fellow",
