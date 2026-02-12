@@ -9,20 +9,15 @@
       "facilitation": 0
     },
     "participation_score": 13,
-    "final_payload_turns": 34,
-    "final_word_count": 408,
-    "word_reduction_ratio": "0.41"
+    "final_payload_turns": 18,
+    "final_word_count": 199,
+    "word_reduction_ratio": "0.71"
   },
   "evaluation_ready_transcript": [
     {
       "speaker": "Fellow",
-      "text": "Hello everyone. Today we're going to talk about growth mindset.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member1",
-      "text": "What's that?",
-      "_compressed": false
+      "text": " Today we're going to talk about growth mindset.",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
@@ -30,77 +25,38 @@
       "_compressed": false
     },
     {
-      "speaker": "Member2",
-      "text": "studying more?",
+      "speaker": "Fellow",
+      "text": " the main point is that effort matters.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "Yes, exactly. the main point is that effort matters. If you work hard, you can improve. Let me read you the definition from t...[TRUNCATED]...belief that abilities can be developed through dedication and hard work. This view creates a love of learning and resilience.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member3",
-      "text": "But some people are naturally smarter, right?",
+      "text": " Growth mindset is the belief that abilities can be developed through dedication and hard work.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": " The curriculum says I should tell you that effort matters more than talent.",
+      "text": "The curriculum says I should tell you that effort matters more than talent.",
       "_compressed": true
     },
     {
-      "speaker": "Member4",
-      "text": "I failed my math test even though I studied.",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": "Okay, that's tough. But with growth mindset, you can try again. Next time study more or differently.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member1",
-      "text": "How do I know what to do differently?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": " , to summarize: growth mindset means you can improve.  You should have a growth mindset.",
+      "text": " But with growth mindset, you can try again.",
       "_compressed": true
     },
     {
-      "speaker": "Member5",
-      "text": "Can you give us an example?",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": "Sure. , if you're bad at something, instead of saying 'I'm bad at this,' you say 'I'm not good at this yet.' The word 'yet' is important.",
+      "text": ", to summarize: growth mindset means you can improve.",
       "_compressed": true
     },
     {
-      "speaker": "Member2",
-      "text": "That makes sense.",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": " everyone understand?  It's a muscle in that way.",
+      "text": "Sure. , if you're bad at something, instead of saying 'I'm bad at this,' you say 'I'm not good at th...",
       "_compressed": true
     },
     {
-      "speaker": "Member6",
-      "text": "anyone can be good at anything?",
-      "_compressed": true
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 4
-    },
-    {
       "speaker": "Fellow",
-      "text": "There are lots of apps for meditation.",
+      "text": " It's a muscle in that way.",
       "_compressed": true
     },
     {
@@ -110,61 +66,33 @@
     },
     {
       "speaker": "Fellow",
-      "text": "That's something you'd need to talk to a doctor about. I can't advise on that. But lifestyle changes exercise can help too.",
+      "text": "That's something you'd need to talk to a doctor about.",
       "_compressed": true
-    },
-    {
-      "speaker": "Member5",
-      "text": "My parents put a lot of pressure on me to get good grades.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member2",
-      "text": "What should I say to them?",
-      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "be honest about your feelings. Tell them you're trying your best. Anyway, we should probably get back to growth mindset. , wh...[TRUNCATED]...e we? Right, growth mindset. The important thing to remember is that you can develop your abilities. That's the core message.",
+      "text": " Anyway, we should probably get back to growth mindset.",
       "_compressed": true
-    },
-    {
-      "speaker": "Member6",
-      "text": "Is there anything we should practice this week?",
-      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "Yes, good question. Try to notice when you have negative thoughts about your abilities. Then try to reframe them more positively with a growth mindset perspective.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member3",
-      "text": "what?",
+      "text": " , growth mindset.",
       "_compressed": true
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 3
-    },
-    {
-      "speaker": "Member1",
-      "text": "Yeah, makes sense.",
-      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "Okay good. the main points are: effort matters, you can improve through practice, and don't have a fixed mindset. Those are t...[TRUNCATED]...we've covered everything. Growth mindset is about believing you can develop your abilities. That's what you need to remember.",
+      "text": " Then try to reframe them more positively with a growth mindset perspective.",
       "_compressed": true
     },
     {
-      "speaker": "Member5",
-      "text": "This was helpful.",
-      "_compressed": false
+      "speaker": "Fellow",
+      "text": " the main points are: effort matters, you can improve through practice, and don't have a fixed minds...",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " Growth mindset is about believing you can develop your abilities.",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
@@ -172,13 +100,8 @@
       "_compressed": true
     },
     {
-      "speaker": "Member2",
-      "text": "Will we talk about this more next time?",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": "We'll be moving on to a new topic, but you can always bring up questions about growth mindset if you have them.",
+      "text": "We'll be moving on to a new topic, but you can always bring up questions about growth mindset if you...",
       "_compressed": true
     }
   ]

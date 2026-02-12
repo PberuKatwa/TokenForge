@@ -18,12 +18,7 @@ export async function evaluateWithGemini(optimizedData: EvalPayload) {
       generationConfig: { responseMimeType: "application/json" }
   });
 
-  // Flatten the payload into a simple string before sending
-  const flatTranscript = optimizedData.evaluation_ready_transcript
-    .map(turn => "_type" in turn
-      ? `[... Skipped ${turn.count} turns ...]`
-      : `${turn.speaker}: ${turn.text}`)
-    .join("\n");
+
 
   // const systemPrompt = `
   //   You are an expert Educational Quality Auditor.
@@ -56,7 +51,7 @@ export async function evaluateWithGemini(optimizedData: EvalPayload) {
 
   const promptInput = `
     Session Topic: ${optimizedData.metadata.session_topic}
-    Payload: ${flatTranscript}
+    Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}
   `;
 
 // Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}

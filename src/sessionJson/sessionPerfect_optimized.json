@@ -9,122 +9,64 @@
       "facilitation": 6
     },
     "participation_score": 47,
-    "final_payload_turns": 75,
-    "final_word_count": 1137,
-    "word_reduction_ratio": "0.44"
+    "final_payload_turns": 39,
+    "final_word_count": 467,
+    "word_reduction_ratio": "0.77"
   },
   "evaluation_ready_transcript": [
     {
-      "speaker": "Member6",
-      "text": "Calm.",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": "Thank you for sharing. I appreciate the honesty. It sounds some of you have had long days. Today we're talking about somethin...[TRUNCATED]...lent. Instead of thinking 'I'm not smart,' we think 'I can improve with practice.' What do you think that means in real life?",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member2",
-      "text": "studying more if you fail?",
+      "text": " Today we're talking about something that can help during stressful times—growth mindset.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "Yes, that's a great example. Studying differently or putting in more effort can help you improve.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member3",
-      "text": "But some people are naturally smarter.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "That's a common thought, and I'm glad you brought it up. People may start at different levels, but research shows the brain is a muscle. The more you use it, the stronger it becomes. What happens to a muscle if you train it consistently?",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member4",
-      "text": "It gets stronger.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member1",
-      "text": "I failed my last math test even though I tried.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Thank you for sharing that. It sounds that was disappointing. In a growth mindset, failure isn't proof that you can't do it—it's information. It shows you that you may need a new strategy. What could be a different approach next time?",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member1",
-      "text": "Maybe practicing more questions.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 3
-    },
-    {
-      "speaker": "Member6",
-      "text": "I used to be bad at public speaking, but I improved after practicing.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "That's a perfect example of growth mindset in action. You practiced, and your ability developed. How did it feel when you noticed yourself improving?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member6",
-      "text": "It felt good. I could do it.",
+      "text": "Growth mindset is the belief that abilities can be developed through dedication and hard work.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "That confidence you built came from effort and practice. That's the power of growth mindset.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member2",
-      "text": "I improved in football after training more.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Yes, consistent effort builds skill over time. Thank you for sharing that example. Let's compare two thoughts. Fixed mindset ...[TRUNCATED]... mindset says: 'I'm not good at science yet, but I can improve.' What differences do you notice between these two statements?",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member5",
-      "text": "One sounds final, the other sounds hopeful.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "I how you put that—hopeful. That word is powerful. The word 'yet' is especially important because it acknowledges where you are now while leaving room for growth.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member3",
-      "text": "But what if you try hard and still don't get it?",
+      "text": " Studying differently or putting in more effort can help you improve.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "That's an important question. Sometimes we need to try different strategies, not more effort. It's if you're trying to open a...[TRUNCATED]...asking for help, breaking things into smaller steps, or approaching the problem from a different angle. Does that make sense?",
+      "text": " People may start at different levels, but research shows the brain is a muscle.",
       "_compressed": true
     },
     {
-      "speaker": "Member3",
-      "text": "Yeah, I think .",
+      "speaker": "Fellow",
+      "text": " In a growth mindset, failure isn't proof that you can't do it—it's information.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That's a perfect example of growth mindset in action.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That confidence you built came from effort and practice.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Yes, consistent effort builds skill over time.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " Fixed mindset says: 'I'm bad at science.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": "I how you put that—hopeful. That word is powerful. The word 'yet' is especially important because it...",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " Sometimes we need to try different strategies, not more effort.",
       "_compressed": true
     },
     {
@@ -133,56 +75,28 @@
       "_compressed": true
     },
     {
-      "speaker": "Member3",
-      "text": "Maybe in chemistry when I don't understand a concept. I could ask the teacher to explain it differently.",
-      "_compressed": false
+      "speaker": "Fellow",
+      "text": " Asking for help and seeking different explanations are both growth mindset strategies.",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "Exactly. Asking for help and seeking different explanations are both growth mindset strategies. I'd also love to hear from someone who hasn't spoken much yet. Member4—what's one area where you'd to grow or improve?",
+      "text": "I'd also love to hear from someone who hasn't spoken much yet. Member4—what's one area where you'd t...",
       "_compressed": true
-    },
-    {
-      "speaker": "Member4",
-      "text": "Probably writing essays.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 5
-    },
-    {
-      "speaker": "Member1",
-      "text": "I get frustrated when I don't understand something right away.",
-      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "That frustration is completely normal. Everyone feels that way sometimes. Growth mindset doesn't mean we never feel frustrate...[TRUNCATED]...ize that feeling and choose to keep going anyway. What's something small you could try when you feel that frustration coming?",
+      "text": " Growth mindset doesn't mean we never feel frustrated—it means we recognize that feeling and choose ...",
       "_compressed": true
-    },
-    {
-      "speaker": "Member1",
-      "text": "Maybe take a break and come back to it?",
-      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "That's a smart strategy. Taking a break can help your brain process information. You're showing growth mindset by thinking ab...[TRUNCATED]...hways. It's growing stronger. That's why effort matters more than talent—because effort is what builds your brain's capacity.",
+      "text": " You're showing growth mindset by thinking about how to handle that challenge.",
       "_compressed": true
     },
     {
-      "speaker": "Member5",
-      "text": "even if something feels hard, that's when we're learning?",
-      "_compressed": true
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member2",
-      "text": "What about things we'll never be good at? , I'm terrible at art.",
+      "speaker": "Fellow",
+      "text": " When you make mistakes and keep trying, your brain is creating new neural pathways.",
       "_compressed": true
     },
     {
@@ -191,28 +105,14 @@
       "_compressed": false
     },
     {
-      "speaker": "Member2",
-      "text": "My drawings don't look good.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member2",
-      "text": "Maybe. I've never tried to learn properly.",
+      "speaker": "Fellow",
+      "text": "That's the growth mindset shift there.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "That's the growth mindset shift right there. You moved from 'I'm terrible' to 'I haven't learned yet.' That's powerful. Somet...[TRUNCATED]... It means we acknowledge them and then ask ourselves: 'What can I learn from this?' Has anyone experienced that shift before?",
+      "text": " Growth mindset doesn't mean we ignore feelings.",
       "_compressed": true
-    },
-    {
-      "speaker": "Member3",
-      "text": "I guess when I kept trying in chemistry and finally passed.",
-      "_compressed": false
     },
     {
       "speaker": "Fellow",
@@ -220,42 +120,24 @@
       "_compressed": true
     },
     {
-      "speaker": "Member3",
-      "text": "I wanted to pass, and my friend helped me study differently.",
+      "speaker": "Fellow",
+      "text": " Those are both growth mindset actions.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "you had a goal, and you were willing to try a new strategy by studying with your friend. Those are both growth mindset action...[TRUNCATED]...e academic, social, or personal. hold that in your mind. Now, what would a fixed mindset thought about that challenge sound ?",
+      "text": " I want everyone to think silently for a moment about one challenge you're currently facing—it could...",
       "_compressed": true
     },
     {
-      "speaker": "Member1",
-      "text": "I can't do math.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member4",
-      "text": "I'll never be good at sports.",
-      "_compressed": false
+      "speaker": "Fellow",
+      "text": "Now, what would a fixed mindset thought about that challenge sound ?",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "Good examples. Notice how those thoughts close the door on possibility. Now, how could we reframe each of those with a growth mindset?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member1",
-      "text": "Math is hard for me right now, but I can improve with practice?",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 4
+      "text": " Now, how could we reframe each of those with a growth mindset?",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
@@ -263,38 +145,14 @@
       "_compressed": true
     },
     {
-      "speaker": "Member2",
-      "text": "Practice guitar 15 minutes daily instead of trying to do an hour when I feel it.",
+      "speaker": "Fellow",
+      "text": "That's such an important growth mindset skill—recognizing when you need help and being willing to as...",
       "_compressed": true
     },
     {
-      "_type": "OMITTED_CONTENT",
-      "count": 5
-    },
-    {
-      "speaker": "Member3",
-      "text": "I think I'll ask for help earlier instead of waiting until I'm completely lost.",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": "That's such an important growth mindset skill—recognizing when you need help and being willing to ask for it. That's not weakness; that's strategic learning.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member5",
-      "text": "I'm not sure what my action should be.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "That's okay. What's the challenge you were thinking about?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member5",
-      "text": "Managing my time better. I get overwhelmed with assignments.",
-      "_compressed": false
+      "text": " What's the challenge you were thinking about?",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
@@ -302,80 +160,53 @@
       "_compressed": false
     },
     {
-      "speaker": "Member5",
-      "text": "Maybe writing down all my assignments in one place?",
-      "_compressed": false
-    },
-    {
       "speaker": "Fellow",
-      "text": "That's a perfect first step. You're taking control instead of feeling helpless. That's growth mindset in action. I want to em...[TRUNCATED]...ng. It's about how we respond to struggle. It's about believing that effort, strategies, and persistence lead to improvement.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member4",
-      "text": "What if we try all of this and still fail?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Another great question. Failure still happens, even with growth mindset. But there's a difference between failing and being a...[TRUNCATED]...ou are. And each time we fail, we have information about what to try differently next time. Does that distinction make sense?",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member4",
-      "text": "Yeah, I think .",
-      "_compressed": true
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 2
-    },
-    {
-      "speaker": "Fellow",
-      "text": " Let's reflect for a moment.  I'd to hear from each of you: what's one thing from today's discussion that stood out to you or that you want to remember?",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member1",
-      "text": "That failure is information, not a definition of who I am.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 9
-    },
-    {
-      "speaker": "Member6",
-      "text": "That struggling means my brain is growing, not that I should give up.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Perfect. The challenge is where the growth happens. Before we close, let me summarize the key ideas. Growth mindset is the be...[TRUNCATED]...t,' pause. Add the word 'yet,' and then take one small action toward improvement. Next session, we'll talk about how it went.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member3",
-      "text": "This feels less overwhelming now. there's something I can do.",
+      "text": " That's growth mindset in action.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": " That's exactly what growth mindset is about—recognizing that you have agency and that small steps lead to real change.  Does anyone have any final questions or thoughts before we close?",
-      "_compressed": true
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member5",
-      "text": "This was helpful. Thank you.",
+      "text": "I want to emphasize something important: growth mindset isn't about being perfect or never strugglin...",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "I appreciate you all being engaged and willing to share today. You all demonstrated growth mindset by being open to these ide...[TRUNCATED]...ughtfully you engaged with these ideas. I'm looking forward to hearing about your experiences next week. Take care, everyone.",
+      "text": " Failure still happens, even with growth mindset.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let's reflect for a moment. I'd to hear from each of you: what's one thing from today's discussion t...",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " The challenge is where the growth happens.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " Growth mindset is the belief that abilities can be developed through dedication and hard work.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": "This week, I'd you to notice your self-talk. When you catch yourself thinking something 'I can't do ...",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " That's exactly what growth mindset is about—recognizing that you have agency and that small steps l...",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " You all demonstrated growth mindset by being open to these ideas and reflecting honestly on your ch...",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " Your effort matters.",
       "_compressed": true
     }
   ]

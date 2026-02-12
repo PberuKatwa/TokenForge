@@ -9,96 +9,35 @@
       "facilitation": 0
     },
     "participation_score": 16,
-    "final_payload_turns": 18,
-    "final_word_count": 220,
-    "word_reduction_ratio": "0.69"
+    "final_payload_turns": 5,
+    "final_word_count": 56,
+    "word_reduction_ratio": "0.92"
   },
   "evaluation_ready_transcript": [
     {
       "speaker": "Fellow",
-      "text": " That's how cognitive neuroscience works—your neural pathways are predetermined by your genetic phenotype.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member4",
-      "text": "What does phenotype mean?",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member1",
-      "text": "I've been feeling anxious about my exams.",
+      "text": " That's how cognitive neuroscience works—your neural pathways are predetermined by your genetic phen...",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "what? That sounds clinical anxiety. You should probably see a psychiatrist and get on some SSRIs—selective serotonin reuptake...[TRUNCATED]...who took Zoloft and it helped. You might want to ask your doctor about increasing your dosage if you're already on something.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member2",
-      "text": "? Is that safe?",
-      "_compressed": true
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 1
-    },
-    {
-      "speaker": "Member5",
-      "text": "My boyfriend and I have been fighting a lot.",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Honestly, teenage relationships are toxic. You should break up with him. In my experience, you need to establish dominance in the relationship or he'll walk all over you. Have you tried giving him the silent treatment?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Member3",
-      "text": "Can we get back to the session topic?",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 6
-    },
-    {
-      "speaker": "Member4",
-      "text": "What about practice and effort?",
-      "_compressed": false
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Effort is overrated. Talent is what matters. Mozart didn't become Mozart by practicing—he was a prodigy. Einstein was born brilliant. If you have to work hard at something, it's probably not your strength.",
-      "_compressed": true
-    },
-    {
-      "speaker": "Member2",
-      "text": "I've been having trouble sleeping because of stress.",
-      "_compressed": false
-    },
-    {
-      "_type": "OMITTED_CONTENT",
-      "count": 6
-    },
-    {
-      "speaker": "Member6",
-      "text": "That doesn't help us.",
+      "text": " You might want to ask your doctor about increasing your dosage if you're already on something.",
       "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "Sure it does. It shows that natural ability trumps effort. Anyway, we're running out of time. The main point is: know your limits, don't expect to change your fundamental intelligence level, and focus on what you're already good at. Class dismissed.",
-      "_compressed": false
+      "text": "Honestly, teenage relationships are toxic. You should break up with him. In my experience, you need ...",
+      "_compressed": true
     },
     {
-      "speaker": "Member1",
-      "text": "Wait, what are we supposed to do this week?",
-      "_compressed": false
+      "speaker": "Fellow",
+      "text": "Effort is overrated.",
+      "_compressed": true
+    },
+    {
+      "speaker": "Fellow",
+      "text": " It shows that natural ability trumps effort.",
+      "_compressed": true
     }
   ]
 }
