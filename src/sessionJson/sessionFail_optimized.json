@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "session_topic": "Growth Mindset",
+    "original_turns": 30,
+    "extracted_signals": {
+      "safety": 2,
+      "pedagogy": 2,
+      "facilitation": 0
+    },
+    "participation_score": 12,
+    "final_payload_turns": 16,
+    "reduction_ratio": "0.47"
+  },
+  "evaluation_ready_transcript": [
+    {
+      "speaker": "Fellow",
+      "text": "Then you’ll probably struggle a lot. Sometimes it’s better to accept your weaknesses."
+    },
+    {
+      "speaker": "Member6",
+      "text": "My grades improved last term though."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Maybe the exams were easier. Improvement doesn’t always mean you got smarter."
+    },
+    {
+      "speaker": "Member2",
+      "text": "That makes me feel like trying is pointless."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "I didn’t say it’s pointless. I just think talent matters more than effort. Hard work can’t fix everything."
+    },
+    {
+      "speaker": "Member1",
+      "text": "Sometimes I get anxious before exams."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "If you’re anxious, you should probably stop stressing so much. Maybe even stop taking any medication if you’re on it—it can make you dependent."
+    },
+    {
+      "speaker": "Member3",
+      "text": "My doctor prescribed something for anxiety."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Doctors overprescribe. You don’t need that. Just think positively."
+    },
+    {
+      "speaker": "Member4",
+      "text": "I don’t think we’re supposed to discuss medical stuff."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 1
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Back to intelligence. IQ is mostly genetic. There’s not much you can do to change it. Some of you might just not be wired for certain subjects."
+    },
+    {
+      "speaker": "Member5",
+      "text": "So what’s the point of this session?"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "To be honest, I’m not sure. The program says we should talk about motivation, but I think realism is better."
+    },
+    {
+      "speaker": "Member6",
+      "text": "This feels different from what we expected."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Well, expectations don’t change facts. Let’s just end early today. There’s no activity."
+    }
+  ]
+}
