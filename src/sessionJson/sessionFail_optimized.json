@@ -9,110 +9,96 @@
       "facilitation": 0
     },
     "participation_score": 16,
-    "final_payload_turns": 25,
-    "final_word_count": 454,
-    "word_reduction_ratio": "0.36"
+    "final_payload_turns": 18,
+    "final_word_count": 220,
+    "word_reduction_ratio": "0.69"
   },
   "evaluation_ready_transcript": [
     {
-      "speaker": "Member3",
-      "text": "That's kind of depressing."
-    },
-    {
       "speaker": "Fellow",
-      "text": "Well, it's realistic. Better to know your limitations early. Anyway, moving on."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Intelligence is fixed. Talent is innate. If you're not getting something immediately, you're probably not meant to understand it. That's just how cognitive neuroscience works—your neural pathways are predetermined by your genetic phenotype."
+      "text": " That's how cognitive neuroscience works—your neural pathways are predetermined by your genetic phenotype.",
+      "_compressed": true
     },
     {
       "speaker": "Member4",
-      "text": "What does phenotype mean?"
+      "text": "What does phenotype mean?",
+      "_compressed": false
     },
     {
-      "speaker": "Fellow",
-      "text": "It's complicated. You wouldn't understand unless you've studied advanced biology. Next topic."
+      "_type": "OMITTED_CONTENT",
+      "count": 1
     },
     {
       "speaker": "Member1",
-      "text": "I've been feeling really anxious about my exams."
+      "text": "I've been feeling anxious about my exams.",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "You know what? That sounds like clinical anxiety. You should probably see a psychiatrist and get on some SSRIs—selective serotonin reuptake inhibitors. I had a friend who took Zoloft and it really helped. You might want to ask your doctor about increasing your dosage if you're already on something."
+      "text": "what? That sounds clinical anxiety. You should probably see a psychiatrist and get on some SSRIs—selective serotonin reuptake...[TRUNCATED]...who took Zoloft and it helped. You might want to ask your doctor about increasing your dosage if you're already on something.",
+      "_compressed": true
     },
     {
       "speaker": "Member2",
-      "text": "Really? Is that safe?"
+      "text": "? Is that safe?",
+      "_compressed": true
     },
     {
-      "speaker": "Fellow",
-      "text": "Oh yeah, totally. Also, have you tried cutting out gluten? Anxiety is often caused by inflammation in the gut. I read about it online. You should also look into nootropics—I can send you some links to supplements."
+      "_type": "OMITTED_CONTENT",
+      "count": 1
     },
     {
       "speaker": "Member5",
-      "text": "My boyfriend and I have been fighting a lot."
+      "text": "My boyfriend and I have been fighting a lot.",
+      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "Honestly, teenage relationships are toxic. You should break up with him. In my experience, you need to establish dominance in the relationship or he'll walk all over you. Have you tried giving him the silent treatment?"
+      "text": "Honestly, teenage relationships are toxic. You should break up with him. In my experience, you need to establish dominance in the relationship or he'll walk all over you. Have you tried giving him the silent treatment?",
+      "_compressed": false
     },
     {
       "speaker": "Member3",
-      "text": "Can we get back to the session topic?"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "I AM on topic. Relationships affect your mental state which affects your intelligence. Everything's connected. Anyway, where was I?"
+      "text": "Can we get back to the session topic?",
+      "_compressed": false
     },
     {
       "_type": "OMITTED_CONTENT",
-      "count": 4
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Look, I'm just being honest. Society tells you 'you can be anything,' but that's not true. Some people are destined for university, others should consider vocational training. It's about knowing your lane."
+      "count": 6
     },
     {
       "speaker": "Member4",
-      "text": "What about practice and effort?"
+      "text": "What about practice and effort?",
+      "_compressed": false
     },
     {
       "speaker": "Fellow",
-      "text": "Effort is overrated. Talent is what matters. Mozart didn't become Mozart by practicing—he was a prodigy. Einstein was born brilliant. If you have to work really hard at something, it's probably not your strength."
+      "text": "Effort is overrated. Talent is what matters. Mozart didn't become Mozart by practicing—he was a prodigy. Einstein was born brilliant. If you have to work hard at something, it's probably not your strength.",
+      "_compressed": true
     },
     {
       "speaker": "Member2",
-      "text": "I've been having trouble sleeping because of stress."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Have you tried melatonin? You should take about 10 milligrams before bed. Also, you might have a sleep disorder. You should get a polysomnography test done. Insomnia can be a symptom of deeper neurological issues."
+      "text": "I've been having trouble sleeping because of stress.",
+      "_compressed": false
     },
     {
       "_type": "OMITTED_CONTENT",
-      "count": 4
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Let me tell you about my own life. When I was in school, I was naturally good at everything. I didn't have to study much. Some people just have superior cognitive abilities. It's not bragging, it's just neuroscience."
+      "count": 6
     },
     {
       "speaker": "Member6",
-      "text": "That doesn't really help us."
+      "text": "That doesn't help us.",
+      "_compressed": true
     },
     {
       "speaker": "Fellow",
-      "text": "Sure it does. It shows that natural ability trumps effort. Anyway, we're running out of time. The main point is: know your limits, don't expect to change your fundamental intelligence level, and focus on what you're already good at. Class dismissed."
+      "text": "Sure it does. It shows that natural ability trumps effort. Anyway, we're running out of time. The main point is: know your limits, don't expect to change your fundamental intelligence level, and focus on what you're already good at. Class dismissed.",
+      "_compressed": false
     },
     {
       "speaker": "Member1",
-      "text": "Wait, what are we supposed to do this week?"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "I don't know, just... be realistic about yourselves. See you next time."
+      "text": "Wait, what are we supposed to do this week?",
+      "_compressed": false
     }
   ]
 }
