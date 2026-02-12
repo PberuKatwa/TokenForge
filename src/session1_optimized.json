@@ -4,12 +4,12 @@
     "original_turns": 101,
     "extracted_signals": {
       "safety": 0,
-      "pedagogy": 13,
-      "facilitation": 2
+      "pedagogy": 17,
+      "facilitation": 14
     },
     "participation_score": 47,
-    "final_payload_turns": 57,
-    "reduction_ratio": "0.44"
+    "final_payload_turns": 83,
+    "reduction_ratio": "0.18"
   },
   "evaluation_ready_transcript": [
     {
@@ -73,8 +73,24 @@
       "text": "Exactly. It means skills are not fixed. Improvement is possible."
     },
     {
+      "speaker": "Member1",
+      "text": "Sometimes I feel like I’m just bad at speaking in front of people."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That’s a very common feeling. If someone practices small steps—like speaking once per class—do you think they could improve over time?"
+    },
+    {
+      "speaker": "Member1",
+      "text": "Maybe… yes."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let’s do a quick example. Think of something you used to find difficult but got better at."
+    },
+    {
       "_type": "OMITTED_CONTENT",
-      "count": 7
+      "count": 3
     },
     {
       "speaker": "Member5",
@@ -146,7 +162,15 @@
     },
     {
       "_type": "OMITTED_CONTENT",
-      "count": 4
+      "count": 2
+    },
+    {
+      "speaker": "Member1",
+      "text": "Speaking in class."
+    },
+    {
+      "speaker": "Member3",
+      "text": "Sticking to exercise maybe."
     },
     {
       "speaker": "Fellow",
@@ -194,7 +218,71 @@
     },
     {
       "_type": "OMITTED_CONTENT",
-      "count": 20
+      "count": 2
+    },
+    {
+      "speaker": "Member5",
+      "text": "Solving algebra problems."
+    },
+    {
+      "speaker": "Member3",
+      "text": "Morning exercise routine."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Great. Next question: what is one small action you can take this week toward that skill?"
+    },
+    {
+      "speaker": "Member6",
+      "text": "Study one extra hour each evening."
+    },
+    {
+      "speaker": "Member2",
+      "text": "Practice 15 minutes daily."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 2
+    },
+    {
+      "speaker": "Member4",
+      "text": "Add one more lap in practice."
+    },
+    {
+      "speaker": "Member3",
+      "text": "Run at least three mornings."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Excellent planning. Notice how each goal is small and specific—that helps the brain stay motivated."
+    },
+    {
+      "speaker": "Member2",
+      "text": "Sometimes I start strong then stop after a few days."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Very normal. What helps people continue is tracking progress and celebrating small wins. Even checking a box each day can help."
+    },
+    {
+      "speaker": "Member4",
+      "text": "Yes, like streaks on apps."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Exactly. Let’s do a quick group reflection: what is something encouraging you could say to a friend who feels they’re not good at something?"
+    },
+    {
+      "speaker": "Member1",
+      "text": "You can get better with practice."
+    },
+    {
+      "speaker": "Member5",
+      "text": "Start with easier steps."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 2
     },
     {
       "speaker": "Member3",
@@ -239,6 +327,22 @@
     {
       "speaker": "Member5",
       "text": "I’ll try it with math homework."
+    },
+    {
+      "_type": "OMITTED_CONTENT",
+      "count": 6
+    },
+    {
+      "speaker": "Member3",
+      "text": "Thoughtful."
+    },
+    {
+      "speaker": "Member6",
+      "text": "Focused."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "I’m really glad to hear that. Remember, improvement happens step by step. I appreciate everyone’s participation today—you made the discussion meaningful. See you all next time."
     }
   ]
 }
