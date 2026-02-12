@@ -1,11 +1,9 @@
-import * as fs from 'fs/promises';
 import { optimizeTranscriptForLLM, Session, EvalPayload } from './token.prune.js';
 
-export async function runTest() {
+export async function runTest(jsonData:string) {
   try {
-    // 1. Load the JSON file
-    const rawData = await fs.readFile('./session1.json', 'utf-8');
-    const session: Session = JSON.parse(rawData);
+
+    const session: Session = JSON.parse(jsonData);
 
     console.log(`--- Starting Optimization for: ${session.session_topic} ---`);
     console.log(`Original Size: ${session.transcript.length} turns`);
@@ -28,6 +26,8 @@ export async function runTest() {
     // 4. Log the actual Payload for inspection
     console.log("\n--- Final Payload Preview ---");
     console.log(JSON.stringify(result.evaluation_ready_transcript, null, 2));
+
+    return result;
 
   } catch (error) {
     console.error("Error processing transcript:", error);
