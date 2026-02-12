@@ -11,9 +11,9 @@ const __dirname = path.dirname(__filename);
 
 async function runner() {
   try {
-    const inputFileName = "sessionFail.json";
+    // const inputFileName = "sessionFail.json";
     // const inputFileName = "sessionAverage.json";
-    // const inputFileName = "sessionPerfect.json";
+    const inputFileName = "sessionPerfect.json";
     const filePath = path.join(__dirname, "sessionJson", inputFileName);
 
     console.log(`Reading file from: ${filePath}`);
@@ -66,8 +66,8 @@ async function runner() {
     // 3. Write to file
     await fs.writeFile(outputPath, jsonString, "utf-8");
 
-    console.log(`\n✔ Success!`);
-    console.log(`Optimized payload saved to: ${outputPath}`);
+    // console.log(`\n✔ Success!`);
+    // console.log(`Optimized payload saved to: ${outputPath}`);
 
     // Optional: Log the reduction ratio to the console for a quick check
     // if (result.metadata) {
