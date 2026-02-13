@@ -1,4 +1,4 @@
-import { ScoredTurn, Session } from "../types/pruner.types.js";
+import { PruneContext, ScoredTurn, Session } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -74,12 +74,29 @@ export class TranscriptPrunner{
     sessionTranscript:Session
   ) {
     try {
+      const { transcript } = sessionTranscript;
+
+      const context = {
+        transcript,
+        signalsScores: {
+          safety: 0,
+          pedagogy: 0,
+          facilitation: 0
+        },
+        metadata: {
+          participationScore: 0,
+          originalWordCount: 0,
+          originalTurns: transcript.length,
+          finalTurns: 0,
+          finalWordCount:0
+        }
+      }
 
       const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
         this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
           fillerWords);
 
-      const { transcript } = sessionTranscript;
+
       const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
       let participationScore = 0;
       let originalWordCount = 0;
@@ -154,6 +171,133 @@ export class TranscriptPrunner{
     } catch (error) {
       throw error;
     }
+  }
+
+  private initializeContext(
+    safetyWords: string[],
+    pedagogyWords: string[],
+    reflectionWords: string[],
+    empathyWords: string[],
+    understandingWords: string[],
+    fillerWords: string[],
+    sessionTranscript: Session
+  ): PruneContext{
+
+    return{
+      sessionTranscript,
+      signalsScores: {
+        safety: 0,
+        pedagogy: 0,
+        facilitation: 0
+      },
+      metadata: {
+        participationScore: 0,
+        originalWordCount: 0,
+        originalTurns: sessionTranscript.transcript.length,
+        finalTurns: 0,
+        finalWordCount:0
+      },
+      lexicons: {
+        safetyWords,
+        pedagogyWords,
+        reflectionWords,
+        empathyWords,
+        understandingWords,
+        fillerWords
+      }
+    }
+
+  }
+
+  public prune(
+    safetyWords: string[],
+    pedagogyWords: string[],
+    reflectionWords: string[],
+    empathyWords: string[],
+    understandingWords: string[],
+    fillerWords: string[],
+    sessionTranscript:Session
+  ) {
+    try {
+      const { transcript } = sessionTranscript;
+
+      const context: PruneContext = this.initializeContext(
+        safetyWords,
+        pedagogyWords,
+        reflectionWords,
+        empathyWords,
+        understandingWords,
+        fillerWords,
+        sessionTranscript
+      )
+
+      const turns = this.scoreTurns(context)
+
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  private scoreTurns(context: PruneContext) {
+
+    const { sessionTranscript, signalsScores, metadata, lexicons } = context;
+    const { safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords } = lexicons;
+    const { transcript } = sessionTranscript;
+    let { originalWordCount,participationScore } = metadata;
+
+    const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
+      this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
+        fillerWords);
+
+    // PASS 1: Score and identify signal turns ONLY
+    const scoredTurns: ScoredTurn[] = [];
+
+    for (let i = 0; i < transcript.length; i++) {
+
+      const turn = transcript[i];
+      const wordCount = turn.text.trim().split(/\s+/).length;
+      originalWordCount += wordCount;
+
+      const isFellow = turn.speaker === "Fellow";
+      let score = 0;
+
+      if (safetyRegex.test(turn.text)) {
+        score += 100;
+        signalsScores.safety++;
+      }
+
+      if (isFellow && pedagogyRegex.test(turn.text)) {
+        score += 50;
+        signalsScores.pedagogy++;
+      }
+
+      if (isFellow) {
+
+        if (reflectionRegex.test(turn.text)) {
+          score += 40;
+          signalsScores.facilitation++;
+        }
+
+        if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
+          score += 30;
+          signalsScores.facilitation++;
+        }
+
+      }
+
+      if (!isFellow && wordCount > 3) participationScore++;
+
+      // Only track turns that meet minimum threshold
+      if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
+        scoredTurns.push({ ...turn, index: i, score });
+      }
+
+      safetyRegex.lastIndex = 0;
+      pedagogyRegex.lastIndex = 0;
+    }
+
+    return scoredTurns;
   }
 
 

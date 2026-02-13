@@ -39,3 +39,34 @@ export interface ScoredTurn extends RawTurn {
   index: number;
   score: number;
 }
+
+
+export interface Lexicons {
+  safetyWords: string[];
+  pedagogyWords: string[];
+  reflectionWords: string[];
+  empathyWords: string[];
+  understandingWords: string[];
+  fillerWords: string[];
+}
+
+export interface SignalScores {
+  safety: number;
+  pedagogy: number;
+  facilitation: number;
+}
+
+export interface PruneMetadata {
+  participationScore: number;
+  originalWordCount: number;
+  originalTurns: number;
+  finalTurns: number;
+  finalWordCount: number;
+}
+
+export interface PruneContext {
+  sessionTranscript: Session;
+  signalsScores: SignalScores;
+  metadata: PruneMetadata;
+  lexicons: Lexicons;
+}
