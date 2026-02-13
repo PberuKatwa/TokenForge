@@ -58,115 +58,6 @@ export class TranscriptPrunner{
     }
   }
 
-  // public pruneTranscript(
-  //   safetyWords: string[],
-  //   pedagogyWords: string[],
-  //   reflectionWords: string[],
-  //   empathyWords: string[],
-  //   understandingWords: string[],
-  //   fillerWords: string[],
-  //   sessionTranscript:Session
-  // ) {
-  //   try {
-  //     const { transcript } = sessionTranscript;
-
-  //     const context = {
-  //       transcript,
-  //       signalsScores: {
-  //         safety: 0,
-  //         pedagogy: 0,
-  //         facilitation: 0
-  //       },
-  //       metadata: {
-  //         participationScore: 0,
-  //         originalWordCount: 0,
-  //         originalTurns: transcript.length,
-  //         finalTurns: 0,
-  //         finalWordCount:0
-  //       }
-  //     }
-
-  //     const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
-  //       this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
-  //         fillerWords);
-
-
-  //     const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
-  //     let participationScore = 0;
-  //     let originalWordCount = 0;
-
-  //     // PASS 1: Score and identify signal turns ONLY
-  //     const scoredTurns: ScoredTurn[] = [];
-
-  //     for (let i = 0; i < transcript.length; i++) {
-
-  //       const turn = transcript[i];
-  //       const wordCount = turn.text.trim().split(/\s+/).length;
-  //       originalWordCount += wordCount;
-
-  //       const isFellow = turn.speaker === "Fellow";
-  //       let score = 0;
-
-  //       if (safetyRegex.test(turn.text)) {
-  //         score += 100;
-  //         signals.safety++;
-  //       }
-
-  //       if (isFellow && pedagogyRegex.test(turn.text)) {
-  //         score += 50;
-  //         signals.pedagogy++;
-  //       }
-
-  //       if (isFellow) {
-
-  //         if (reflectionRegex.test(turn.text)) {
-  //           score += 40;
-  //           signals.facilitation++;
-  //         }
-
-  //         if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
-  //           score += 30;
-  //           signals.facilitation++;
-  //         }
-
-  //       }
-
-  //       if (!isFellow && wordCount > 3) participationScore++;
-
-  //       // Only track turns that meet minimum threshold
-  //       if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
-  //         scoredTurns.push({ ...turn, index: i, score });
-  //       }
-
-  //       safetyRegex.lastIndex = 0;
-  //       pedagogyRegex.lastIndex = 0;
-  //     }
-
-  //     // PASS 2: Cluster Identification (Sliding Window)
-  //     const keepIndices = new Set<number>();
-  //     scoredTurns.forEach(turn => {
-  //         for (let i = turn.index - this.windowPadding; i <= turn.index + this.windowPadding; i++) {
-  //           if (i >= 0 && i < transcript.length) keepIndices.add(i);
-  //         }
-  //     });
-
-  //     const prunedTranscript22 = transcript.filter((_, index) =>
-  //       keepIndices.has(index)
-  //     );
-
-  //     console.log("pruned", prunedTranscript22)
-  //     console.log("kept indices", keepIndices, "totall", transcript.length)
-  //     console.log("windowPadding", this.windowPadding)
-  //     console.log("signallls", signals)
-  //     console.log("participation score", participationScore)
-  //     console.log("word count", originalWordCount)
-  //     // console.log("this are the turnss",scoredTurns)
-
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
   private initializeContext(
     safetyWords: string[],
     pedagogyWords: string[],
@@ -222,7 +113,7 @@ export class TranscriptPrunner{
         sessionTranscript
       )
 
-      const { scoredTurns, metadata } = this.scoreTurns22(context);
+      const { scoredTurns, metadata } = this.scoreTurns(context);
 
       const keptIndices = this.computeKeptIndices(scoredTurns, sessionTranscript.transcript.length);
 
@@ -235,7 +126,7 @@ export class TranscriptPrunner{
     }
   }
 
-  private scoreTurns22(context: PruneContext) {
+  private scoreTurns(context: PruneContext) {
 
     const { sessionTranscript, signalsScores, metadata, lexicons } = context;
     const { transcript } = sessionTranscript;
