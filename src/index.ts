@@ -14,8 +14,8 @@ const __dirname = path.dirname(__filename);
 
 async function runPruner() {
   try {
-    // const inputFileName = "sessionFail.json";
-    const inputFileName = "sessionAverage.json";
+    const inputFileName = "sessionFail.json";
+    // const inputFileName = "sessionAverage.json";
     // const inputFileName = "sessionPerfect.json";
 
     const filePath = path.join(__dirname, "sessionJson", inputFileName);

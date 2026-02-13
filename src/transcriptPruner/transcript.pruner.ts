@@ -131,27 +131,25 @@ export class TranscriptPrunner{
         pedagogyRegex.lastIndex = 0;
       }
 
-      if (this.windowPadding > 0) {
-        scoredTurns.forEach(
-          (turn) =>{
-            for (let i = turn.index - this.windowPadding; i <= (turn.index + this.windowPadding); i++){
-              if (i >= 0 && i < transcript.length) {
-
-                const window = transcript[i];
-                const windowCount = window.text.trim().split(/\s+/).length;
-                originalWordCount += windowCount;
-                scoredTurns.push({ ...window, index: i, score: 0 });
-
-              }
-            }
+      // PASS 2: Cluster Identification (Sliding Window)
+      const keepIndices = new Set<number>();
+      scoredTurns.forEach(turn => {
+          for (let i = turn.index - this.windowPadding; i <= turn.index + this.windowPadding; i++) {
+            if (i >= 0 && i < transcript.length) keepIndices.add(i);
           }
-        )
-      }
+      });
 
+      const prunedTranscript22 = transcript.filter((_, index) =>
+        keepIndices.has(index)
+      );
+
+      console.log("pruned", prunedTranscript22)
+      console.log("kept indices", keepIndices, "totall", transcript.length)
+      console.log("windowPadding", this.windowPadding)
       console.log("signallls", signals)
       console.log("participation score", participationScore)
       console.log("word count", originalWordCount)
-      console.log("this are the turnss",scoredTurns)
+      // console.log("this are the turnss",scoredTurns)
 
     } catch (error) {
       throw error;

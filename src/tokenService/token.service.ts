@@ -17,12 +17,16 @@ export async function tokenService(jsonData:string) {
 
     const sessionData = result.data;
 
+    console.log("===============================================BEGINNING================================================")
+    console.log("========================================================================================================");
     // const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
     //   understandingWords, fillerWords, sessionData)
 
-    const answer = await initializePruner(3, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
+    const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
       understandingWords, fillerWords, sessionData)
 
+    console.log("===============================================ENDDDDDDD================================================")
+    console.log("========================================================================================================");
   } catch (error) {
     throw error;
   }
