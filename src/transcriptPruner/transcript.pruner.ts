@@ -1,5 +1,5 @@
 import { Sign } from "crypto";
-import { Lexicons, PruneContext, RawTurn, ScoredTurn, Session, SignalRegexSet } from "../types/pruner.types.js";
+import { Lexicons, PruneContext, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -232,67 +232,6 @@ export class TranscriptPrunner{
     }
   }
 
-  // private scoreTurns(context: PruneContext) {
-
-  //   const { sessionTranscript, signalsScores, metadata, lexicons } = context;
-  //   const { safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords } = lexicons;
-  //   const { transcript } = sessionTranscript;
-
-  //   const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
-  //     this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
-  //       fillerWords);
-
-  //   // PASS 1: Score and identify signal turns ONLY
-  //   const scoredTurns: ScoredTurn[] = [];
-
-  //   for (let i = 0; i < transcript.length; i++) {
-
-  //     const turn = transcript[i];
-  //     const wordCount = turn.text.trim().split(/\s+/).length;
-  //     metadata.originalWordCount += wordCount;
-
-  //     const isFellow = turn.speaker === "Fellow";
-  //     let score = 0;
-
-  //     if (safetyRegex.test(turn.text)) {
-  //       score += 100;
-  //       signalsScores.safety++;
-  //     }
-
-  //     if (isFellow && pedagogyRegex.test(turn.text)) {
-  //       score += 50;
-  //       signalsScores.pedagogy++;
-  //     }
-
-  //     if (isFellow) {
-
-  //       if (reflectionRegex.test(turn.text)) {
-  //         score += 40;
-  //         signalsScores.facilitation++;
-  //       }
-
-  //       if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
-  //         score += 30;
-  //         signalsScores.facilitation++;
-  //       }
-
-  //     }
-
-  //     if (!isFellow && wordCount > 3) metadata.participationScore++;
-
-  //     // Only track turns that meet minimum threshold
-  //     if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
-  //       scoredTurns.push({ ...turn, index: i, score });
-  //     }
-
-  //     safetyRegex.lastIndex = 0;
-  //     pedagogyRegex.lastIndex = 0;
-  //   }
-
-  //   metadata.finalTurns = scoredTurns.length;
-  //   return { scoredTurns, metadata };
-  // }
-
   private scoreTurns22(context: PruneContext) {
 
     const { sessionTranscript, signalsScores, metadata, lexicons } = context;
@@ -308,7 +247,7 @@ export class TranscriptPrunner{
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
-        const score = this.calculateScoreTurn(turn, context, regexSet)
+        const score = this.calculateScoreTurn(turn, signalsScores, regexSet)
         if (!isFellow && wordCount > 3) metadata.participationScore++;
 
         // Only track turns that meet minimum threshold
@@ -326,36 +265,36 @@ export class TranscriptPrunner{
     return { scoredTurns, metadata };
   }
 
-  private calculateScoreTurn(turn:RawTurn,context:PruneContext,regex:SignalRegexSet) {
+  private calculateScoreTurn(turn:RawTurn,signals:SignalScores,regex:SignalRegexSet) {
 
     const isFellow = turn.speaker === "Fellow";
     let score = 0;
 
     if (regex.safetyRegex.test(turn.text)) {
       score += 100;
-      context.signalsScores.safety++;
+      signals.safety++;
     }
 
     if (isFellow) {
 
       if (regex.pedagogyRegex.test(turn.text)) {
         score += 50;
-        context.signalsScores.pedagogy++;
+        signals.pedagogy++;
       }
 
       if (regex.reflectionRegex.test(turn.text)) {
         score += 40;
-        context.signalsScores.facilitation++;
+        signals.facilitation++;
       }
 
       if (regex.empathyRegex.test(turn.text)) {
-        score += 30;
-        context.signalsScores.facilitation++;
+        score += 20;
+        signals.facilitation++;
       }
 
       if(regex. understandingRegex.test(turn.text)){
-        score += 30;
-        context.signalsScores.facilitation++;
+        score += 200;
+        signals.facilitation++;
       }
 
     }
