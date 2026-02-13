@@ -117,9 +117,18 @@ export class TranscriptPrunner{
       const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
       const finalScript = transcript.filter((_, index) => keptIndices.has(index));
 
-      console.log("metadata", metadata);
-      console.log("kept indices", keptIndices)
-      console.log("finalll", finalScript)
+      const finalSession: Session = {
+        session_topic: sessionTranscript.session_topic,
+        duration_minutes: sessionTranscript.duration_minutes,
+        transcript:finalScript
+      }
+
+      const finalPayload = this.buildPrunedSession(metadata, context.signalsScores, finalSession);
+
+      // console.log("metadata", metadata);
+      // console.log("kept indices", keptIndices)
+      // console.log("finalll", finalScript)
+      console.log("payyyyy", finalPayload)
       // console.log("turnsss", scoredTurns);
 
     } catch (error) {
@@ -218,7 +227,7 @@ export class TranscriptPrunner{
     return keptIndices;
   }
 
-  private buildPayload(
+  private buildPrunedSession(
     metadata: PruneMetadata,
     signals:SignalScores,
     prunedTranscript: Session
