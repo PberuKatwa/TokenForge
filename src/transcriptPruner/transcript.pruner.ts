@@ -5,7 +5,6 @@ export class TranscriptPrunner{
   private readonly minimumCharactersPerTurn: number;
   private readonly keepOnlySignalTurns: boolean;
   private safetyLexicon: RegExp | null;
-  private pedagogyLexicon: RegExp | null;
 
   constructor(
     windowPadding: number,
@@ -50,6 +49,15 @@ export class TranscriptPrunner{
   ) {
     try {
 
+      const safetyRegex = this.convertStringArrayToRegExp(safetyWords);
+      const pedagogyRegex = this.convertStringArrayToRegExp(pedagogyWords);
+      const reflectionRegex = this.convertStringArrayToRegExp(reflectionWords);
+      const empathyRegex = this.convertStringArrayToRegExp(empathyWords);
+      const understandingRegex = this.convertStringArrayToRegExp(understandingWords);
+      const fillerRegex = this.convertStringArrayToRegExp(fillerWords);
+
+
+      return { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex };
     } catch (error) {
       throw error;
     }
