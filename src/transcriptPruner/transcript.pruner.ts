@@ -224,8 +224,11 @@ export class TranscriptPrunner{
 
       const { scoredTurns, metadata } = this.scoreTurns22(context);
 
+      const keptIndices = this.computeKeptIndices(scoredTurns, sessionTranscript.transcript.length);
+
       console.log("metadata", metadata);
-      console.log("turnsss", scoredTurns);
+      console.log("kept indices",keptIndices)
+      // console.log("turnsss", scoredTurns);
 
     } catch (error) {
       throw error;
@@ -300,6 +303,27 @@ export class TranscriptPrunner{
     }
 
     return score;
+  }
+
+  private computeKeptIndices(
+    scoredTurns: ScoredTurn[],
+    transcriptLength: number
+  ): Set<number> {
+    const keptIndices = new Set<number>();
+
+    scoredTurns.forEach(turn => {
+      for (
+        let i = turn.index - this.windowPadding;
+        i <= turn.index + this.windowPadding;
+        i++
+      ) {
+        if (i >= 0 && i < transcriptLength) {
+          keptIndices.add(i);
+        }
+      }
+    });
+
+    return keptIndices;
   }
 
 
