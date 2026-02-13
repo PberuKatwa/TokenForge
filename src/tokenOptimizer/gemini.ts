@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { EvalPayload } from "./token.prune.js";
+import { EvalPayload } from "../types/pruner.types.js";
 import dotenv from 'dotenv';
 dotenv.config();
 

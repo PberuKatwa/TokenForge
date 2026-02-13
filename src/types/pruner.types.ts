@@ -35,7 +35,7 @@ export interface EvalPayload {
   evaluation_ready_transcript: ProcessedTurn[];
 }
 
-interface ScoredTurn extends RawTurn {
+export interface ScoredTurn extends RawTurn {
   index: number;
   score: number;
 }

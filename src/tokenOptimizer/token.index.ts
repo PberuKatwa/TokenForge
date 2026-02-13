@@ -1,4 +1,5 @@
-import { optimizeTranscriptForLLM, Session, EvalPayload } from './token.prune.js';
+import { Session, EvalPayload } from '../types/pruner.types.js';
+import { optimizeTranscriptForLLM } from './token.pruner.js';
 
 export async function runTest(jsonData:string) {
   try {

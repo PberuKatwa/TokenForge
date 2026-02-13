@@ -1,9 +1,7 @@
 /**
- * TOKENCUT: Exhaustive Transcript Preprocessing for LLM Evaluation
- * Language: TypeScript 5.x
+ * TOKENCUT: Ultra-Aggressive Pruner for Minimum Latency
+ * Only sends turns with detected signals - removes ALL filler
  */
-
-// --- Types & Interfaces ---
 
 export type Speaker = "Fellow" | string;
 
@@ -18,20 +16,14 @@ export interface Session {
   transcript: RawTurn[];
 }
 
-export interface OmittedMarker {
-  _type: "OMITTED_CONTENT";
-  count: number;
-}
-
 export interface ProcessedTurn extends RawTurn {
   _compressed?: boolean;
 }
 
-export type PayloadTurn = ProcessedTurn | OmittedMarker;
-
 export interface EvalMetadata {
   session_topic: string;
   original_turns: number;
+  original_word_count: number;
   extracted_signals: {
     safety: number;
     pedagogy: number;
@@ -39,150 +31,146 @@ export interface EvalMetadata {
   };
   participation_score: number;
   final_payload_turns: number;
-  reduction_ratio: string;
+  final_word_count: number;
+  word_reduction_ratio: string;
 }
 
 export interface EvalPayload {
   metadata: EvalMetadata;
-  evaluation_ready_transcript: PayloadTurn[];
+  evaluation_ready_transcript: ProcessedTurn[];
 }
 
 interface ScoredTurn extends RawTurn {
   index: number;
   score: number;
-  tags: string[];
 }
 
-// --- Configuration ---
-
+// ULTRA-AGGRESSIVE CONFIG
 const CONFIG = {
-  // Safety-related keywords (Protocol Safety: things the Fellow should NOT give advice on)
-  SAFETY_LEXICON: /\b(medication|pill|doctor|diagnose|depressed|suicide|self-harm|break up|therapy|legal|clinic|prescription|relationship|stop this|don’t do that)\b/gi,
+  SAFETY_LEXICON: /\b(medication|pill|doctor|diagnose|depressed|suicide|self-harm|break up|therapy|legal|clinic|prescription)\b/gi,
+  PEDAGOGY_LEXICON: /\b(growth mindset|fixed mindset|neuroplasticity|effort|yet|challenge|muscle|neural|persistence|strategy)\b/gi,
+  REFLECTION_PROMPTS: /\b(think quietly|reflect|imagine|what if|how would you|take a moment)\b/i,
+  EMPATHY_MARKERS: /^(i hear you|that makes sense|thank you for sharing|great point)/i,
+  CHECK_FOR_UNDERSTANDING: /\b(does that make sense|how do you feel|do you agree|has anyone heard)\b/i,
+  FILLER_WORDS: /\b(um|uh|like|you know|i mean|actually|basically|literally|sort of|kind of|well|so|just|really|very|right|okay|yeah)\b/gi,
 
-  // Pedagogy-related keywords (Content Coverage: Growth Mindset concepts)
-  PEDAGOGY_LEXICON: /\b(growth mindset|fixed mindset|abilities can improve|effort matters|learning from failure|brain is a muscle|practice|strategies|improvement|yet|challenge|small steps|continuous improvement|skills|motivation|persistence|learning|mistakes)\b/gi,
-
-  // Reflection prompts (Facilitation Quality: encouraging self-reflection)
-  REFLECTION_PROMPTS: /\b(think quietly|reflect|imagine|what if|how would you|take a moment|notice|catch a thought|connect this to real life|consider)\b/i,
-
-  // Empathy markers (Facilitation Quality: showing warmth & validation)
-  EMPATHY_MARKERS: /^(i hear you|that’s a very common feeling|that makes sense|thank you for sharing|great point|i appreciate your honesty|exactly|perfect|good point|sounds like that was hard|nice example)/i,
-
-  // Checking for understanding (Facilitation Quality: engagement & comprehension)
-  CHECK_FOR_UNDERSTANDING: /\b(does that make sense|how do you feel about|do you agree|has anyone heard|what usually goes through your mind|could be a version of that thought|next question|what do you think|can you share)\b/i,
-
-  // Other parameters
-  WINDOW_PADDING: 2,
-  MAX_MONOLOGUE_CHARS: 600
+  // EXTREME settings
+  WINDOW_PADDING: 0,  // NO context padding
+  MAX_CHARS_PER_TURN: 100,  // Hyper-aggressive truncation
+  MIN_SIGNAL_SCORE: 20,  // Only keep high-signal turns
+  KEEP_ONLY_SIGNAL_TURNS: true  // Skip all non-signal turns
 };
 
+const countWords = (str: string): number => str.trim().split(/\s+/).length;
 
-// --- Core Logic ---
+const stripFiller = (text: string): string => {
+  return text
+    .replace(CONFIG.FILLER_WORDS, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+};
 
-/**
- * Optimizes a transcript into a token-efficient payload for LLM analysis.
- */
- export function optimizeTranscriptForLLM(session: Session): EvalPayload {
-   const { transcript } = session;
-   const scoredTurns: ScoredTurn[] = [];
-   const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
-   let participationScore = 0;
+const extractEssence = (text: string, score: number): string => {
+  let essence = stripFiller(text);
 
-   console.log(`\n🚀 [START] Optimizing session: "${session.session_topic}"`);
+  // For safety turns, keep the critical sentence
+  if (score >= 100) {
+    const match = essence.match(/[^.!?]*(?:medication|pill|doctor|diagnose|depressed|suicide|self-harm|therapy|legal)[^.!?]*[.!?]/i);
+    if (match) essence = match[0];
+  }
 
-   // PASS 1: Categorization & Scoring
-   console.log(`\n--- PASS 1: SCORING LOGS ---`);
-   for (let i = 0; i < transcript.length; i++) {
-     const turn = transcript[i];
-     const text = turn.text;
-     const isFellow = turn.speaker === "Fellow";
-     let score = 0;
-     const tags: string[] = [];
-     // console.log("===========================================================================================================")
+  // For pedagogy turns, extract the concept mention
+  else if (score >= 50) {
+    const match = essence.match(/[^.!?]*(?:growth mindset|fixed mindset|neuroplasticity|effort|challenge|muscle|neural)[^.!?]*[.!?]/i);
+    if (match) essence = match[0];
+  }
 
-     if (CONFIG.SAFETY_LEXICON.test(text)) {
-       score += 100; tags.push("SAFETY"); signals.safety++;
-     }
-     if (isFellow && CONFIG.PEDAGOGY_LEXICON.test(text)) {
-       score += 50; tags.push("PEDAGOGY"); signals.pedagogy++;
-     }
-     if (isFellow) {
-       if (CONFIG.REFLECTION_PROMPTS.test(text)) {
-         score += 40; tags.push("REFLECTION"); signals.facilitation++;
-       }
-       if (CONFIG.EMPATHY_MARKERS.test(text) || CONFIG.CHECK_FOR_UNDERSTANDING.test(text)) {
-         score += 30; tags.push("FACILITATION"); signals.facilitation++;
-       }
-     }
+  // Truncate aggressively
+  if (essence.length > CONFIG.MAX_CHARS_PER_TURN) {
+    essence = essence.slice(0, CONFIG.MAX_CHARS_PER_TURN) + "...";
+  }
 
-     if (score > 0) {
-       console.log(`[HIT] Turn #${i} (${turn.speaker}): Score ${score} | Tags: [${tags.join(", ")}] | Text: "${text.substring(0, 50)}..."`);
-     }
+  return essence;
+};
 
-     if (!isFellow && text.split(/\s+/).length > 3) participationScore++;
-     scoredTurns.push({ ...turn, index: i, score, tags });
+export function optimizeTranscriptForLLM(session: Session): EvalPayload {
+  const { transcript } = session;
+  const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
+  let participationScore = 0;
+  let originalWordCount = 0;
 
-     CONFIG.SAFETY_LEXICON.lastIndex = 0;
-     CONFIG.PEDAGOGY_LEXICON.lastIndex = 0;
-     // console.log("===========================================================================================================")
-   }
+  // PASS 1: Score and identify signal turns ONLY
+  const scoredTurns: ScoredTurn[] = [];
 
-   // PASS 2: Cluster Identification
-   console.log(`\n--- PASS 2: WINDOW EXPANSION ---`);
-   const keepIndices = new Set<number>();
-   scoredTurns.forEach(turn => {
-     if (turn.score > 0) {
-       const start = Math.max(0, turn.index - CONFIG.WINDOW_PADDING);
-       const end = Math.min(transcript.length - 1, turn.index + CONFIG.WINDOW_PADDING);
+  for (let i = 0; i < transcript.length; i++) {
+    const turn = transcript[i];
+    const wordCount = countWords(turn.text);
+    originalWordCount += wordCount;
 
-       console.log(`[WINDOW] Signal at #${turn.index} triggering keep for range: ${start} to ${end}`);
+    const isFellow = turn.speaker === "Fellow";
+    let score = 0;
 
-       for (let i = start; i <= end; i++) {
-         keepIndices.add(i);
-       }
-     }
-   });
+    if (CONFIG.SAFETY_LEXICON.test(turn.text)) {
+      score += 100;
+      signals.safety++;
+    }
+    if (isFellow && CONFIG.PEDAGOGY_LEXICON.test(turn.text)) {
+      score += 50;
+      signals.pedagogy++;
+    }
+    if (isFellow) {
+      if (CONFIG.REFLECTION_PROMPTS.test(turn.text)) {
+        score += 40;
+        signals.facilitation++;
+      }
+      if (CONFIG.EMPATHY_MARKERS.test(turn.text) || CONFIG.CHECK_FOR_UNDERSTANDING.test(turn.text)) {
+        score += 30;
+        signals.facilitation++;
+      }
+    }
 
-   // PASS 3: Assembly & Truncation
-   console.log(`\n--- PASS 3: FINAL ASSEMBLY ---`);
-   const finalPayload: PayloadTurn[] = [];
-   const sortedIndices = Array.from(keepIndices).sort((a, b) => a - b);
-   let lastIdx = -1;
+    if (!isFellow && wordCount > 3) participationScore++;
 
-   for (const idx of sortedIndices) {
-     // Log Omissions
-     if (lastIdx !== -1 && idx > lastIdx + 1) {
-       const skippedCount = idx - lastIdx - 1;
-       console.log(`[SKIP] Skipping ${skippedCount} turns between index ${lastIdx} and ${idx}`);
-       finalPayload.push({ _type: "OMITTED_CONTENT", count: skippedCount });
-     }
+    // Only track turns that meet minimum threshold
+    if (score >= CONFIG.MIN_SIGNAL_SCORE || !CONFIG.KEEP_ONLY_SIGNAL_TURNS) {
+      scoredTurns.push({ ...turn, index: i, score });
+    }
 
-     const originalTurn = transcript[idx];
-     const processedTurn: ProcessedTurn = { ...originalTurn };
+    CONFIG.SAFETY_LEXICON.lastIndex = 0;
+    CONFIG.PEDAGOGY_LEXICON.lastIndex = 0;
+  }
 
-     if (processedTurn.text.length > CONFIG.MAX_MONOLOGUE_CHARS) {
-       console.log(`[COMPRESS] Truncating Turn #${idx} monologue (${processedTurn.text.length} chars)`);
-       const half = Math.floor(CONFIG.MAX_MONOLOGUE_CHARS / 2);
-       processedTurn.text = `${processedTurn.text.slice(0, half)} ... [TRUNCATED] ... ${processedTurn.text.slice(-half)}`;
-       processedTurn._compressed = true;
-     }
+  // PASS 2: Extract essence and build minimal payload
+  const finalPayload: ProcessedTurn[] = [];
+  let finalWordCount = 0;
 
-     finalPayload.push(processedTurn);
-     lastIdx = idx;
-   }
+  for (const turn of scoredTurns) {
+    const essence = extractEssence(turn.text, turn.score);
 
-   const reduction = (1 - (finalPayload.length / transcript.length)) * 100;
-   console.log(`\n✅ [FINISH] Optimization complete. Reduction: ${reduction.toFixed(1)}%\n`);
+    finalPayload.push({
+      speaker: turn.speaker,
+      text: essence,
+      _compressed: essence !== turn.text
+    });
 
-   return {
-     metadata: {
-       session_topic: session.session_topic,
-       original_turns: transcript.length,
-       extracted_signals: signals,
-       participation_score: participationScore,
-       final_payload_turns: finalPayload.length,
-       reduction_ratio: (reduction / 100).toFixed(2)
-     },
-     evaluation_ready_transcript: finalPayload
-   };
- }
+    finalWordCount += countWords(essence);
+  }
+
+  const reduction = originalWordCount > 0
+    ? (1 - (finalWordCount / originalWordCount)).toFixed(2)
+    : "0.00";
+
+  return {
+    metadata: {
+      session_topic: session.session_topic,
+      original_turns: transcript.length,
+      original_word_count: originalWordCount,
+      extracted_signals: signals,
+      participation_score: participationScore,
+      final_payload_turns: finalPayload.length,
+      final_word_count: finalWordCount,
+      word_reduction_ratio: reduction
+    },
+    evaluation_ready_transcript: finalPayload
+  };
+}

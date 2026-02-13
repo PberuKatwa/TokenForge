@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Session } from "./token.prune.js";
+import { Session } from "../types/pruner.types.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
