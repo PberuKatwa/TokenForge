@@ -348,10 +348,16 @@ export class TranscriptPrunner{
         context.signalsScores.facilitation++;
       }
 
-      if (regex.empathyRegex.test(turn.text) ||regex. understandingRegex.test(turn.text)) {
+      if (regex.empathyRegex.test(turn.text)) {
         score += 30;
         context.signalsScores.facilitation++;
       }
+
+      if(regex. understandingRegex.test(turn.text)){
+        score += 30;
+        context.signalsScores.facilitation++;
+      }
+
     }
 
     return score;
