@@ -70,3 +70,12 @@ export interface PruneContext {
   metadata: PruneMetadata;
   lexicons: Lexicons;
 }
+
+export type SignalRegexSet = {
+  safetyRegex: RegExp;
+  pedagogyRegex: RegExp;
+  reflectionRegex: RegExp;
+  empathyRegex: RegExp;
+  understandingRegex: RegExp;
+  fillerRegex: RegExp;
+};

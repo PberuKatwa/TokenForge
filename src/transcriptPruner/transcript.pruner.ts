@@ -1,4 +1,5 @@
-import { PruneContext, ScoredTurn, Session } from "../types/pruner.types.js";
+import { Sign } from "crypto";
+import { Lexicons, PruneContext, RawTurn, ScoredTurn, Session, SignalRegexSet } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -40,22 +41,15 @@ export class TranscriptPrunner{
     }
   }
 
-  private initializeScoringRegex(
-    safetyWords: string[],
-    pedagogyWords: string[],
-    reflectionWords: string[],
-    empathyWords: string[],
-    understandingWords: string[],
-    fillerWords:string[]
-  ) {
+  private initializeScoringRegex(lexiconSet:Lexicons ):SignalRegexSet {
     try {
 
-      const safetyRegex = this.convertStringArrayToRegExp(safetyWords);
-      const pedagogyRegex = this.convertStringArrayToRegExp(pedagogyWords);
-      const reflectionRegex = this.convertStringArrayToRegExp(reflectionWords);
-      const empathyRegex = this.convertStringArrayToRegExp(empathyWords);
-      const understandingRegex = this.convertStringArrayToRegExp(understandingWords);
-      const fillerRegex = this.convertStringArrayToRegExp(fillerWords);
+      const safetyRegex = this.convertStringArrayToRegExp(lexiconSet.safetyWords);
+      const pedagogyRegex = this.convertStringArrayToRegExp(lexiconSet.pedagogyWords);
+      const reflectionRegex = this.convertStringArrayToRegExp(lexiconSet.reflectionWords);
+      const empathyRegex = this.convertStringArrayToRegExp(lexiconSet.empathyWords);
+      const understandingRegex = this.convertStringArrayToRegExp(lexiconSet.understandingWords);
+      const fillerRegex = this.convertStringArrayToRegExp(lexiconSet.fillerWords);
 
 
       return { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex };
@@ -64,114 +58,114 @@ export class TranscriptPrunner{
     }
   }
 
-  public pruneTranscript(
-    safetyWords: string[],
-    pedagogyWords: string[],
-    reflectionWords: string[],
-    empathyWords: string[],
-    understandingWords: string[],
-    fillerWords: string[],
-    sessionTranscript:Session
-  ) {
-    try {
-      const { transcript } = sessionTranscript;
+  // public pruneTranscript(
+  //   safetyWords: string[],
+  //   pedagogyWords: string[],
+  //   reflectionWords: string[],
+  //   empathyWords: string[],
+  //   understandingWords: string[],
+  //   fillerWords: string[],
+  //   sessionTranscript:Session
+  // ) {
+  //   try {
+  //     const { transcript } = sessionTranscript;
 
-      const context = {
-        transcript,
-        signalsScores: {
-          safety: 0,
-          pedagogy: 0,
-          facilitation: 0
-        },
-        metadata: {
-          participationScore: 0,
-          originalWordCount: 0,
-          originalTurns: transcript.length,
-          finalTurns: 0,
-          finalWordCount:0
-        }
-      }
+  //     const context = {
+  //       transcript,
+  //       signalsScores: {
+  //         safety: 0,
+  //         pedagogy: 0,
+  //         facilitation: 0
+  //       },
+  //       metadata: {
+  //         participationScore: 0,
+  //         originalWordCount: 0,
+  //         originalTurns: transcript.length,
+  //         finalTurns: 0,
+  //         finalWordCount:0
+  //       }
+  //     }
 
-      const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
-        this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
-          fillerWords);
+  //     const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
+  //       this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
+  //         fillerWords);
 
 
-      const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
-      let participationScore = 0;
-      let originalWordCount = 0;
+  //     const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
+  //     let participationScore = 0;
+  //     let originalWordCount = 0;
 
-      // PASS 1: Score and identify signal turns ONLY
-      const scoredTurns: ScoredTurn[] = [];
+  //     // PASS 1: Score and identify signal turns ONLY
+  //     const scoredTurns: ScoredTurn[] = [];
 
-      for (let i = 0; i < transcript.length; i++) {
+  //     for (let i = 0; i < transcript.length; i++) {
 
-        const turn = transcript[i];
-        const wordCount = turn.text.trim().split(/\s+/).length;
-        originalWordCount += wordCount;
+  //       const turn = transcript[i];
+  //       const wordCount = turn.text.trim().split(/\s+/).length;
+  //       originalWordCount += wordCount;
 
-        const isFellow = turn.speaker === "Fellow";
-        let score = 0;
+  //       const isFellow = turn.speaker === "Fellow";
+  //       let score = 0;
 
-        if (safetyRegex.test(turn.text)) {
-          score += 100;
-          signals.safety++;
-        }
+  //       if (safetyRegex.test(turn.text)) {
+  //         score += 100;
+  //         signals.safety++;
+  //       }
 
-        if (isFellow && pedagogyRegex.test(turn.text)) {
-          score += 50;
-          signals.pedagogy++;
-        }
+  //       if (isFellow && pedagogyRegex.test(turn.text)) {
+  //         score += 50;
+  //         signals.pedagogy++;
+  //       }
 
-        if (isFellow) {
+  //       if (isFellow) {
 
-          if (reflectionRegex.test(turn.text)) {
-            score += 40;
-            signals.facilitation++;
-          }
+  //         if (reflectionRegex.test(turn.text)) {
+  //           score += 40;
+  //           signals.facilitation++;
+  //         }
 
-          if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
-            score += 30;
-            signals.facilitation++;
-          }
+  //         if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
+  //           score += 30;
+  //           signals.facilitation++;
+  //         }
 
-        }
+  //       }
 
-        if (!isFellow && wordCount > 3) participationScore++;
+  //       if (!isFellow && wordCount > 3) participationScore++;
 
-        // Only track turns that meet minimum threshold
-        if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
-          scoredTurns.push({ ...turn, index: i, score });
-        }
+  //       // Only track turns that meet minimum threshold
+  //       if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
+  //         scoredTurns.push({ ...turn, index: i, score });
+  //       }
 
-        safetyRegex.lastIndex = 0;
-        pedagogyRegex.lastIndex = 0;
-      }
+  //       safetyRegex.lastIndex = 0;
+  //       pedagogyRegex.lastIndex = 0;
+  //     }
 
-      // PASS 2: Cluster Identification (Sliding Window)
-      const keepIndices = new Set<number>();
-      scoredTurns.forEach(turn => {
-          for (let i = turn.index - this.windowPadding; i <= turn.index + this.windowPadding; i++) {
-            if (i >= 0 && i < transcript.length) keepIndices.add(i);
-          }
-      });
+  //     // PASS 2: Cluster Identification (Sliding Window)
+  //     const keepIndices = new Set<number>();
+  //     scoredTurns.forEach(turn => {
+  //         for (let i = turn.index - this.windowPadding; i <= turn.index + this.windowPadding; i++) {
+  //           if (i >= 0 && i < transcript.length) keepIndices.add(i);
+  //         }
+  //     });
 
-      const prunedTranscript22 = transcript.filter((_, index) =>
-        keepIndices.has(index)
-      );
+  //     const prunedTranscript22 = transcript.filter((_, index) =>
+  //       keepIndices.has(index)
+  //     );
 
-      console.log("pruned", prunedTranscript22)
-      console.log("kept indices", keepIndices, "totall", transcript.length)
-      console.log("windowPadding", this.windowPadding)
-      console.log("signallls", signals)
-      console.log("participation score", participationScore)
-      console.log("word count", originalWordCount)
-      // console.log("this are the turnss",scoredTurns)
+  //     console.log("pruned", prunedTranscript22)
+  //     console.log("kept indices", keepIndices, "totall", transcript.length)
+  //     console.log("windowPadding", this.windowPadding)
+  //     console.log("signallls", signals)
+  //     console.log("participation score", participationScore)
+  //     console.log("word count", originalWordCount)
+  //     // console.log("this are the turnss",scoredTurns)
 
-    } catch (error) {
-      throw error;
-    }
-  }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   private initializeContext(
     safetyWords: string[],
@@ -228,76 +222,131 @@ export class TranscriptPrunner{
         sessionTranscript
       )
 
-      const { scoredTurns, metadata } = this.scoreTurns(context);
+      const { scoredTurns, metadata } = this.scoreTurns22(context);
 
       console.log("metadata", metadata);
-      // console.log("turnsss", scoredTurns)
+      console.log("turnsss", scoredTurns);
 
     } catch (error) {
       throw error;
     }
   }
 
-  private scoreTurns(context: PruneContext) {
+  // private scoreTurns(context: PruneContext) {
+
+  //   const { sessionTranscript, signalsScores, metadata, lexicons } = context;
+  //   const { safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords } = lexicons;
+  //   const { transcript } = sessionTranscript;
+
+  //   const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
+  //     this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
+  //       fillerWords);
+
+  //   // PASS 1: Score and identify signal turns ONLY
+  //   const scoredTurns: ScoredTurn[] = [];
+
+  //   for (let i = 0; i < transcript.length; i++) {
+
+  //     const turn = transcript[i];
+  //     const wordCount = turn.text.trim().split(/\s+/).length;
+  //     metadata.originalWordCount += wordCount;
+
+  //     const isFellow = turn.speaker === "Fellow";
+  //     let score = 0;
+
+  //     if (safetyRegex.test(turn.text)) {
+  //       score += 100;
+  //       signalsScores.safety++;
+  //     }
+
+  //     if (isFellow && pedagogyRegex.test(turn.text)) {
+  //       score += 50;
+  //       signalsScores.pedagogy++;
+  //     }
+
+  //     if (isFellow) {
+
+  //       if (reflectionRegex.test(turn.text)) {
+  //         score += 40;
+  //         signalsScores.facilitation++;
+  //       }
+
+  //       if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
+  //         score += 30;
+  //         signalsScores.facilitation++;
+  //       }
+
+  //     }
+
+  //     if (!isFellow && wordCount > 3) metadata.participationScore++;
+
+  //     // Only track turns that meet minimum threshold
+  //     if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
+  //       scoredTurns.push({ ...turn, index: i, score });
+  //     }
+
+  //     safetyRegex.lastIndex = 0;
+  //     pedagogyRegex.lastIndex = 0;
+  //   }
+
+  //   metadata.finalTurns = scoredTurns.length;
+  //   return { scoredTurns, metadata };
+  // }
+
+  private scoreTurns22(context: PruneContext) {
 
     const { sessionTranscript, signalsScores, metadata, lexicons } = context;
-    const { safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords } = lexicons;
     const { transcript } = sessionTranscript;
-    let { originalWordCount,participationScore } = metadata;
 
-    const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
-      this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,
-        fillerWords);
+    const regexSet:SignalRegexSet = this.initializeScoringRegex(lexicons);
 
     // PASS 1: Score and identify signal turns ONLY
     const scoredTurns: ScoredTurn[] = [];
 
-    for (let i = 0; i < transcript.length; i++) {
+    transcript.forEach(
+      (turn, index) => {
 
-      const turn = transcript[i];
-      const wordCount = turn.text.trim().split(/\s+/).length;
-      metadata.originalWordCount += wordCount;
+        const wordCount = turn.text.trim().split(/\s+/).length;
+        metadata.originalWordCount += wordCount;
 
-      const isFellow = turn.speaker === "Fellow";
-      let score = 0;
-
-      if (safetyRegex.test(turn.text)) {
-        score += 100;
-        signalsScores.safety++;
-      }
-
-      if (isFellow && pedagogyRegex.test(turn.text)) {
-        score += 50;
-        signalsScores.pedagogy++;
-      }
-
-      if (isFellow) {
-
-        if (reflectionRegex.test(turn.text)) {
-          score += 40;
-          signalsScores.facilitation++;
-        }
-
-        if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
-          score += 30;
-          signalsScores.facilitation++;
-        }
+        const score  = this.calculateScoreTurn(turn,context,regexSet)
 
       }
-
-      if (!isFellow && wordCount > 3) metadata.participationScore++;
-
-      // Only track turns that meet minimum threshold
-      if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
-        scoredTurns.push({ ...turn, index: i, score });
-      }
-
-      safetyRegex.lastIndex = 0;
-      pedagogyRegex.lastIndex = 0;
-    }
+    )
 
     metadata.finalTurns = scoredTurns.length;
     return { scoredTurns, metadata };
+  }
+
+  private calculateScoreTurn(turn:RawTurn,context:PruneContext,regex:SignalRegexSet) {
+
+    const isFellow = turn.speaker === "Fellow";
+    let score = 0;
+
+    if (regex.safetyRegex.test(turn.text)) {
+      score += 100;
+      context.signalsScores.safety++;
+    }
+
+    if (isFellow && regex.pedagogyRegex.test(turn.text)) {
+      score += 50;
+      context.signalsScores.pedagogy++;
+    }
+
+    if (isFellow) {
+
+      if (regex.reflectionRegex.test(turn.text)) {
+        score += 40;
+        context.signalsScores.facilitation++;
+      }
+
+      if (regex.empathyRegex.test(turn.text) ||regex. understandingRegex.test(turn.text)) {
+        score += 30;
+        context.signalsScores.facilitation++;
+      }
+
+    }
+
   }
 
 
