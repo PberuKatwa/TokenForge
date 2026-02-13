@@ -4,7 +4,7 @@ export class TranscriptPrunner{
   private readonly maximumCharactersPerTurn: number;
   private readonly minimumCharactersPerTurn: number;
   private readonly keepOnlySignalTurns: boolean;
-  private readonly safetyLexicon: string[];
+  private  safetyLexicon: RegExp| null;
 
   constructor(
     windowPadding: number,
@@ -16,9 +16,10 @@ export class TranscriptPrunner{
     this.maximumCharactersPerTurn = maximumCharactersPerTurn;
     this.minimumCharactersPerTurn = minimumCharactersPerTurn;
     this.keepOnlySignalTurns = keepOnlySignalTurns;
+    this.safetyLexicon = null;
   }
 
-  private convertStringArrayToRegExp(lexicon:string[]) {
+  private convertStringArrayToRegExp(lexicon:string[]):RegExp {
     try {
 
       const escaped = lexicon.map(word => {
@@ -33,6 +34,16 @@ export class TranscriptPrunner{
       const pattern = `\\b(?:${escaped.join('|')})\\b`;
 
       return new RegExp(pattern, 'gi');
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public pruneTranscript(safetyWords:string[]) {
+    try {
+
+      this.safetyLexicon = this.convertStringArrayToRegExp(safetyWords)
+
     } catch (error) {
       throw error;
     }
