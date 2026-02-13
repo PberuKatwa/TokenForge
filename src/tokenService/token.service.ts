@@ -11,8 +11,8 @@ export async function tokenService(jsonData:string) {
     const result = SessionSchema.safeParse(parsedJson);
 
     if (!result.success) {
-      console.error(result.error.format());
-      process.exit(1);
+      console.error("validation error",result.error.format());
+      throw new Error(`Invalid session data format`);
     }
 
     const sessionData = result.data;
