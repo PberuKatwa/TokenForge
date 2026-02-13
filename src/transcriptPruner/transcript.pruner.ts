@@ -1,5 +1,5 @@
 import { Sign } from "crypto";
-import { Lexicons, PruneContext, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores } from "../types/pruner.types.js";
+import { Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -217,6 +217,29 @@ export class TranscriptPrunner{
 
     return keptIndices;
   }
+
+  private buildPayload(
+    metadata: PruneMetadata,
+    signals:SignalScores,
+    prunedTranscript: Session
+  ): PrunedSession {
+
+    const { transcript } = prunedTranscript;
+    const prunedWordCount = transcript.reduce(
+      (sum, turn) => sum + (turn.text.trim().split(/\s+/).length),
+      0
+    );
+
+    metadata.finalWordCount = prunedWordCount;
+    const finalPayload: PrunedSession= {
+      metadata,
+      signalScores: signals,
+      finalTranscript:prunedTranscript
+    }
+
+    return finalPayload;
+  }
+
 
 
 }
