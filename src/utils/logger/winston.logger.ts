@@ -1,14 +1,14 @@
 import winston, { Logger, LoggerOptions } from "winston";
 
 // Define an interface for better type safety when injecting
-export interface IAppLogger {
+export interface AppLoggerInterface {
   info(message: string, meta?: any): void;
   error(message: string, meta?: any): void;
   warn(message: string, meta?: any): void;
   debug(message: string, meta?: any): void;
 }
 
-class AppLogger implements IAppLogger {
+class AppLogger implements AppLoggerInterface {
   private logger: Logger;
 
   constructor() {
@@ -36,6 +36,7 @@ class AppLogger implements IAppLogger {
         new winston.transports.File({ filename: "combined.log" }),
       ],
     });
+
   }
 
   // Wrapper methods to satisfy the interface
