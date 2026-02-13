@@ -1,59 +1,15 @@
-import { Session, EvalMetadata, EvalPayload, ScoredTurn, ProcessedTurn } from "../types/pruner.types.js";
-
-/**
- * TOKENCUT: Ultra-Aggressive Pruner for Minimum Latency
- * Only sends turns with detected signals - removes ALL filler
- */
-
-// ULTRA-AGGRESSIVE CONFIG
-const CONFIG = {
-  SAFETY_LEXICON: /\b(medication|pill|doctor|diagnose|depressed|suicide|self-harm|break up|therapy|legal|clinic|prescription)\b/gi,
-  PEDAGOGY_LEXICON: /\b(growth mindset|fixed mindset|neuroplasticity|effort|yet|challenge|muscle|neural|persistence|strategy)\b/gi,
-  REFLECTION_PROMPTS: /\b(think quietly|reflect|imagine|what if|how would you|take a moment)\b/i,
-  EMPATHY_MARKERS: /^(i hear you|that makes sense|thank you for sharing|great point)/i,
-  CHECK_FOR_UNDERSTANDING: /\b(does that make sense|how do you feel|do you agree|has anyone heard)\b/i,
-  FILLER_WORDS: /\b(um|uh|like|you know|i mean|actually|basically|literally|sort of|kind of|well|so|just|really|very|right|okay|yeah)\b/gi,
-
-  // EXTREME settings
-  WINDOW_PADDING: 0,  // NO context padding
-  MAX_CHARS_PER_TURN: 100,  // Hyper-aggressive truncation
-  MIN_SIGNAL_SCORE: 20,  // Only keep high-signal turns
-  KEEP_ONLY_SIGNAL_TURNS: true  // Skip all non-signal turns
-};
-
-const countWords = (str: string): number => str.trim().split(/\s+/).length;
-
-const stripFiller = (text: string): string => {
-  return text
-    .replace(CONFIG.FILLER_WORDS, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-
-const extractEssence = (text: string, score: number): string => {
-  let essence = stripFiller(text);
-
-  // For safety turns, keep the critical sentence
-  if (score >= 100) {
-    const match = essence.match(/[^.!?]*(?:medication|pill|doctor|diagnose|depressed|suicide|self-harm|therapy|legal)[^.!?]*[.!?]/i);
-    if (match) essence = match[0];
-  }
-
-  // For pedagogy turns, extract the concept mention
-  else if (score >= 50) {
-    const match = essence.match(/[^.!?]*(?:growth mindset|fixed mindset|neuroplasticity|effort|challenge|muscle|neural)[^.!?]*[.!?]/i);
-    if (match) essence = match[0];
-  }
-
-  // Truncate aggressively
-  if (essence.length > CONFIG.MAX_CHARS_PER_TURN) {
-    essence = essence.slice(0, CONFIG.MAX_CHARS_PER_TURN) + "...";
-  }
-
-  return essence;
-};
+import { Session, EvalPayload, ScoredTurn, ProcessedTurn } from "../types/pruner.types.js";
+import { CONFIG } from "./config.pruner.js";
+import { countWords, extractEssence } from "./utils.pruner.js";
 
 export function optimizeTranscriptForLLM(session: Session): EvalPayload {
+
+  try {
+
+  } catch (error) {
+
+  }
+
   const { transcript } = session;
   const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
   let participationScore = 0;
