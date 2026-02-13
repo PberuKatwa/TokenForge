@@ -6,6 +6,7 @@ import { evaluateWithGemini } from './tokenOptimizer/gemini.js';
 import { evaluateFullTranscript } from './tokenOptimizer/geminiFull.js';
 import { Session } from './tokenOptimizer/token.pruneLogged.js';
 import { logger } from './utils/logger/index.logger.js';
+import { initializePruner } from './transcriptPruner/index.pruner.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

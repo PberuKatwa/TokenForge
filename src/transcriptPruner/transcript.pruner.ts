@@ -44,6 +44,7 @@ export class TranscriptPrunner{
 
       this.safetyLexicon = this.convertStringArrayToRegExp(safetyWords)
 
+      return this.safetyLexicon;
     } catch (error) {
       throw error;
     }
