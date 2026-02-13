@@ -4,18 +4,18 @@ export class TranscriptPrunner{
 
   private readonly windowPadding: number;
   private readonly maximumCharactersPerTurn: number;
-  private readonly minimumCharactersPerTurn: number;
+  private readonly minimumSignalScore: number;
   private readonly keepOnlySignalTurns: boolean;
 
   constructor(
     windowPadding: number,
     maximumCharactersPerTurn: number,
-    minimumCharactersPerTurn: number,
+    minimumSignalScore: number,
     keepOnlySignalTurns: boolean
   ) {
     this.windowPadding = windowPadding;
     this.maximumCharactersPerTurn = maximumCharactersPerTurn;
-    this.minimumCharactersPerTurn = minimumCharactersPerTurn;
+    this.minimumSignalScore = minimumSignalScore;
     this.keepOnlySignalTurns = keepOnlySignalTurns;
   }
 
@@ -118,12 +118,12 @@ export class TranscriptPrunner{
         if (!isFellow && wordCount > 3) participationScore++;
 
         // Only track turns that meet minimum threshold
-        if (score >= CONFIG.MIN_SIGNAL_SCORE || !CONFIG.KEEP_ONLY_SIGNAL_TURNS) {
+        if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
           scoredTurns.push({ ...turn, index: i, score });
         }
 
-        CONFIG.SAFETY_LEXICON.lastIndex = 0;
-        CONFIG.PEDAGOGY_LEXICON.lastIndex = 0;
+        safetyRegex.lastIndex = 0;
+        pedagogyRegex.lastIndex = 0;
       }
 
     } catch (error) {

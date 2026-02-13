@@ -4,7 +4,7 @@ import { TranscriptPrunner } from "./transcript.pruner.js";
 export async function initializePruner(
   windowPadding: number,
   maximumCharactersPerTurn: number,
-  minimumCharactersPerTurn: number,
+  minimumSignalScore: number,
   keepOnlySignalTurns: boolean,
   safetyWords: string[],
   pedagogyWords: string[],
@@ -19,7 +19,7 @@ export async function initializePruner(
     const pruner = new TranscriptPrunner(
       windowPadding,
       maximumCharactersPerTurn,
-      minimumCharactersPerTurn,
+      minimumSignalScore,
       keepOnlySignalTurns
     )
 
