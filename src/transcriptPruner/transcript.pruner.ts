@@ -300,16 +300,24 @@ export class TranscriptPrunner{
 
     const regexSet:SignalRegexSet = this.initializeScoringRegex(lexicons);
 
-    // PASS 1: Score and identify signal turns ONLY
     const scoredTurns: ScoredTurn[] = [];
-
     transcript.forEach(
       (turn, index) => {
 
+        const isFellow = turn.speaker === "Fellow";
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
-        const score  = this.calculateScoreTurn(turn,context,regexSet)
+        const score = this.calculateScoreTurn(turn, context, regexSet)
+        if (!isFellow && wordCount > 3) metadata.participationScore++;
+
+        // Only track turns that meet minimum threshold
+        if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
+          scoredTurns.push({ ...turn, index, score });
+        }
+
+        regexSet.safetyRegex.lastIndex = 0;
+        regexSet.pedagogyRegex.lastIndex = 0;
 
       }
     )
@@ -344,9 +352,9 @@ export class TranscriptPrunner{
         score += 30;
         context.signalsScores.facilitation++;
       }
-
     }
 
+    return score;
   }
 
 
