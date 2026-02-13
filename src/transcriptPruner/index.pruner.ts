@@ -24,6 +24,11 @@ export async function initializePruner(
       console.log("Safety term detected");
     }
 
+    const matches = txtTest.match(regexTest)
+    if (txtTest.match(regexTest)) {
+      console.log("these are the matches", matches)
+    }
+
   } catch (error) {
     throw error;
   }

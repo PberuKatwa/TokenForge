@@ -4,7 +4,8 @@ export class TranscriptPrunner{
   private readonly maximumCharactersPerTurn: number;
   private readonly minimumCharactersPerTurn: number;
   private readonly keepOnlySignalTurns: boolean;
-  private  safetyLexicon: RegExp| null;
+  private safetyLexicon: RegExp | null;
+  private pedagogyLexicon: RegExp | null;
 
   constructor(
     windowPadding: number,
@@ -37,6 +38,22 @@ export class TranscriptPrunner{
     } catch (error) {
       throw error;
     }
+  }
+
+  private initializeScoringRegex(
+    safetyWords: string[],
+    pedagogyWords: string[],
+    reflectionWords: string[],
+    empathyWords: string[],
+    understandingWords: string[],
+    fillerWords:string[]
+  ) {
+    try {
+
+    } catch (error) {
+      throw error;
+    }
+
   }
 
   public pruneTranscript(safetyWords:string[]) {
