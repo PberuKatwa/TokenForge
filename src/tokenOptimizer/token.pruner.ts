@@ -1,14 +1,9 @@
 import { Session, EvalPayload, ScoredTurn, ProcessedTurn } from "../types/pruner.types.js";
 import { CONFIG } from "./config.pruner.js";
 import { countWords, extractEssence } from "./utils.pruner.js";
+import { logger } from "../utils/logger/index.logger.js";
 
 export function optimizeTranscriptForLLM(session: Session): EvalPayload {
-
-  try {
-
-  } catch (error) {
-
-  }
 
   const { transcript } = session;
   const signals = { safety: 0, pedagogy: 0, facilitation: 0 };
