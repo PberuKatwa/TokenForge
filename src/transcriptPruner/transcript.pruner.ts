@@ -336,12 +336,12 @@ export class TranscriptPrunner{
       context.signalsScores.safety++;
     }
 
-    if (isFellow && regex.pedagogyRegex.test(turn.text)) {
-      score += 50;
-      context.signalsScores.pedagogy++;
-    }
-
     if (isFellow) {
+
+      if (regex.pedagogyRegex.test(turn.text)) {
+        score += 50;
+        context.signalsScores.pedagogy++;
+      }
 
       if (regex.reflectionRegex.test(turn.text)) {
         score += 40;
