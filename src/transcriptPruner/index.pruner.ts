@@ -1,3 +1,4 @@
+import { Session } from "../types/pruner.types.js";
 import { TranscriptPrunner } from "./transcript.pruner.js";
 
 export async function initializePruner(
@@ -10,7 +11,8 @@ export async function initializePruner(
   reflectionWords: string[],
   empathyWords: string[],
   understandingWords: string[],
-  fillerWords:string[]
+  fillerWords: string[],
+  session:Session
 ) {
   try {
 
@@ -21,18 +23,10 @@ export async function initializePruner(
       keepOnlySignalTurns
     )
 
-    const regexTest = pruner.pruneTranscript(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords)
+    const regexTest = pruner.pruneTranscript(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords,session)
 
     const txtTest = "She is struggling with depression and self harm.";
 
-    if (regexTest.test(txtTest)) {
-      console.log("Safety term detected");
-    }
-
-    const matches = txtTest.match(regexTest)
-    if (txtTest.match(regexTest)) {
-      console.log("these are the matches", matches)
-    }
 
   } catch (error) {
     throw error;
