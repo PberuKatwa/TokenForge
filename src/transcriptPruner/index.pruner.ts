@@ -23,7 +23,10 @@ export async function initializePruner(
       keepOnlySignalTurns
     )
 
-    const regexTest = pruner.pruneTranscript(safetyWords, pedagogyWords, reflectionWords, empathyWords,
+    // const regexTest = pruner.pruneTranscript(safetyWords, pedagogyWords, reflectionWords, empathyWords,
+    //   understandingWords, fillerWords, session)
+
+    const regexTest = pruner.prune(safetyWords, pedagogyWords, reflectionWords, empathyWords,
       understandingWords, fillerWords, session)
 
     const txtTest = "She is struggling with depression and self harm.";

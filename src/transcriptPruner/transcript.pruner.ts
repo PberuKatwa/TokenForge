@@ -182,7 +182,6 @@ export class TranscriptPrunner{
     fillerWords: string[],
     sessionTranscript: Session
   ): PruneContext{
-
     return{
       sessionTranscript,
       signalsScores: {
@@ -206,7 +205,6 @@ export class TranscriptPrunner{
         fillerWords
       }
     }
-
   }
 
   public prune(
@@ -219,7 +217,6 @@ export class TranscriptPrunner{
     sessionTranscript:Session
   ) {
     try {
-      const { transcript } = sessionTranscript;
 
       const context: PruneContext = this.initializeContext(
         safetyWords,
@@ -233,6 +230,7 @@ export class TranscriptPrunner{
 
       const turns = this.scoreTurns(context)
 
+      console.log("turnsss", turns)
 
     } catch (error) {
       throw error;
