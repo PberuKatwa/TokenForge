@@ -1,6 +1,6 @@
 import { TranscriptPrunner } from "./transcript.pruner.js";
 
-export function initializePruner(
+export async function initializePruner(
   windowPadding: number,
   maximumCharactersPerTurn: number,
   minimumCharactersPerTurn: number,

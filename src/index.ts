@@ -15,10 +15,28 @@ const __dirname = path.dirname(__filename);
 async function runPruner() {
   try {
 
+    const safetyWords = [
+      "medication",
+      "pill",
+      "doctor",
+      "diagnose",
+      "depress",      // use root form instead of depressed
+      "suicide",
+      "self-harm",
+      "break up",
+      "therapy",
+      "legal",
+      "clinic",
+      "prescription"
+    ];
+
+    const answer = await initializePruner(0,100,20,true,safetyWords)
   } catch (error) {
     logger.error(`Error in running pruner`, error)
   }
 }
+
+runPruner()
 
 // async function runner() {
 //   try {
