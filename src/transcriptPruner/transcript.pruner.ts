@@ -100,19 +100,24 @@ export class TranscriptPrunner{
           score += 100;
           signals.safety++;
         }
+
         if (isFellow && pedagogyRegex.test(turn.text)) {
           score += 50;
           signals.pedagogy++;
         }
+
         if (isFellow) {
+
           if (reflectionRegex.test(turn.text)) {
             score += 40;
             signals.facilitation++;
           }
+
           if (empathyRegex.test(turn.text) || understandingRegex.test(turn.text)) {
             score += 30;
             signals.facilitation++;
           }
+
         }
 
         if (!isFellow && wordCount > 3) participationScore++;
@@ -125,6 +130,11 @@ export class TranscriptPrunner{
         safetyRegex.lastIndex = 0;
         pedagogyRegex.lastIndex = 0;
       }
+
+      console.log("signallls", signals)
+      console.log("participation score", participationScore)
+      console.log("word count", originalWordCount)
+      console.log("this are the turnss",scoredTurns)
 
     } catch (error) {
       throw error;

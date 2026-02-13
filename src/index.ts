@@ -17,8 +17,8 @@ async function runPruner() {
     // const inputFileName = "sessionFail.json";
     const inputFileName = "sessionAverage.json";
     // const inputFileName = "sessionPerfect.json";
-    const filePath = path.join(__dirname, "sessionJson", inputFileName);
 
+    const filePath = path.join(__dirname, "sessionJson", inputFileName);
     console.log(`Reading file from: ${filePath}`);
 
     const data = await fs.readFile(filePath, "utf-8");
