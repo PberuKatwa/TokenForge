@@ -63,3 +63,24 @@ export const understandingWords: string[] = [
   "do you agree",
   "has anyone heard"
 ];
+
+export const fillerWords: string[] = [
+  "um",
+  "uh",
+  "like",
+  "you know",
+  "i mean",
+  "actually",
+  "basically",
+  "literally",
+  "sort of",
+  "kind of",
+  "well",
+  "so",
+  "just",
+  "really",
+  "very",
+  "right",
+  "okay",
+  "yeah"
+];
