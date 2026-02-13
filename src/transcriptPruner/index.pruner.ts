@@ -5,7 +5,12 @@ export async function initializePruner(
   maximumCharactersPerTurn: number,
   minimumCharactersPerTurn: number,
   keepOnlySignalTurns: boolean,
-  safetyWords:string[]
+  safetyWords: string[],
+  pedagogyWords: string[],
+  reflectionWords: string[],
+  empathyWords: string[],
+  understandingWords: string[],
+  fillerWords:string[]
 ) {
   try {
 
@@ -16,7 +21,7 @@ export async function initializePruner(
       keepOnlySignalTurns
     )
 
-    const regexTest = pruner.pruneTranscript(safetyWords)
+    const regexTest = pruner.pruneTranscript(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords)
 
     const txtTest = "She is struggling with depression and self harm.";
 

@@ -1,3 +1,5 @@
+import { Session } from "../types/pruner.types.js";
+
 export class TranscriptPrunner{
 
   private readonly windowPadding: number;
@@ -64,10 +66,21 @@ export class TranscriptPrunner{
 
   }
 
-  public pruneTranscript(safetyWords:string[]) {
+  public pruneTranscript(
+    safetyWords: string[],
+    pedagogyWords: string[],
+    reflectionWords: string[],
+    empathyWords: string[],
+    understandingWords: string[],
+    fillerWords: string[],
+    sessionTranscript:Session
+  ) {
     try {
 
-      this.safetyLexicon = this.convertStringArrayToRegExp(safetyWords)
+      const { safetyRegex, pedagogyRegex, reflectionRegex, empathyRegex, understandingRegex, fillerRegex } =
+        this.initializeScoringRegex(safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords, fillerWords);
+
+
 
       return this.safetyLexicon;
     } catch (error) {
