@@ -6,8 +6,6 @@ import { evaluateWithGemini } from './tokenOptimizer/gemini.js';
 import { evaluateFullTranscript } from './tokenOptimizer/geminiFull.js';
 import { Session } from './tokenOptimizer/token.pruneLogged.js';
 import { logger } from './utils/logger/index.logger.js';
-import { initializePruner } from './transcriptPruner/index.pruner.js';
-import { safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,fillerWords } from './tokenOptimizer/config.pruner.js';
 import { tokenService } from './tokenService/token.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
