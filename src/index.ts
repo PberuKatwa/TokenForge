@@ -8,6 +8,7 @@ import { Session } from './tokenOptimizer/token.pruneLogged.js';
 import { logger } from './utils/logger/index.logger.js';
 import { initializePruner } from './transcriptPruner/index.pruner.js';
 import { safetyWords, pedagogyWords, reflectionWords, empathyWords, understandingWords,fillerWords } from './tokenOptimizer/config.pruner.js';
+import { tokenService } from './tokenService/token.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,9 +24,8 @@ async function runPruner() {
     console.log(`Reading file from: ${filePath}`);
 
     const data = await fs.readFile(filePath, "utf-8");
-    const sessionData: Session = JSON.parse(data);
 
-    const answer = await initializePruner(0, 100, 20, true, safetyWords,pedagogyWords,reflectionWords,empathyWords,understandingWords,fillerWords,sessionData)
+    const output = await tokenService(data)
 
   } catch (error) {
     logger.error(`Error in running pruner`, error)
