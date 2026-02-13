@@ -228,9 +228,10 @@ export class TranscriptPrunner{
         sessionTranscript
       )
 
-      const turns = this.scoreTurns(context)
+      const { scoredTurns, metadata } = this.scoreTurns(context);
 
-      console.log("turnsss", turns)
+      console.log("metadata", metadata);
+      // console.log("turnsss", scoredTurns)
 
     } catch (error) {
       throw error;
@@ -255,7 +256,7 @@ export class TranscriptPrunner{
 
       const turn = transcript[i];
       const wordCount = turn.text.trim().split(/\s+/).length;
-      originalWordCount += wordCount;
+      metadata.originalWordCount += wordCount;
 
       const isFellow = turn.speaker === "Fellow";
       let score = 0;
@@ -284,7 +285,7 @@ export class TranscriptPrunner{
 
       }
 
-      if (!isFellow && wordCount > 3) participationScore++;
+      if (!isFellow && wordCount > 3) metadata.participationScore++;
 
       // Only track turns that meet minimum threshold
       if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
@@ -295,7 +296,8 @@ export class TranscriptPrunner{
       pedagogyRegex.lastIndex = 0;
     }
 
-    return scoredTurns;
+    metadata.finalTurns = scoredTurns.length;
+    return { scoredTurns, metadata };
   }
 
 
