@@ -17,7 +17,10 @@ export async function tokenService(jsonData:string) {
 
     const sessionData = result.data;
 
-    const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
+    // const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
+    //   understandingWords, fillerWords, sessionData)
+
+    const answer = await initializePruner(3, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
       understandingWords, fillerWords, sessionData)
 
   } catch (error) {

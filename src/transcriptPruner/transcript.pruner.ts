@@ -131,6 +131,23 @@ export class TranscriptPrunner{
         pedagogyRegex.lastIndex = 0;
       }
 
+      if (this.windowPadding > 0) {
+        scoredTurns.forEach(
+          (turn) =>{
+            for (let i = turn.index - this.windowPadding; i <= (turn.index + this.windowPadding); i++){
+              if (i >= 0 && i < transcript.length) {
+
+                const window = transcript[i];
+                const windowCount = window.text.trim().split(/\s+/).length;
+                originalWordCount += windowCount;
+                scoredTurns.push({ ...window, index: i, score: 0 });
+
+              }
+            }
+          }
+        )
+      }
+
       console.log("signallls", signals)
       console.log("participation score", participationScore)
       console.log("word count", originalWordCount)
