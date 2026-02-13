@@ -79,3 +79,9 @@ export type SignalRegexSet = {
   understandingRegex: RegExp;
   fillerRegex: RegExp;
 };
+
+export interface PrunedSession {
+  metadata: PruneMetadata;
+  signalScores: SignalScores;
+  finalTranscript: Session;
+}
