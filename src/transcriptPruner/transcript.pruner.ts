@@ -112,13 +112,14 @@ export class TranscriptPrunner{
         fillerWords,
         sessionTranscript
       )
-
+      const { transcript } = sessionTranscript;
       const { scoredTurns, metadata } = this.scoreTurns(context);
-
-      const keptIndices = this.computeKeptIndices(scoredTurns, sessionTranscript.transcript.length);
+      const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
+      const finalScript = transcript.filter((_, index) => keptIndices.has(index));
 
       console.log("metadata", metadata);
-      console.log("kept indices",keptIndices)
+      console.log("kept indices", keptIndices)
+      console.log("finalll", finalScript)
       // console.log("turnsss", scoredTurns);
 
     } catch (error) {
