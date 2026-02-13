@@ -1,14 +1,7 @@
 import winston, { Logger, LoggerOptions } from "winston";
+import { AppLoggerInterface } from "../../types/logger.types.js";
 
-// Define an interface for better type safety when injecting
-export interface AppLoggerInterface {
-  info(message: string, meta?: any): void;
-  error(message: string, meta?: any): void;
-  warn(message: string, meta?: any): void;
-  debug(message: string, meta?: any): void;
-}
-
-class AppLogger implements AppLoggerInterface {
+export class AppLogger implements AppLoggerInterface {
   private logger: Logger;
 
   constructor() {
@@ -45,8 +38,3 @@ class AppLogger implements AppLoggerInterface {
   public warn(message: string, meta?: any) { this.logger.warn(message, meta); }
   public debug(message: string, meta?: any) { this.logger.debug(message, meta); }
 }
-
-// Export a singleton instance
-export const logger = new AppLogger();
-// Export the class itself for DI containers (Inversify, NestJS, etc.)
-export { AppLogger };
