@@ -92,3 +92,14 @@ export interface TranscriptIndices {
   memberIndices: Set<number>;
   keptIndices:Set<number>;
 }
+
+export interface AggregatedTurn {
+  text: string;
+  tags: string[];
+  score: number;
+  matchedWords: string[];
+}
+
+export interface AggregatedTurnArray {
+  turns: AggregatedTurn[];
+}

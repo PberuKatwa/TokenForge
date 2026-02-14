@@ -122,11 +122,13 @@ export class TranscriptPrunner{
     const memberIndices = new Set<number>();
     const keptIndices = new Set<number>();
 
-    const turnIndices:TranscriptIndices = {
+    const turnIndices: TranscriptIndices = {
       fellowIndices: fellowIndices,
       memberIndices: memberIndices,
-      keptIndices:keptIndices
+      keptIndices: keptIndices
     }
+
+    const detailedTurn:any[] = []
 
     const scoredTurns: ScoredTurn[] = [];
     transcript.forEach(
@@ -136,11 +138,12 @@ export class TranscriptPrunner{
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
-        const score = this.calculateScoreTurn(turn, signalsScores, regexSet)
+        const score = this.calculateScoreTurn(turn, signalsScores, regexSet,detailedTurn)
         if (!isFellow && wordCount > 3) metadata.participationScore++;
 
         // Only track turns that meet minimum threshold
         if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
+
           if (isFellow) {
             turnIndices.fellowIndices.add(index);
           } else {
@@ -155,19 +158,30 @@ export class TranscriptPrunner{
       }
     )
 
-    console.log("indicess", turnIndices);
+    // console.log("indicess", turnIndices);
+    console.log("detaileddd", detailedTurn)
     metadata.finalTurns = scoredTurns.length;
     return { scoredTurns, metadata };
   }
 
-  private calculateScoreTurn(turn:RawTurn,signals:SignalScores,regex:SignalRegexSet) {
+  private calculateScoreTurn(turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[]) {
 
     const isFellow = turn.speaker === "Fellow";
     let score = 0;
 
+    const tags = []
+    const matchedWords = []
+
     if (regex.safetyRegex.test(turn.text)) {
       score += 100;
       signals.safety++;
+
+      tags.push("SAFETY")
+      const matches = turn.text.match(regex.safetyRegex);
+      if (matches) {
+        matchedWords.push(...matches);
+      }
+
     }
 
     if (isFellow) {
@@ -175,23 +189,62 @@ export class TranscriptPrunner{
       if (regex.pedagogyRegex.test(turn.text)) {
         score += 50;
         signals.pedagogy++;
+
+        tags.push("PEDAGOGY")
+        const matches = turn.text.match(regex.pedagogyRegex);
+        if (matches) {
+          matchedWords.push(...matches);
+        }
+
       }
 
       if (regex.reflectionRegex.test(turn.text)) {
         score += 40;
         signals.facilitation++;
+
+        tags.push("REFLECTION")
+        const matches = turn.text.match(regex.reflectionRegex);
+        if (matches) {
+          matchedWords.push(...matches);
+        }
+
       }
 
       if (regex.empathyRegex.test(turn.text)) {
         score += 20;
         signals.facilitation++;
+
+        tags.push("EMPATHY")
+        const matches = turn.text.match(regex.empathyRegex);
+        if (matches) {
+          matchedWords.push(...matches);
+        }
+
       }
 
       if(regex. understandingRegex.test(turn.text)){
         score += 200;
         signals.facilitation++;
+
+        tags.push("UNDERSTANDING")
+        const matches = turn.text.match(regex.understandingRegex);
+        if (matches) {
+          matchedWords.push(...matches);
+        }
+
       }
 
+    }
+
+    const aggregatedTurn = {
+      text: turn.text,
+      tags,
+      score,
+      matchedWords
+    }
+
+    if (score > this.minimumSignalScore) {
+      detailed.push(aggregatedTurn)
     }
 
     return score;
