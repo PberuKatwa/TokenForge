@@ -22,7 +22,7 @@ export async function tokenService(jsonData:string) {
     console.log("===============================================BEGINNING================================================")
     console.log("========================================================================================================");
 
-    const pruner = initializePruner(1, 100, 20, true);
+    const pruner = initializePruner(0, 100, 20, true);
     const prunedSession = pruner.pruneTranscript(allLexicons, sessionData)
 
     console.time("Unoptimized Gemini Response Time");
