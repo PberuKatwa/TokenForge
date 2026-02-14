@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 
 async function runPruner() {
   try {
+
     // const inputFileName = "sessionFail.json";
     // const inputFileName = "sessionAverage.json";
     const inputFileName = "sessionPerfect.json";
@@ -23,7 +24,25 @@ async function runPruner() {
 
     const data = await fs.readFile(filePath, "utf-8");
 
-    const output = await tokenService(data)
+    const { prunedSession, unoptimizedGemini, finalEvaluation } = await tokenService(data);
+
+    if (prunedSession) {
+      const evalFileName = inputFileName.replace(".json", "_pruned.json");
+      const evalPath = path.join(__dirname, "sessionJson", evalFileName);
+      await fs.writeFile(evalPath, JSON.stringify(prunedSession.finalTranscript, null, 2));
+    }
+
+    if (unoptimizedGemini) {
+      const evalFileName = inputFileName.replace(".json", "_unoptimized.json");
+      const evalPath = path.join(__dirname, "sessionJson", evalFileName);
+      await fs.writeFile(evalPath, JSON.stringify(unoptimizedGemini, null, 2));
+    }
+
+    if (finalEvaluation) {
+      const evalFileName = inputFileName.replace(".json", "_evaluation.json");
+      const evalPath = path.join(__dirname, "sessionJson", evalFileName);
+      await fs.writeFile(evalPath, JSON.stringify(finalEvaluation, null, 2));
+    }
 
   } catch (error) {
     logger.error(`Error in running pruner`, error)
