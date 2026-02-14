@@ -85,4 +85,10 @@ export interface PrunedSession {
   metadata: PruneMetadata;
   signalScores: SignalScores;
   finalTranscript: Session;
+};
+
+export interface TranscriptIndices {
+  fellowIndices: Set<number>;
+  memberIndices: Set<number>;
+  keptIndices:Set<number>;
 }

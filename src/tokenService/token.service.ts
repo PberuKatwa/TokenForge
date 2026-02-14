@@ -25,20 +25,23 @@ export async function tokenService(jsonData:string) {
     const pruner = initializePruner(0, 100, 20, true);
     const prunedSession = pruner.pruneTranscript(allLexicons, sessionData)
 
-    console.time("Unoptimized Gemini Response Time");
-    const unoptimizedGemini = await evaluateFullTranscript(sessionData)
-    console.timeEnd("Unoptimized Gemini Response Time");
+    // console.time("Unoptimized Gemini Response Time");
+    // const unoptimizedGemini = await evaluateFullTranscript(sessionData)
+    // console.timeEnd("Unoptimized Gemini Response Time");
 
     console.log("========================================================================================================");
     console.log("========================================================================================================");
 
 
-    console.time("Gemini Response Time");
-    const finalEvaluation = await evaluateWithGemini(prunedSession);
-    console.timeEnd("Gemini Response Time");
+    // console.time("Gemini Response Time");
+    // const finalEvaluation = await evaluateWithGemini(prunedSession);
+    // console.timeEnd("Gemini Response Time");
 
     console.log("===============================================ENDDDDDDD================================================")
     console.log("========================================================================================================");
+
+    const unoptimizedGemini = null;
+    const finalEvaluation = null;
 
     return { prunedSession, unoptimizedGemini, finalEvaluation };
   } catch (error) {

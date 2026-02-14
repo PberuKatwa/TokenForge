@@ -1,5 +1,5 @@
 import { Sign } from "crypto";
-import { Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores } from "../types/pruner.types.js";
+import { Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores, TranscriptIndices } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -117,7 +117,16 @@ export class TranscriptPrunner{
     const { sessionTranscript, signalsScores, metadata, lexicons } = context;
     const { transcript } = sessionTranscript;
 
-    const regexSet:SignalRegexSet = this.initializeScoringRegex(lexicons);
+    const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
+    const fellowIndices = new Set<number>();
+    const memberIndices = new Set<number>();
+    const keptIndices = new Set<number>();
+
+    const turnIndices:TranscriptIndices = {
+      fellowIndices: fellowIndices,
+      memberIndices: memberIndices,
+      keptIndices:keptIndices
+    }
 
     const scoredTurns: ScoredTurn[] = [];
     transcript.forEach(
@@ -132,6 +141,11 @@ export class TranscriptPrunner{
 
         // Only track turns that meet minimum threshold
         if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
+          if (isFellow) {
+            turnIndices.fellowIndices.add(index);
+          } else {
+            turnIndices.memberIndices.add(index);
+          }
           scoredTurns.push({ ...turn, index, score });
         }
 
@@ -141,6 +155,7 @@ export class TranscriptPrunner{
       }
     )
 
+    console.log("indicess", turnIndices);
     metadata.finalTurns = scoredTurns.length;
     return { scoredTurns, metadata };
   }
