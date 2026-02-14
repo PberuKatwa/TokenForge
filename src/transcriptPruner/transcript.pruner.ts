@@ -1,5 +1,5 @@
 import { Sign } from "crypto";
-import { Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores, TranscriptIndices } from "../types/pruner.types.js";
+import { AggregatedTurnArray, Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores, TranscriptIndices } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -94,9 +94,12 @@ export class TranscriptPrunner{
         sessionTranscript
       )
       const { transcript } = sessionTranscript;
-      const { scoredTurns, metadata } = this.scoreTurns(context);
+      const { scoredTurns, metadata, turnIndices } = this.scoreTurns(context);
       const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
-      const finalScript = transcript.filter((_, index) => keptIndices.has(index));
+      // const finalScript = transcript.filter((_, index) => keptIndices.has(index));
+
+      const finalScript = transcript.filter((_, index) => turnIndices.keptIndices.has(index));
+
 
       const finalSession: Session = {
         session_topic: sessionTranscript.session_topic,
@@ -158,11 +161,42 @@ export class TranscriptPrunner{
       }
     )
 
-    // console.log("indicess", turnIndices);
-    console.log("detaileddd", detailedTurn)
+    turnIndices.keptIndices = turnIndices.fellowIndices;
+    turnIndices.keptIndices = this.addEveryThirdIndex(turnIndices.keptIndices)
+    // turnIndices.keptIndices = this.createStrideIndices(turnIndices.fellowIndices)
+    console.log("indicess", turnIndices);
+    // console.log("detaileddd", detailedTurn)
     metadata.finalTurns = scoredTurns.length;
-    return { scoredTurns, metadata };
+    return { scoredTurns, metadata, turnIndices };
   }
+
+  private addEveryThirdIndex(
+    fellowIndices: Set<number>
+  ): Set<number> {
+
+    if (fellowIndices.size === 0) return fellowIndices;
+
+    const sorted = [...fellowIndices].sort((a, b) => a - b);
+
+    const first = sorted[0];
+    const last = sorted[sorted.length - 1];
+
+    let current = first;
+
+    while (current < last) {
+
+      const next = current + 1;
+
+      if (next < last) {
+        fellowIndices.add(next); // ADD, not replace
+      }
+
+      current += 3; // skip two positions
+    }
+
+    return fellowIndices;
+  }
+
 
   private calculateScoreTurn(turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[]) {
 
