@@ -6,7 +6,7 @@ import { evaluateWithGemini } from '../tokenOptimizer/gemini.js';
 import { evaluateFullTranscript } from '../tokenOptimizer/geminiFull.js';
 
 
-export async function tokenService(jsonData:string):Promise<PrunedSession> {
+export async function tokenService(jsonData:string) {
   try {
 
     const parsedJson: Session = JSON.parse(jsonData);
@@ -21,22 +21,26 @@ export async function tokenService(jsonData:string):Promise<PrunedSession> {
 
     console.log("===============================================BEGINNING================================================")
     console.log("========================================================================================================");
-    // const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
-    //   understandingWords, fillerWords, sessionData)
-
-    // const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
-    //   understandingWords, fillerWords, sessionData)
 
     const pruner = initializePruner(1, 100, 20, true);
-
     const prunedSession = pruner.pruneTranscript(allLexicons, sessionData)
 
-    console.log("prunedddd", prunedSession);
+    console.time("Unoptimized Gemini Response Time");
+    const unoptimizedGemini = await evaluateFullTranscript(sessionData)
+    console.timeEnd("Unoptimized Gemini Response Time");
+
+    console.log("========================================================================================================");
+    console.log("========================================================================================================");
+
+
+    console.time("Gemini Response Time");
+    const finalEvaluation = await evaluateWithGemini(prunedSession);
+    console.timeEnd("Gemini Response Time");
 
     console.log("===============================================ENDDDDDDD================================================")
     console.log("========================================================================================================");
 
-    return prunedSession;
+    return { prunedSession, unoptimizedGemini, finalEvaluation };
   } catch (error) {
     throw error;
   }

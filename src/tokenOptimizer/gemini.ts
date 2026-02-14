@@ -1,9 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { EvalPayload } from "../types/pruner.types.js";
+import { EvalPayload, PrunedSession } from "../types/pruner.types.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
-export async function evaluateWithGemini(optimizedData: EvalPayload) {
+export async function evaluateWithGemini(optimizedData: PrunedSession) {
 
   // Initialize Gemini
 
@@ -50,8 +50,8 @@ export async function evaluateWithGemini(optimizedData: EvalPayload) {
   `;
 
   const promptInput = `
-    Session Topic: ${optimizedData.metadata.session_topic}
-    Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}
+    Session Topic: ${optimizedData.finalTranscript.session_topic}
+    Payload: ${JSON.stringify(optimizedData.finalTranscript.transcript)}
   `;
 
 // Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}
