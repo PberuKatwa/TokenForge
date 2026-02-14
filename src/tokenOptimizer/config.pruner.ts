@@ -1,3 +1,5 @@
+import { Lexicons } from "../types/pruner.types.js";
+
 export const CONFIG = {
   SAFETY_LEXICON: /\b(medication|pill|doctor|diagnose|depressed|suicide|self-harm|break up|therapy|legal|clinic|prescription)\b/gi,
   PEDAGOGY_LEXICON: /\b(growth mindset|fixed mindset|neuroplasticity|effort|yet|challenge|muscle|neural|persistence|strategy)\b/gi,
@@ -84,3 +86,12 @@ export const fillerWords: string[] = [
   "okay",
   "yeah"
 ];
+
+export const allLexicons:Lexicons = {
+  safetyWords,
+  pedagogyWords,
+  reflectionWords,
+  empathyWords,
+  understandingWords,
+  fillerWords
+}

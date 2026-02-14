@@ -59,12 +59,7 @@ export class TranscriptPrunner{
   }
 
   private initializeContext(
-    safetyWords: string[],
-    pedagogyWords: string[],
-    reflectionWords: string[],
-    empathyWords: string[],
-    understandingWords: string[],
-    fillerWords: string[],
+    lexicons:Lexicons,
     sessionTranscript: Session
   ): PruneContext{
     return{
@@ -83,34 +78,19 @@ export class TranscriptPrunner{
         reductionRatioPercentage:0
       },
       lexicons: {
-        safetyWords,
-        pedagogyWords,
-        reflectionWords,
-        empathyWords,
-        understandingWords,
-        fillerWords
+        ...lexicons
       }
     }
   }
 
-  public prune(
-    safetyWords: string[],
-    pedagogyWords: string[],
-    reflectionWords: string[],
-    empathyWords: string[],
-    understandingWords: string[],
-    fillerWords: string[],
+  public pruneTranscript(
+    lexicons:Lexicons,
     sessionTranscript:Session
-  ) {
+  ):PrunedSession {
     try {
 
       const context: PruneContext = this.initializeContext(
-        safetyWords,
-        pedagogyWords,
-        reflectionWords,
-        empathyWords,
-        understandingWords,
-        fillerWords,
+        lexicons,
         sessionTranscript
       )
       const { transcript } = sessionTranscript;
@@ -126,14 +106,7 @@ export class TranscriptPrunner{
 
       const finalPayload = this.buildPrunedSession(metadata, context.signalsScores, finalSession);
 
-      // console.log("metadata", metadata);
-      // console.log("kept indices", keptIndices)
-      // console.log("finalll", finalScript)
-      console.log("payyyyy", finalPayload)
-
-      // console.log(JSON.stringify(finalPayload.finalTranscript, null, 2));
-      // console.log("turnsss", scoredTurns);
-
+      return finalPayload;
     } catch (error) {
       throw error;
     }
