@@ -79,7 +79,8 @@ export class TranscriptPrunner{
         originalWordCount: 0,
         originalTurns: sessionTranscript.transcript.length,
         finalTurns: 0,
-        finalWordCount:0
+        finalWordCount: 0,
+        reductionRatioPercentage:0
       },
       lexicons: {
         safetyWords,
@@ -129,6 +130,8 @@ export class TranscriptPrunner{
       // console.log("kept indices", keptIndices)
       // console.log("finalll", finalScript)
       console.log("payyyyy", finalPayload)
+
+      // console.log(JSON.stringify(finalPayload.finalTranscript, null, 2));
       // console.log("turnsss", scoredTurns);
 
     } catch (error) {
@@ -224,6 +227,19 @@ export class TranscriptPrunner{
       }
     });
 
+    // scoredTurns.forEach(turn => {
+    //   for (
+    //     let i = turn.index;
+    //     i <= turn.index + this.windowPadding;
+    //     i++
+    //   ) {
+    //     if (i < transcriptLength) {
+    //       keptIndices.add(i);
+    //     }
+    //   }
+    // });
+
+
     return keptIndices;
   }
 
@@ -238,6 +254,10 @@ export class TranscriptPrunner{
       (sum, turn) => sum + (turn.text.trim().split(/\s+/).length),
       0
     );
+
+
+
+    metadata.reductionRatioPercentage = Math.floor(( 1 - ( (prunedWordCount) / (metadata.originalWordCount))) * 100 ) ;
 
     metadata.finalWordCount = prunedWordCount;
     const finalPayload: PrunedSession= {

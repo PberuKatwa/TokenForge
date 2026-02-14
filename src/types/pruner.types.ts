@@ -62,6 +62,7 @@ export interface PruneMetadata {
   originalTurns: number;
   finalTurns: number;
   finalWordCount: number;
+  reductionRatioPercentage: number;
 }
 
 export interface PruneContext {

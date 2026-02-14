@@ -25,7 +25,7 @@ export async function tokenService(jsonData:string) {
     // const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
     //   understandingWords, fillerWords, sessionData)
 
-    const answer = await initializePruner(0, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
+    const answer = await initializePruner(1, 100, 20, true, safetyWords, pedagogyWords, reflectionWords, empathyWords,
       understandingWords, fillerWords, sessionData)
 
     console.log("===============================================ENDDDDDDD================================================")
