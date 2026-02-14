@@ -259,16 +259,14 @@ export class TranscriptPrunner{
 
     if (score >= 100) {
       chosen =
-        sentences.find(s => this.regex.safetyRegex.test(s)) ?? cleaned;
+        sentences.find(s => regexSet.safetyRegex.test(s)) ?? cleaned;
     } else if (score >= 50) {
       chosen =
-        sentences.find(s => this.regex.pedagogyRegex.test(s)) ?? cleaned;
+        sentences.find(s => regexSet.pedagogyRegex.test(s)) ?? cleaned;
     }
 
-    this.resetRegexState();
-
-    if (chosen.length > this.maxCharsPerTurn) {
-      chosen = chosen.slice(0, this.maxCharsPerTurn) + "...";
+    if (chosen.length > this.maximumCharactersPerTurn) {
+      chosen = chosen.slice(0, this.maximumCharactersPerTurn) + "...";
     }
 
     return chosen.trim();

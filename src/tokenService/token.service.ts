@@ -2,6 +2,8 @@ import { PrunedSession, Session } from '../types/pruner.types.js';
 import { initializePruner } from '../transcriptPruner/index.pruner.js';
 import { allLexicons } from '../tokenOptimizer/config.pruner.js';
 import { SessionSchema } from '../validators/session.schema.js';
+import { evaluateWithGemini } from '../tokenOptimizer/gemini.js';
+import { evaluateFullTranscript } from '../tokenOptimizer/geminiFull.js';
 
 
 export async function tokenService(jsonData:string):Promise<PrunedSession> {
