@@ -1,10 +1,10 @@
-import { Session } from '../types/pruner.types.js';
+import { PrunedSession, Session } from '../types/pruner.types.js';
 import { initializePruner } from '../transcriptPruner/index.pruner.js';
 import { allLexicons } from '../tokenOptimizer/config.pruner.js';
 import { SessionSchema } from '../validators/session.schema.js';
 
 
-export async function tokenService(jsonData:string) {
+export async function tokenService(jsonData:string):Promise<PrunedSession> {
   try {
 
     const parsedJson: Session = JSON.parse(jsonData);
@@ -33,6 +33,8 @@ export async function tokenService(jsonData:string) {
 
     console.log("===============================================ENDDDDDDD================================================")
     console.log("========================================================================================================");
+
+    return prunedSession;
   } catch (error) {
     throw error;
   }

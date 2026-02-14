@@ -228,8 +228,6 @@ export class TranscriptPrunner{
       0
     );
 
-
-
     metadata.reductionRatioPercentage = Math.floor(( 1 - ( (prunedWordCount) / (metadata.originalWordCount))) * 100 ) ;
 
     metadata.finalWordCount = prunedWordCount;
@@ -241,6 +239,41 @@ export class TranscriptPrunner{
 
     return finalPayload;
   }
+
+  private stripFiller(text: string, regexSet:SignalRegexSet): string {
+    return text
+      .replace(regexSet.fillerRegex, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+
+  private extractEssence(turn: ScoredTurn, regexSet: SignalRegexSet): string {
+
+    const { text, score } = turn;
+    const cleaned = this.stripFiller(text, regexSet);
+
+    const sentences = cleaned.match(/[^.!?]+[.!?]?/g) ?? [cleaned];
+
+    let chosen = cleaned;
+
+    if (score >= 100) {
+      chosen =
+        sentences.find(s => this.regex.safetyRegex.test(s)) ?? cleaned;
+    } else if (score >= 50) {
+      chosen =
+        sentences.find(s => this.regex.pedagogyRegex.test(s)) ?? cleaned;
+    }
+
+    this.resetRegexState();
+
+    if (chosen.length > this.maxCharsPerTurn) {
+      chosen = chosen.slice(0, this.maxCharsPerTurn) + "...";
+    }
+
+    return chosen.trim();
+  }
+
 
 
 
