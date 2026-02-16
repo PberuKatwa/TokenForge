@@ -32,19 +32,7 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "The curriculum says I should tell you that effort matters more than talent. So remember that - effort is important."
-    },
-    {
-      "speaker": "Member4",
-      "text": "I failed my math test even though I studied."
-    },
-    {
-      "speaker": "SYSTEM",
-      "text": "[5 turn(s) omitted]"
+      "text": "[8 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -88,27 +76,31 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[2 turn(s) omitted]"
+      "text": "[10 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
-      "text": "So, where were we? Right, growth mindset. The important thing to remember is that you can develop your abilities. That's really the core message."
-    },
-    {
-      "speaker": "Member6",
-      "text": "Is there anything we should practice this week?"
+      "text": "Okay good. So the main points are: effort matters, you can improve through practice, and don't have a fixed mindset. Those are the key takeaways."
     },
     {
       "speaker": "Fellow",
-      "text": "Yes, good question. Try to notice when you have negative thoughts about your abilities. Then try to reframe them more positively with a growth mindset perspective."
+      "text": "Let me check my notes... yes, I think we've covered everything. Growth mindset is about believing you can develop your abilities. That's what you need to remember."
     },
     {
-      "speaker": "Member3",
-      "text": "Like what?"
+      "speaker": "Member5",
+      "text": "This was helpful."
     },
     {
       "speaker": "SYSTEM",
-      "text": "[10 turn(s) omitted]"
+      "text": "[1 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "So for next week, just try to apply this mindset to your studies. When things get hard, remember that you can improve with effort."
+    },
+    {
+      "speaker": "Member2",
+      "text": "Will we talk about this more next time?"
     },
     {
       "speaker": "Fellow",

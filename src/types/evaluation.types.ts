@@ -1,3 +1,5 @@
+import { PrunedSession } from "./pruner.types.js";
+
 export interface LLMEvaluation {
   session_summary: string;
   metrics: Metrics;
@@ -18,4 +20,9 @@ export interface MetricCategory {
 export interface RiskAssessment {
   flag: "SAFE" | "RISK";
   quote: string | null;
+}
+
+export interface LLMEvaluationResult {
+  llmEvaluation: LLMEvaluation;
+  prunedTranscript: PrunedSession;
 }

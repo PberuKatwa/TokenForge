@@ -39,7 +39,6 @@ async function runPruner(config: RunConfig): Promise<void> {
   const { inputFileName } = config;
 
   const filePath = path.join(ORIGINAL_SESSIONS_DIR, inputFileName);
-
   logger.info("Starting pruner run", { inputFileName, filePath });
 
   try {
