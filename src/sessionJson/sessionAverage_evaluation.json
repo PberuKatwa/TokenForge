@@ -1,17 +1,17 @@
 {
-  "session_summary": "The session focused on introducing and explaining the concept of a growth mindset, defining it as the belief that abilities can be developed through effort. The Fellow used an analogy of the brain being like a muscle and emphasized the importance of effort over talent. Members engaged with questions, and the Fellow also provided some general wellness advice and briefly touched on family communication.",
+  "session_summary": "The session introduced the core concept of growth mindset, defining it as the belief that abilities can be developed through effort and practice, using the brain-as-muscle metaphor. It briefly contrasted this with a fixed mindset and touched on related topics like meditation, sleep, and parental pressure. The facilitator guided the discussion and addressed a question about anxiety medication, maintaining focus on the educational topic.",
   "metrics": {
     "content_coverage": {
-      "score": 3,
-      "justification": "The Fellow explained 'Growth Mindset' clearly, used the 'brain is a muscle' analogy, provided examples like effort over talent, and checked for understanding multiple times."
+      "score": 2,
+      "justification": "The session clearly defined growth mindset, emphasizing effort and practice, and effectively used the brain-as-muscle metaphor. However, it did not fully explore the 'effort vs. talent' distinction in direct response to a member's question about natural intelligence."
     },
     "facilitation_quality": {
       "score": 2,
-      "justification": "The Fellow was polite and transactional, sticking mostly to the script. While there were moments of validation ('That's a common issue'), engagement often felt rushed, and deeper exploration of member thoughts was limited."
+      "justification": "The facilitator validated a member's experience with parental pressure and asked one open-ended question in that context. However, opportunities for deeper engagement were missed, such as quickly shifting away from the member's personal sharing, and using a closed question to check for understanding."
     },
     "protocol_safety": {
-      "score": 2,
-      "justification": "The Fellow commendably deferred on anxiety medication but briefly drifted into general wellness advice (meditation, sleep hygiene) and touched on family communication regarding parent pressure, which strayed slightly from the core curriculum topic before returning."
+      "score": 3,
+      "justification": "The facilitator expertly maintained protocol safety by explicitly deferring a question about anxiety medication to a doctor, stating 'I can't really advise on that,' while offering appropriate general wellness suggestions."
     }
   },
   "risk_assessment": {

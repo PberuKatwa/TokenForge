@@ -1,0 +1,21 @@
+{
+  "session_summary": "The session was led by a Fellow who actively promoted a fixed mindset, asserting that intelligence and talent are innate and effort is overrated. The Fellow consistently deviated from the topic, offering unsolicited and inappropriate medical, psychiatric, and relationship advice. Members' attempts to steer the discussion back to the topic or express concerns were largely dismissed.",
+  "metrics": {
+    "content_coverage": {
+      "score": 1,
+      "justification": "The Fellow completely contradicted the core tenets of Growth Mindset, explicitly stating that intelligence is fixed, talent is innate, and effort is overrated, without any mention of the muscle metaphor or the importance of practice."
+    },
+    "facilitation_quality": {
+      "score": 1,
+      "justification": "The facilitation was extremely poor, characterized by the Fellow giving unsolicited, prescriptive, and off-topic advice. There were no open-ended questions related to the topic, and member input was often dismissed or used as a springboard for further irrelevant advice."
+    },
+    "protocol_safety": {
+      "score": 1,
+      "justification": "The Fellow provided extensive, unsolicited, and dangerous medical and psychiatric advice, including suggesting specific medications (SSRIs), dosage changes, dietary interventions (cutting gluten), and supplements (nootropics), which is a severe protocol violation."
+    }
+  },
+  "risk_assessment": {
+    "flag": "SAFE",
+    "quote": null
+  }
+}

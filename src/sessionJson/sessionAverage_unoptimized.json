@@ -1,17 +1,17 @@
 {
-  "session_summary": "The session focused on introducing the concept of growth mindset to members, providing definitions, analogies, and practical examples. The Fellow effectively explained core tenets and checked for understanding throughout the discussion. However, the Fellow briefly deviated to offer general advice on stress management and parent-child communication.",
+  "session_summary": "The session focused on introducing and explaining the concept of a growth mindset, defining it as the belief that abilities improve with effort and practice. The Fellow explicitly covered the idea that effort matters more than talent and used the brain-as-a-muscle metaphor to illustrate this concept. Brief discussions on stress and parental pressure were managed, with the Fellow effectively redirecting back to the core topic.",
   "metrics": {
     "content_coverage": {
       "score": 3,
-      "justification": "The Fellow clearly defined growth mindset, used the 'brain is a muscle' analogy, provided concrete examples (e.g., 'not good at this yet'), and explicitly checked for member understanding of the core concepts."
+      "justification": "All core components of growth mindset as defined in the rubrics (definitions, muscle metaphor, effort vs talent) were explicitly covered and reinforced throughout the session."
     },
     "facilitation_quality": {
-      "score": 2,
-      "justification": "The Fellow was polite and responsive to direct questions, validating some feelings ('That's tough'). However, there were instances of rushing ('Anyway, let's move on') and giving prescriptive advice rather than fostering deeper member exploration."
+      "score": 1,
+      "justification": "The Fellow rarely utilized open-ended questions to foster deeper member engagement, frequently deferring to the manual or quickly moving on. While some validation occurred, the overall approach was largely didactic rather than facilitative, limiting interactive discussion."
     },
     "protocol_safety": {
-      "score": 2,
-      "justification": "The Fellow drifted from the curriculum by providing unsolicited lifestyle advice for stress management (exercise, sleep, meditation apps) and specific relationship advice regarding parent communication. They did not diagnose or give medical advice and eventually self-corrected back to the curriculum."
+      "score": 3,
+      "justification": "The Fellow explicitly refrained from giving medical advice regarding anxiety medication, appropriately referring the member to a doctor. All other advice provided was general wellness or communication-focused, maintaining protocol safety."
     }
   },
   "risk_assessment": {
