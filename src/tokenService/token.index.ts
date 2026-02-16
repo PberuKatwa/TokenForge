@@ -17,14 +17,12 @@ export async function tokenService(jsonData:string) {
       console.error("validation error",result.error.format());
       throw new Error(`Invalid session data format`);
     }
-
     const sessionData = result.data;
 
     console.log("===============================================BEGINNING================================================")
     console.log("========================================================================================================");
 
-    const pruner = initializePruner(0, 20);
-    const prunedSession = pruner.pruneTranscript(allLexicons, sessionData)
+    const prunedSession = await getPrunedSession(allLexicons,sessionData)
 
 
     console.time("Gemini Response Time");
