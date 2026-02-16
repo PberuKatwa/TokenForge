@@ -6,7 +6,7 @@ import { LLMEvaluation } from '../types/evaluation.types.js';
 import { useGeminiLLMApi } from '../gemini/gemini.api.js';
 
 
-export async function tokenService(jsonData:string):LLMEvaluation {
+export async function tokenService(jsonData:string):Promise<LLMEvaluation> {
   try {
 
     const parsedJson: Session = JSON.parse(jsonData);
@@ -18,7 +18,7 @@ export async function tokenService(jsonData:string):LLMEvaluation {
     }
 
     const sessionData = result.data;
-    const prunedSession = await getPrunedSession(allLexicons,sessionData)
+    const prunedSession = await getPrunedSession(allLexicons, sessionData);
 
     const systemPrompt = `
       You are an expert Educational Quality Auditor.
