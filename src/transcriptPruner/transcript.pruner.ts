@@ -134,13 +134,11 @@ export class TranscriptPrunner{
     }
   }
 
-  private scoreTurns(context: PruneContext): {
-    metadata: PruneMetadata,
-    completeIndices:CompleteIndices
-  } {
+  private scoreTurns(context: PruneContext):PruneContext {
 
     const { sessionTranscript, metadata, lexicons, completeIndices } = context;
     const { transcript } = sessionTranscript;
+    const { turnIndices, signalIndices, finalIndices } = completeIndices;
 
     const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
 
@@ -150,31 +148,31 @@ export class TranscriptPrunner{
         metadata.originalWordCount += wordCount;
 
         if ( turn.speaker === "Fellow" ) {
-          completeIndices.turnIndices.fellowIndices.add(index);
+          turnIndices.fellowIndices.add(index);
         } else {
-          completeIndices.turnIndices.memberIndices.add(index);
+          turnIndices.memberIndices.add(index);
         }
 
-        if (regexSet.safetyRegex.test(turn.text)) completeIndices.signalIndices.safetyIndices.add(index);
-        if (regexSet.pedagogyRegex.test(turn.text)) completeIndices.signalIndices.pedagogyIndices.add(index);
-        if (regexSet.reflectionRegex.test(turn.text)) completeIndices.signalIndices.reflectionIndices.add(index);
-        if (regexSet.empathyRegex.test(turn.text)) completeIndices.signalIndices.empathyIndices.add(index);
-        if(regexSet. understandingRegex.test(turn.text)) completeIndices.signalIndices.empathyIndices.add(index);
+        if (regexSet.safetyRegex.test(turn.text)) signalIndices.safetyIndices.add(index);
+        if (regexSet.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
+        if (regexSet.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
+        if (regexSet.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
+        if(regexSet. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
 
         regexSet.safetyRegex.lastIndex = 0;
         regexSet.pedagogyRegex.lastIndex = 0;
       }
     )
 
-    const computedIndices = this.computeFinalIndices(transcript, completeIndices.turnIndices, completeIndices.signalIndices)
+    const computedIndices = this.computeFinalIndices(transcript, turnIndices, signalIndices)
     const sortedIndices = Array.from(computedIndices).sort((a, b) => a - b);
     const allIndices = new Set(sortedIndices);
-    // console.log("sorted indices", finalIndices)
 
     completeIndices.finalIndices = allIndices;
+    context.metadata = metadata;
+    context.completeIndices = { turnIndices, signalIndices, finalIndices:allIndices };
+    return context;
 
-    console.log("our indices", completeIndices)
-    return { metadata, completeIndices };
   }
 
   private addRange(
