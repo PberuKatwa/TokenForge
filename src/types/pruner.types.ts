@@ -11,11 +11,6 @@ export interface Session {
   transcript: RawTurn[];
 }
 
-export interface ScoredTurn extends RawTurn {
-  index: number;
-  score: number;
-}
-
 export interface Lexicons {
   safetyWords: string[];
   pedagogyWords: string[];
