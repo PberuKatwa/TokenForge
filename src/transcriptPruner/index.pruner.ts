@@ -1,4 +1,3 @@
-import { Lexicons, PrunedSession, Session } from "../types/pruner.types.js";
 import { TranscriptPrunner } from "./transcript.pruner.js";
 
 export function initializePruner(
