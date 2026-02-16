@@ -35,7 +35,7 @@ async function writeJsonFile(filePath: string, data: unknown) {
   }
 }
 
-async function runPruner(config: RunConfig): Promise<void> {
+export async function runPruner(config: RunConfig): Promise<void> {
   const { inputFileName } = config;
 
   const filePath = path.join(ORIGINAL_SESSIONS_DIR, inputFileName);
@@ -144,7 +144,3 @@ function buildSystemPrompt(): string {
     }
   `;
 }
-
-runPruner({
-  inputFileName: "sessionAverage.json",
-});
