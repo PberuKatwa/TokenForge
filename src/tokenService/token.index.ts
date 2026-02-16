@@ -56,6 +56,8 @@ export async function getLLMEvaluation(jsonData: string): Promise<{
       }
     `;
 
+    console.log("pruneddd", prunedSession)
+
     console.time("OPTIMIZED Time");
     const llmEvaluation = await useGeminiLLMApi(systemPrompt, prunedSession.finalTranscript);
     console.timeEnd("OPTIMIZED Time");

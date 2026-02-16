@@ -11,28 +11,20 @@
       "text": "What's that?"
     },
     {
-      "speaker": "Fellow",
-      "text": "Growth mindset is the idea that you can get better at things through effort and practice."
-    },
-    {
-      "speaker": "Member2",
-      "text": "Like studying more?"
+      "speaker": "SYSTEM",
+      "text": "[6 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
-      "text": "Yes, exactly. So the main point is that effort matters. If you work hard, you can improve."
+      "text": "The curriculum says I should tell you that effort matters more than talent. So remember that - effort is important."
     },
     {
-      "speaker": "Fellow",
-      "text": "Let me read you the definition from the manual. Growth mindset is the belief that abilities can be developed through dedication and hard work. This view creates a love of learning and resilience."
-    },
-    {
-      "speaker": "Member3",
-      "text": "But some people are just naturally smarter, right?"
+      "speaker": "Member4",
+      "text": "I failed my math test even though I studied."
     },
     {
       "speaker": "SYSTEM",
-      "text": "[6 turn(s) omitted]"
+      "text": "[3 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -104,7 +96,23 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[12 turn(s) omitted]"
+      "text": "[6 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Okay good. So the main points are: effort matters, you can improve through practice, and don't have a fixed mindset. Those are the key takeaways."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let me check my notes... yes, I think we've covered everything. Growth mindset is about believing you can develop your abilities. That's what you need to remember."
+    },
+    {
+      "speaker": "Member5",
+      "text": "This was helpful."
+    },
+    {
+      "speaker": "SYSTEM",
+      "text": "[3 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",

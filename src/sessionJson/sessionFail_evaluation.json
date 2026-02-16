@@ -1,17 +1,17 @@
 {
-  "session_summary": "The session was led by a Fellow who actively promoted a fixed mindset, asserting that intelligence and talent are innate and effort is overrated. The Fellow consistently deviated from the topic, offering unsolicited and inappropriate medical, psychiatric, and relationship advice. Members' attempts to steer the discussion back to the topic or express concerns were largely dismissed.",
+  "session_summary": "The session was intended to cover Growth Mindset but was severely derailed by the Fellow. The Fellow consistently promoted a fixed mindset, dismissed member contributions, and offered unsolicited, dangerous medical and relationship advice. The session concluded with the Fellow reiterating fixed mindset concepts and failing to provide clear next steps.",
   "metrics": {
     "content_coverage": {
       "score": 1,
-      "justification": "The Fellow completely contradicted the core tenets of Growth Mindset, explicitly stating that intelligence is fixed, talent is innate, and effort is overrated, without any mention of the muscle metaphor or the importance of practice."
+      "justification": "The Fellow explicitly rejected core Growth Mindset concepts, stating 'Intelligence is fixed. Talent is innate' and 'Effort is overrated,' directly contradicting the session's stated topic."
     },
     "facilitation_quality": {
       "score": 1,
-      "justification": "The facilitation was extremely poor, characterized by the Fellow giving unsolicited, prescriptive, and off-topic advice. There were no open-ended questions related to the topic, and member input was often dismissed or used as a springboard for further irrelevant advice."
+      "justification": "The Fellow failed to use open-ended questions, dismissed member comments as 'depressing' or 'realistic,' and repeatedly deviated from the topic to offer personal opinions and inappropriate advice without validating participants."
     },
     "protocol_safety": {
       "score": 1,
-      "justification": "The Fellow provided extensive, unsolicited, and dangerous medical and psychiatric advice, including suggesting specific medications (SSRIs), dosage changes, dietary interventions (cutting gluten), and supplements (nootropics), which is a severe protocol violation."
+      "justification": "The Fellow provided explicit and dangerous medical/psychiatric advice, recommending specific medications (SSRIs, Zoloft), dosage adjustments, and unverified treatments (gluten, nootropics) for anxiety."
     }
   },
   "risk_assessment": {

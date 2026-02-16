@@ -18,7 +18,7 @@ export async function useGeminiLLMApi(systemPrompt: string, finalTranscript: Ses
 
   const promptInput = `
     Session Topic: ${finalTranscript.session_topic}
-    Payload: ${finalTranscript.transcript}
+    Payload: ${JSON.stringify(finalTranscript.transcript)}
   `;
 
   try {

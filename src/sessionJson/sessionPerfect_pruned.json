@@ -4,19 +4,7 @@
   "transcript": [
     {
       "speaker": "SYSTEM",
-      "text": "[4 turn(s) omitted]"
-    },
-    {
-      "speaker": "Member4",
-      "text": "Good."
-    },
-    {
-      "speaker": "Member5",
-      "text": "A bit overwhelmed."
-    },
-    {
-      "speaker": "Member6",
-      "text": "Calm."
+      "text": "[7 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -35,12 +23,20 @@
       "text": "Yes, that's a great example. Studying differently or putting in more effort can help you improve."
     },
     {
-      "speaker": "Member3",
-      "text": "But some people are naturally smarter."
+      "speaker": "SYSTEM",
+      "text": "[1 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That's a common thought, and I'm glad you brought it up. People may start at different levels, but research shows the brain is like a muscle. The more you use it, the stronger it becomes. What happens to a muscle if you train it consistently?"
+    },
+    {
+      "speaker": "Member4",
+      "text": "It gets stronger."
     },
     {
       "speaker": "SYSTEM",
-      "text": "[4 turn(s) omitted]"
+      "text": "[2 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -55,20 +51,8 @@
       "text": "That's a strong plan. You could also try asking your teacher which specific topics to focus on, or studying with a friend. The key is that failure is part of learning, not the end of it."
     },
     {
-      "speaker": "Member5",
-      "text": "So failure is actually good?"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Great question. Failure doesn't feel good, and those feelings are valid. But when we learn from failure instead of letting it define us, it becomes a tool for growth. Can anyone think of a time when you struggled with something but eventually got better at it?"
-    },
-    {
-      "speaker": "Member6",
-      "text": "I used to be bad at public speaking, but I improved after practicing."
-    },
-    {
       "speaker": "SYSTEM",
-      "text": "[4 turn(s) omitted]"
+      "text": "[7 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -104,15 +88,19 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[6 turn(s) omitted]"
+      "text": "[2 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
-      "text": "That's specific and actionable. Great thinking. Starting with one part of the essay, like introductions, is a perfect way to build your skills step by step."
+      "text": "I'd also love to hear from someone who hasn't spoken much yet. Member4—what's one area where you'd like to grow or improve?"
     },
     {
-      "speaker": "Member1",
-      "text": "Sometimes I give up too easily."
+      "speaker": "Member4",
+      "text": "Probably writing essays."
+    },
+    {
+      "speaker": "SYSTEM",
+      "text": "[4 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -131,16 +119,20 @@
       "text": "Maybe take a break and come back to it?"
     },
     {
-      "speaker": "SYSTEM",
-      "text": "[3 turn(s) omitted]"
+      "speaker": "Fellow",
+      "text": "That's a really smart strategy. Taking a break can help your brain process information. You're showing growth mindset by thinking about how to handle that challenge."
     },
     {
       "speaker": "Fellow",
-      "text": "Exactly! When something feels challenging, that's often a sign your brain is working to build new connections. The struggle is part of the process, not a sign that you should stop."
+      "text": "Let me share something interesting about the brain. When you make mistakes and keep trying, your brain is actually creating new neural pathways. It's literally growing stronger. That's why effort matters more than talent—because effort is what builds your brain's capacity."
     },
     {
-      "speaker": "Member2",
-      "text": "What about things we'll never be good at? Like, I'm terrible at art."
+      "speaker": "Member5",
+      "text": "So even if something feels hard, that's when we're learning?"
+    },
+    {
+      "speaker": "SYSTEM",
+      "text": "[2 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -156,27 +148,23 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
+      "text": "[4 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
-      "text": "That's the growth mindset shift right there. You moved from 'I'm terrible' to 'I haven't learned yet.' That's powerful."
+      "text": "That persistence really paid off. What kept you going even when it was difficult?"
     },
     {
-      "speaker": "Fellow",
-      "text": "Sometimes when we fail, we feel embarrassed or ashamed. Those feelings are valid and normal. Growth mindset doesn't mean we ignore feelings. It means we acknowledge them and then ask ourselves: 'What can I learn from this?' Has anyone experienced that shift before?"
-    },
-    {
-      "speaker": "SYSTEM",
-      "text": "[3 turn(s) omitted]"
+      "speaker": "Member3",
+      "text": "I really wanted to pass, and my friend helped me study differently."
     },
     {
       "speaker": "Fellow",
       "text": "So you had a goal, and you were willing to try a new strategy by studying with your friend. Those are both growth mindset actions. Thank you for sharing that."
     },
     {
-      "speaker": "Fellow",
-      "text": "Let's do a quick activity. I want everyone to think silently for a moment about one challenge you're currently facing—it could be academic, social, or personal. Just hold that in your mind."
+      "speaker": "SYSTEM",
+      "text": "[1 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -192,7 +180,19 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[6 turn(s) omitted]"
+      "text": "[1 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Good examples. Notice how those thoughts close the door on possibility. Now, how could we reframe each of those with a growth mindset?"
+    },
+    {
+      "speaker": "Member1",
+      "text": "Math is hard for me right now, but I can improve with practice?"
+    },
+    {
+      "speaker": "SYSTEM",
+      "text": "[3 turn(s) omitted]"
     },
     {
       "speaker": "Member4",
@@ -251,16 +251,8 @@
       "text": "Yeah, I think so."
     },
     {
-      "speaker": "Fellow",
-      "text": "Think about when you were learning to walk as a baby. You fell down hundreds of times. But you didn't think 'I'm a failure at walking.' You just kept trying until you got it. We can bring that same attitude to learning now."
-    },
-    {
-      "speaker": "Member2",
-      "text": "I never thought about it that way."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Our brains are designed to learn and grow. That capacity doesn't go away. We just sometimes forget we have it."
+      "speaker": "SYSTEM",
+      "text": "[3 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -283,12 +275,8 @@
       "text": "Yes, that physical metaphor can be really helpful to remember."
     },
     {
-      "speaker": "Member3",
-      "text": "That I need different strategies sometimes, not just more effort."
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Excellent insight. Working smarter is just as important as working harder."
+      "speaker": "SYSTEM",
+      "text": "[2 turn(s) omitted]"
     },
     {
       "speaker": "Member4",
@@ -300,7 +288,11 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[4 turn(s) omitted]"
+      "text": "[3 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Perfect. The challenge is where the growth happens."
     },
     {
       "speaker": "Fellow",
@@ -319,16 +311,12 @@
       "text": "I'm really glad to hear that. That's exactly what growth mindset is about—recognizing that you have agency and that small steps lead to real change."
     },
     {
+      "speaker": "Fellow",
+      "text": "Does anyone have any final questions or thoughts before we close?"
+    },
+    {
       "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
-    },
-    {
-      "speaker": "Member1",
-      "text": "No, I think I understand it now."
-    },
-    {
-      "speaker": "Member5",
-      "text": "This was really helpful. Thank you."
+      "text": "[2 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",

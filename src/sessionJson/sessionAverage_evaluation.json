@@ -1,17 +1,17 @@
 {
-  "session_summary": "The session introduced the core concept of growth mindset, defining it as the belief that abilities can be developed through effort and practice, using the brain-as-muscle metaphor. It briefly contrasted this with a fixed mindset and touched on related topics like meditation, sleep, and parental pressure. The facilitator guided the discussion and addressed a question about anxiety medication, maintaining focus on the educational topic.",
+  "session_summary": "The session introduced the concept of growth mindset, defining it as the belief in one's ability to improve through effort and practice, contrasting it with a fixed mindset. Key aspects covered included the brain-as-a-muscle metaphor and the importance of effort over inherent talent. The Fellow addressed questions about academic pressure and medication appropriately, while aiming to reinforce the core message of developing abilities.",
   "metrics": {
     "content_coverage": {
-      "score": 2,
-      "justification": "The session clearly defined growth mindset, emphasizing effort and practice, and effectively used the brain-as-muscle metaphor. However, it did not fully explore the 'effort vs. talent' distinction in direct response to a member's question about natural intelligence."
+      "score": 3,
+      "justification": "The session explicitly covered the brain-as-a-muscle metaphor ('brain can change. It's kind of like a muscle') and emphasized effort over talent ('effort matters more than talent')."
     },
     "facilitation_quality": {
       "score": 2,
-      "justification": "The facilitator validated a member's experience with parental pressure and asked one open-ended question in that context. However, opportunities for deeper engagement were missed, such as quickly shifting away from the member's personal sharing, and using a closed question to check for understanding."
+      "justification": "While the Fellow offered validation and an open-ended question regarding parental pressure ('Have you tried talking to them about how you feel?'), most of the session involved direct instruction and checking for understanding ('So everyone understand? Great. Let's continue.'), rather than using open-ended questions to explore growth mindset concepts."
     },
     "protocol_safety": {
       "score": 3,
-      "justification": "The facilitator expertly maintained protocol safety by explicitly deferring a question about anxiety medication to a doctor, stating 'I can't really advise on that,' while offering appropriate general wellness suggestions."
+      "justification": "The Fellow explicitly declined to give medical advice regarding anxiety medication, appropriately deferring to a doctor ('That's something you'd need to talk to a doctor about. I can't really advise on that.')."
     }
   },
   "risk_assessment": {
