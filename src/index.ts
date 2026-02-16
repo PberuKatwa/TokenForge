@@ -1,10 +1,6 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import { runTest } from './tokenOptimizer/token.index.js';
-import { evaluateWithGemini } from './tokenOptimizer/gemini.js';
-import { evaluateFullTranscript } from './tokenOptimizer/geminiFull.js';
-import { Session } from './tokenOptimizer/token.pruneLogged.js';
 import { logger } from './utils/logger/index.logger.js';
 import { tokenService } from './tokenService/token.service.js';
 

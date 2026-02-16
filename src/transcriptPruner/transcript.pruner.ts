@@ -217,7 +217,7 @@ export class TranscriptPrunner{
     transcript: RawTurn[],
     turnIndices: TurnIndices,
     signalIndices: SignalIndices,
-    facilitationMode: "RIGHT_ONLY" | "BOTH" = "RIGHT_ONLY"
+    facilitationMode: "RIGHT_ONLY" | "BOTH" = "BOTH"
   ): Set<number> {
 
     const finalIndices = new Set<number>();
