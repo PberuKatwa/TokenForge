@@ -28,23 +28,23 @@ export async function tokenService(jsonData:string) {
     console.log("PrunedSession", prunedSession)
     console.log(JSON.stringify(prunedSession.finalTranscript, null, 2));
 
-    // console.time("Unoptimized Gemini Response Time");
-    // const unoptimizedGemini = await evaluateFullTranscript(sessionData)
-    // console.timeEnd("Unoptimized Gemini Response Time");
+    console.time("Unoptimized Gemini Response Time");
+    const unoptimizedGemini = await evaluateFullTranscript(sessionData)
+    console.timeEnd("Unoptimized Gemini Response Time");
 
     console.log("========================================================================================================");
     console.log("========================================================================================================");
 
 
-    // console.time("Gemini Response Time");
-    // const finalEvaluation = await evaluateWithGemini(prunedSession);
-    // console.timeEnd("Gemini Response Time");
+    console.time("Gemini Response Time");
+    const finalEvaluation = await evaluateWithGemini(prunedSession);
+    console.timeEnd("Gemini Response Time");
 
     console.log("===============================================ENDDDDDDD================================================")
     console.log("========================================================================================================");
 
-    const unoptimizedGemini = null;
-    const finalEvaluation = null;
+    // const unoptimizedGemini = null;
+    // const finalEvaluation = null;
 
     return { prunedSession, unoptimizedGemini, finalEvaluation };
   } catch (error) {

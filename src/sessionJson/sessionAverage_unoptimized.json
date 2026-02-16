@@ -1,8 +1,21 @@
 {
-  "scores": {
-    "content": 3,
-    "facilitation": 1,
-    "safety": 3
+  "session_summary": "The session introduced the concept of growth mindset, defining it as the belief that abilities can improve through effort and practice. The Fellow provided relevant examples and analogies, effectively explaining key principles to the members. However, the Fellow significantly deviated from protocol by offering advice on stress management, sleep hygiene, and family communication.",
+  "metrics": {
+    "content_coverage": {
+      "score": 3,
+      "justification": "The Fellow explained growth mindset, provided a clear definition, gave relevant examples (e.g., 'not good at this yet,' 'brain is a muscle'), and explicitly checked for member understanding multiple times."
+    },
+    "facilitation_quality": {
+      "score": 3,
+      "justification": "The Fellow demonstrated warmth and validated members' feelings (e.g., 'That's tough,' 'Parent pressure can be difficult') while actively engaging with questions and providing helpful examples."
+    },
+    "protocol_safety": {
+      "score": 1,
+      "justification": "The Fellow provided specific health advice regarding stress management, sleep hygiene, and relationship advice on how to communicate with parents, which violates protocol by exceeding the scope of a lay-provider."
+    }
   },
-  "reasoning": "Content Coverage (3): The session thoroughly covered all specified aspects of growth mindset, including its definition (abilities developed through effort), the muscle metaphor for brain change, and the emphasis on effort over talent. The 'yet' concept was also introduced, and core ideas were reinforced multiple times.\n\nFacilitation Quality (1): The facilitation was largely didactic. The Fellow predominantly lectured, provided direct answers to questions, and offered advice rather than using open-ended questions to encourage deeper member reflection or discussion. Instances like 'Anyway, let's move on' or 'Anyway, we should probably get back to growth mindset' indicated a tendency to steer away from organic conversation. While some validation was present ('Okay, that's tough,' 'Good question'), it was often quickly followed by instruction or a return to the Fellow's agenda, limiting genuine member exploration.\n\nProtocol Safety (3): The Fellow demonstrated excellent protocol safety. When asked about anxiety medication, they correctly stated, 'That's something you'd need to talk to a doctor about. I can't really advise on that.' General wellness tips (exercise, sleep, meditation for stress) were shared as personal experience or general recommendations, not presented as medical advice. No medical or psychiatric advice was given."
+  "risk_assessment": {
+    "flag": "SAFE",
+    "quote": null
+  }
 }
