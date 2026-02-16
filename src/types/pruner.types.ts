@@ -103,3 +103,12 @@ export interface AggregatedTurn {
 export interface AggregatedTurnArray {
   turns: AggregatedTurn[];
 }
+
+export interface SignalIndices{
+  safetyIndices: Set<number>;
+  pedagogyIndices: Set<number>;
+  reflectionIndices: Set<number>;
+  empathyIndices: Set<number>;
+  understandingIndices: Set<number>;
+  fillerIndices: Set<number>;
+}

@@ -1,5 +1,5 @@
 import { Sign } from "crypto";
-import { AggregatedTurnArray, Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalRegexSet, SignalScores, TranscriptIndices } from "../types/pruner.types.js";
+import { AggregatedTurnArray, Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalIndices, SignalRegexSet, SignalScores, TranscriptIndices } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -131,6 +131,15 @@ export class TranscriptPrunner{
       keptIndices: keptIndices
     }
 
+    const signalIndices:SignalIndices = {
+      safetyIndices: new Set<number>(),
+      pedagogyIndices: new Set<number>(),
+      reflectionIndices: new Set<number>(),
+      empathyIndices: new Set<number>(),
+      understandingIndices: new Set<number>(),
+      fillerIndices: new Set<number>(),
+    }
+
     const detailedTurn:any[] = []
 
     const scoredTurns: ScoredTurn[] = [];
@@ -141,17 +150,19 @@ export class TranscriptPrunner{
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
-        const score = this.calculateScoreTurn(turn, signalsScores, regexSet,detailedTurn)
+        if (isFellow) {
+          turnIndices.fellowIndices.add(index);
+        } else {
+          turnIndices.memberIndices.add(index);
+        }
+
+        const score = this.calculateScoreTurn(index,turn, signalsScores, regexSet,detailedTurn,signalIndices)
         if (!isFellow && wordCount > 3) metadata.participationScore++;
 
         // Only track turns that meet minimum threshold
         if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
 
-          if (isFellow) {
-            turnIndices.fellowIndices.add(index);
-          } else {
-            turnIndices.memberIndices.add(index);
-          }
+          turnIndices.keptIndices.add(index)
           scoredTurns.push({ ...turn, index, score });
         }
 
@@ -161,44 +172,53 @@ export class TranscriptPrunner{
       }
     )
 
-    turnIndices.keptIndices = turnIndices.fellowIndices;
-    turnIndices.keptIndices = this.addEveryThirdIndex(turnIndices.keptIndices)
+    // turnIndices.keptIndices = turnIndices.fellowIndices;
+    // turnIndices.keptIndices = this.addEveryThirdIndex(turnIndices.keptIndices)
     // turnIndices.keptIndices = this.createStrideIndices(turnIndices.fellowIndices)
-    console.log("indicess", turnIndices);
+    // turnIndices.keptIndices =
+    //   this.addRandomMemberSample(
+    //     turnIndices.memberIndices,
+    //     turnIndices.keptIndices,
+    //     0.3
+    //   );
+
+    console.log("turn indicess", turnIndices);
+    console.log("signal indices", signalIndices)
     // console.log("detaileddd", detailedTurn)
+
     metadata.finalTurns = scoredTurns.length;
     return { scoredTurns, metadata, turnIndices };
   }
 
-  private addEveryThirdIndex(
-    fellowIndices: Set<number>
+  private addRandomMemberSample(
+    memberIndices: Set<number>,
+    keptIndices: Set<number>,
+    percentage: number = 0.3
   ): Set<number> {
 
-    if (fellowIndices.size === 0) return fellowIndices;
+    const membersArray = [...memberIndices];
 
-    const sorted = [...fellowIndices].sort((a, b) => a - b);
+    const sampleSize = Math.floor(membersArray.length * percentage);
 
-    const first = sorted[0];
-    const last = sorted[sorted.length - 1];
-
-    let current = first;
-
-    while (current < last) {
-
-      const next = current + 1;
-
-      if (next < last) {
-        fellowIndices.add(next); // ADD, not replace
-      }
-
-      current += 3; // skip two positions
+    // Fisher–Yates shuffle
+    for (let i = membersArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [membersArray[i], membersArray[j]] =
+        [membersArray[j], membersArray[i]];
     }
 
-    return fellowIndices;
+    const sampled = membersArray.slice(0, sampleSize);
+
+    const newKept = new Set(keptIndices);
+
+    sampled.forEach(index => newKept.add(index));
+
+    return newKept;
   }
 
 
-  private calculateScoreTurn(turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[]) {
+
+  private calculateScoreTurn(index:number,turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[],signalIndices:SignalIndices) {
 
     const isFellow = turn.speaker === "Fellow";
     let score = 0;
@@ -209,6 +229,7 @@ export class TranscriptPrunner{
     if (regex.safetyRegex.test(turn.text)) {
       score += 100;
       signals.safety++;
+      signalIndices.safetyIndices.add(index)
 
       tags.push("SAFETY")
       const matches = turn.text.match(regex.safetyRegex);
@@ -223,6 +244,8 @@ export class TranscriptPrunner{
       if (regex.pedagogyRegex.test(turn.text)) {
         score += 50;
         signals.pedagogy++;
+        signalIndices.pedagogyIndices.add(index);
+
 
         tags.push("PEDAGOGY")
         const matches = turn.text.match(regex.pedagogyRegex);
@@ -235,6 +258,7 @@ export class TranscriptPrunner{
       if (regex.reflectionRegex.test(turn.text)) {
         score += 40;
         signals.facilitation++;
+        signalIndices.reflectionIndices.add(index)
 
         tags.push("REFLECTION")
         const matches = turn.text.match(regex.reflectionRegex);
@@ -247,6 +271,7 @@ export class TranscriptPrunner{
       if (regex.empathyRegex.test(turn.text)) {
         score += 20;
         signals.facilitation++;
+        signalIndices.empathyIndices.add(index);
 
         tags.push("EMPATHY")
         const matches = turn.text.match(regex.empathyRegex);
@@ -259,6 +284,7 @@ export class TranscriptPrunner{
       if(regex. understandingRegex.test(turn.text)){
         score += 200;
         signals.facilitation++;
+        signalIndices.empathyIndices.add(index);
 
         tags.push("UNDERSTANDING")
         const matches = turn.text.match(regex.understandingRegex);
