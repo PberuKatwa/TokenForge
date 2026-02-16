@@ -126,14 +126,10 @@ export class TranscriptPrunner{
     const { transcript } = sessionTranscript;
 
     const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
-    const fellowIndices = new Set<number>();
-    const memberIndices = new Set<number>();
-    const keptIndices = new Set<number>();
-
     const turnIndices: TurnIndices = {
-      fellowIndices: fellowIndices,
-      memberIndices: memberIndices,
-      keptIndices: keptIndices
+      fellowIndices: new Set<number>(),
+      memberIndices: new Set<number>(),
+      keptIndices: new Set<number>()
     }
 
     const signalIndices:SignalIndices = {
@@ -318,93 +314,32 @@ export class TranscriptPrunner{
   private calculateScoreTurn(index:number,turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[],signalIndices:SignalIndices) {
 
     const isFellow = turn.speaker === "Fellow";
-    let score = 0;
-
-    const tags = []
-    const matchedWords = []
 
     if (regex.safetyRegex.test(turn.text)) {
-      score += 100;
-      signals.safety++;
       signalIndices.safetyIndices.add(index)
-
-      tags.push("SAFETY")
-      const matches = turn.text.match(regex.safetyRegex);
-      if (matches) {
-        matchedWords.push(...matches);
-      }
-
     }
 
     if (isFellow) {
 
       if (regex.pedagogyRegex.test(turn.text)) {
-        score += 50;
-        signals.pedagogy++;
         signalIndices.pedagogyIndices.add(index);
-
-
-        tags.push("PEDAGOGY")
-        const matches = turn.text.match(regex.pedagogyRegex);
-        if (matches) {
-          matchedWords.push(...matches);
-        }
-
       }
 
       if (regex.reflectionRegex.test(turn.text)) {
-        score += 40;
-        signals.facilitation++;
         signalIndices.reflectionIndices.add(index)
-
-        tags.push("REFLECTION")
-        const matches = turn.text.match(regex.reflectionRegex);
-        if (matches) {
-          matchedWords.push(...matches);
-        }
-
       }
 
       if (regex.empathyRegex.test(turn.text)) {
-        score += 20;
-        signals.facilitation++;
         signalIndices.empathyIndices.add(index);
-
-        tags.push("EMPATHY")
-        const matches = turn.text.match(regex.empathyRegex);
-        if (matches) {
-          matchedWords.push(...matches);
-        }
-
       }
 
       if(regex. understandingRegex.test(turn.text)){
-        score += 200;
-        signals.facilitation++;
         signalIndices.empathyIndices.add(index);
-
-        tags.push("UNDERSTANDING")
-        const matches = turn.text.match(regex.understandingRegex);
-        if (matches) {
-          matchedWords.push(...matches);
-        }
-
       }
 
     }
 
-    const aggregatedTurn = {
-      text: turn.text,
-      tags,
-      score,
-      matchedWords
-    }
-
-    if (score > this.minimumSignalScore) {
-      detailed.push(aggregatedTurn)
-    }
-
-    return score;
+    return signalIndices;
   }
 
   private buildFinalTranscript(
