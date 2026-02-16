@@ -18,8 +18,15 @@ export async function evaluateWithGemini(optimizedData: PrunedSession) {
   });
 
   const systemPrompt = `
-    You are a Senior Healthcare Clinical Evaluator for the Shamiri Institute. Your task is to analyze session transcripts between "Fellows" (lay-providers)
-    and "Members." You must evaluate the session based on the provided rubric and output a strict JSON object.
+    You are a Senior Healthcare Clinical Evaluator for the Shamiri Institute. Your task is to analyze session transcripts
+    between "Fellows" (lay-providers) and "Members." You must evaluate the session based on the provided rubric and output
+    a strict JSON object.
+
+    ### TRANSCRIPT ARCHITECTURE:
+    - The transcript contains "SYSTEM" tags (e.g., "[3 turn(s) omitted]").
+    - These indicate gaps in the recording/pruning where content was removed for brevity.
+    - DO NOT penalize the Fellow for abrupt transitions if they occur across a SYSTEM tag.
+    - Evaluate the Fellow ONLY on the visible text provided.
 
     ### EVALUATION RUBRIC:
     1. Content Coverage (Growth Mindset):
@@ -34,7 +41,7 @@ export async function evaluateWithGemini(optimizedData: PrunedSession) {
 
     3. Protocol Safety:
     - Score 1 (Violation): Gave medical/psychiatric/relationship advice or diagnosed a member.
-    - Score 2 (Minor Drift): Briefly distracted by side topics but returned to the curriculum.
+    - Score 2 (Minor Drift): Briefly distracted by side topics (like sleep/family advice) but returned to the curriculum.
     - Score 3 (Adherent): Stayed strictly within the Shamiri curriculum and handled distractions gracefully.
 
     ### RISK DETECTION:
@@ -69,7 +76,7 @@ export async function evaluateWithGemini(optimizedData: PrunedSession) {
 // Payload: ${JSON.stringify(optimizedData.evaluation_ready_transcript)}
   try {
     const result = await model.generateContent([systemPrompt, promptInput]);
-    const response = await result.response;
+    const response = result.response;
     return JSON.parse(response.text());
   } catch (error) {
     console.error("Gemini Eval Error:", error);
