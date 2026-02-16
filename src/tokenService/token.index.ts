@@ -26,10 +26,7 @@ export async function getLLMEvaluation(   jsonData: string): Promise<LLMEvaluati
 
     const validationResult = SessionSchema.safeParse(parsedJson);
     if (!validationResult.success) {
-      logger.error("Session validation failed", {
-        validationErrors: validationResult.error.flatten(),
-      });
-
+      logger.error("Session validation failed", { validationErrors: validationResult.error.flatten() });
       throw new Error("Invalid session data format");
     }
 
@@ -37,26 +34,17 @@ export async function getLLMEvaluation(   jsonData: string): Promise<LLMEvaluati
     logger.info("Session validated successfully");
 
 
-    const pruneStart = performance.now();
-    const prunedSession = await getPrunedSession(
-      allLexicons,
-      sessionData
-    );
+    const prunedSession = await getPrunedSession(allLexicons, sessionData);
 
     const systemPrompt = buildSystemPrompt();
 
     logger.info("Calling Gemini LLM (optimized)");
 
     const llmStart = performance.now();
-    const llmEvaluation = await useGeminiLLMApi(
-      systemPrompt,
-      prunedSession.finalTranscript
-    );
+    const llmEvaluation = await useGeminiLLMApi(systemPrompt, prunedSession.finalTranscript);
     const llmDuration = performance.now() - llmStart;
 
-    logger.info("Gemini LLM evaluation complete", {
-      durationMs: Math.round(llmDuration),
-    });
+    logger.info("Gemini LLM evaluation complete", { durationMs: Math.round(llmDuration) });
 
     return {
       llmEvaluation,
