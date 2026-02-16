@@ -1,4 +1,4 @@
-import { Session } from '../types/pruner.types.js';
+import { PrunedSession, Session } from '../types/pruner.types.js';
 import { getPrunedSession } from './token.service.js';
 import { allLexicons } from './token.config.js';
 import { SessionSchema } from '../validators/session.schema.js';
@@ -6,7 +6,10 @@ import { LLMEvaluation } from '../types/evaluation.types.js';
 import { useGeminiLLMApi } from '../gemini/gemini.api.js';
 
 
-export async function tokenService(jsonData:string):Promise<LLMEvaluation> {
+export async function getLLMEvaluation(jsonData: string): Promise<{
+  llmEvaluation: LLMEvaluation,
+  prunedTranscript: PrunedSession
+}> {
   try {
 
     const parsedJson: Session = JSON.parse(jsonData);
@@ -55,10 +58,7 @@ export async function tokenService(jsonData:string):Promise<LLMEvaluation> {
 
     const llmEvaluation = await useGeminiLLMApi(systemPrompt, prunedSession.finalTranscript);
 
-    // const unoptimizedGemini = null;
-    // const finalEvaluation = null;
-
-    return llmEvaluation;
+    return { llmEvaluation, prunedTranscript: prunedSession };
   } catch (error) {
     throw error;
   }
