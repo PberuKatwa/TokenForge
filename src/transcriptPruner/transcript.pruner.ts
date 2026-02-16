@@ -1,5 +1,7 @@
-import { Sign } from "crypto";
-import { AggregatedTurnArray, Lexicons, PruneContext, PrunedSession, PruneMetadata, RawTurn, ScoredTurn, Session, SignalIndices, SignalRegexSet, SignalScores, TranscriptIndices } from "../types/pruner.types.js";
+import {
+  AggregatedTurnArray, AllIndices, Lexicons, PruneContext, PrunedSession, PruneMetadata,
+  RawTurn, ScoredTurn, Session, SignalIndices, SignalRegexSet, SignalScores, TurnIndices
+} from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
 
@@ -125,7 +127,7 @@ export class TranscriptPrunner{
     const memberIndices = new Set<number>();
     const keptIndices = new Set<number>();
 
-    const turnIndices: TranscriptIndices = {
+    const turnIndices: TurnIndices = {
       fellowIndices: fellowIndices,
       memberIndices: memberIndices,
       keptIndices: keptIndices
@@ -147,12 +149,15 @@ export class TranscriptPrunner{
       (turn, index) => {
 
         const isFellow = turn.speaker === "Fellow";
+        const isMember = turn.speaker.startsWith("Member")
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
         if (isFellow) {
           turnIndices.fellowIndices.add(index);
-        } else {
+        }
+
+        if (isMember) {
           turnIndices.memberIndices.add(index);
         }
 
@@ -172,50 +177,139 @@ export class TranscriptPrunner{
       }
     )
 
-    // turnIndices.keptIndices = turnIndices.fellowIndices;
-    // turnIndices.keptIndices = this.addEveryThirdIndex(turnIndices.keptIndices)
-    // turnIndices.keptIndices = this.createStrideIndices(turnIndices.fellowIndices)
-    // turnIndices.keptIndices =
-    //   this.addRandomMemberSample(
-    //     turnIndices.memberIndices,
-    //     turnIndices.keptIndices,
-    //     0.3
-    //   );
-
     console.log("turn indicess", turnIndices);
     console.log("signal indices", signalIndices)
-    // console.log("detaileddd", detailedTurn)
 
-    metadata.finalTurns = scoredTurns.length;
-    return { scoredTurns, metadata, turnIndices };
-  }
+    const computedIndices = this.computeFinalIndices(transcript, turnIndices, signalIndices)
 
-  private addRandomMemberSample(
-    memberIndices: Set<number>,
-    keptIndices: Set<number>,
-    percentage: number = 0.3
-  ): Set<number> {
+    const sortedIndices = Array.from(computedIndices).sort((a, b) => a - b);
+    const finalIndices = new Set(sortedIndices);
+    // console.log("sorted indices", finalIndices)
 
-    const membersArray = [...memberIndices];
-
-    const sampleSize = Math.floor(membersArray.length * percentage);
-
-    // Fisher–Yates shuffle
-    for (let i = membersArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [membersArray[i], membersArray[j]] =
-        [membersArray[j], membersArray[i]];
+    const allIndices: AllIndices = {
+      signalIndices,
+      turnIndices,
+      finalIndices
     }
 
-    const sampled = membersArray.slice(0, sampleSize);
 
-    const newKept = new Set(keptIndices);
+    console.log("our indices", allIndices)
 
-    sampled.forEach(index => newKept.add(index));
-
-    return newKept;
+    metadata.finalTurns = scoredTurns.length;
+    return { scoredTurns, metadata, turnIndices, allIndices };
   }
 
+  private addRange(
+    baseIndex: number,
+    padding: number,
+    transcriptLength: number,
+    finalIndices: Set<number>
+  ) {
+    for (let offset = -padding; offset <= padding; offset++) {
+      const i = baseIndex + offset;
+      if (i >= 0 && i < transcriptLength) {
+        finalIndices.add(i);
+      }
+    }
+  }
+
+  private addForward(
+    baseIndex: number,
+    padding: number,
+    transcriptLength: number,
+    finalIndices: Set<number>
+  ) {
+    for (let offset = 0; offset <= padding; offset++) {
+      const i = baseIndex + offset;
+      if (i >= 0 && i < transcriptLength) {
+        finalIndices.add(i);
+      }
+    }
+  }
+
+  private findNearestOpposite(
+    index: number,
+    transcript: RawTurn[],
+    isFellow: boolean
+  ): number | null {
+
+    const target = isFellow ? "Member" : "Fellow";
+
+    // Prefer right side conversationally
+    for (let i = index + 1; i < transcript.length; i++) {
+      if (transcript[i].speaker.startsWith(target)) return i;
+    }
+
+    for (let i = index - 1; i >= 0; i--) {
+      if (transcript[i].speaker.startsWith(target)) return i;
+    }
+
+    return null;
+  }
+
+  private computeFinalIndices(
+    transcript: RawTurn[],
+    turnIndices: TurnIndices,
+    signalIndices: SignalIndices,
+    facilitationMode: "RIGHT_ONLY" | "BOTH" = "RIGHT_ONLY"
+  ): Set<number> {
+
+    const finalIndices = new Set<number>();
+    const transcriptLength = transcript.length;
+
+    const padding = Math.max(1, this.windowPadding);
+
+    signalIndices.safetyIndices.forEach(index => {
+
+      const isFellow = turnIndices.fellowIndices.has(index);
+      const opposite = this.findNearestOpposite(index, transcript, isFellow);
+
+      this.addRange(index, padding, transcriptLength, finalIndices);
+
+      if (opposite !== null) {
+        this.addRange(opposite, padding, transcriptLength, finalIndices);
+      }
+
+    });
+
+    signalIndices.pedagogyIndices.forEach(index => {
+      this.addForward(index, padding, transcriptLength, finalIndices);
+    });
+
+
+    const facilitationSets = [
+      signalIndices.reflectionIndices,
+      signalIndices.empathyIndices,
+      signalIndices.understandingIndices
+    ];
+
+    facilitationSets.forEach(set => {
+      set.forEach(index => {
+
+        const isFellow = turnIndices.fellowIndices.has(index);
+        const opposite = this.findNearestOpposite(index, transcript, isFellow);
+
+        finalIndices.add(index);
+
+        if (opposite !== null) {
+
+          if (facilitationMode === "RIGHT_ONLY") {
+            if (opposite > index) {
+              this.addForward(opposite, padding, transcriptLength, finalIndices);
+            }
+          }
+
+          if (facilitationMode === "BOTH") {
+            this.addRange(opposite, padding, transcriptLength, finalIndices);
+          }
+        }
+
+      });
+
+    });
+
+    return finalIndices;
+  }
 
 
   private calculateScoreTurn(index:number,turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[],signalIndices:SignalIndices) {
@@ -310,6 +404,41 @@ export class TranscriptPrunner{
     return score;
   }
 
+  private buildFinalTranscript(
+    transcript: RawTurn[],
+    finalIndices: Set<number>
+  ): RawTurn[] {
+
+    const finalScript: RawTurn[] = [];
+
+    if (finalIndices.size === 0) return finalScript;
+
+    const sortedIndices = Array.from(finalIndices).sort((a, b) => a - b);
+
+    let previousIndex: number | null = null;
+
+    for (const currentIndex of sortedIndices) {
+
+      if (previousIndex !== null) {
+
+        const gapSize = currentIndex - previousIndex - 1;
+
+        if (gapSize > 0) {
+          finalScript.push({
+            speaker: "SYSTEM",
+            text: `[${gapSize} turn(s) omitted]`
+          });
+        }
+      }
+
+      finalScript.push(transcript[currentIndex]);
+      previousIndex = currentIndex;
+    }
+
+    return finalScript;
+  }
+
+
   private computeKeptIndices(
     scoredTurns: ScoredTurn[],
     transcriptLength: number
@@ -368,37 +497,6 @@ export class TranscriptPrunner{
     return finalPayload;
   }
 
-  private stripFiller(text: string, regexSet:SignalRegexSet): string {
-    return text
-      .replace(regexSet.fillerRegex, '')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
-
-
-  private extractEssence(turn: ScoredTurn, regexSet: SignalRegexSet): string {
-
-    const { text, score } = turn;
-    const cleaned = this.stripFiller(text, regexSet);
-
-    const sentences = cleaned.match(/[^.!?]+[.!?]?/g) ?? [cleaned];
-
-    let chosen = cleaned;
-
-    if (score >= 100) {
-      chosen =
-        sentences.find(s => regexSet.safetyRegex.test(s)) ?? cleaned;
-    } else if (score >= 50) {
-      chosen =
-        sentences.find(s => regexSet.pedagogyRegex.test(s)) ?? cleaned;
-    }
-
-    if (chosen.length > this.maximumCharactersPerTurn) {
-      chosen = chosen.slice(0, this.maximumCharactersPerTurn) + "...";
-    }
-
-    return chosen.trim();
-  }
 
 
 

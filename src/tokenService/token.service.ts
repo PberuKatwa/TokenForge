@@ -25,7 +25,7 @@ export async function tokenService(jsonData:string) {
     const pruner = initializePruner(0, 100, 20, true);
     const prunedSession = pruner.pruneTranscript(allLexicons, sessionData)
 
-    console.log("PrunedSession", prunedSession)
+    // console.log("PrunedSession", prunedSession)
 
     // console.time("Unoptimized Gemini Response Time");
     // const unoptimizedGemini = await evaluateFullTranscript(sessionData)

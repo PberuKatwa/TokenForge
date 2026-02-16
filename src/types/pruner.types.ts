@@ -87,7 +87,7 @@ export interface PrunedSession {
   finalTranscript: Session;
 };
 
-export interface TranscriptIndices {
+export interface TurnIndices {
   fellowIndices: Set<number>;
   memberIndices: Set<number>;
   keptIndices:Set<number>;
@@ -111,4 +111,10 @@ export interface SignalIndices{
   empathyIndices: Set<number>;
   understandingIndices: Set<number>;
   fillerIndices: Set<number>;
+}
+
+export interface AllIndices{
+  signalIndices: SignalIndices;
+  turnIndices: TurnIndices;
+  finalIndices:Set<number>;
 }
