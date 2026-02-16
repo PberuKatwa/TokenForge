@@ -95,21 +95,7 @@ export type SignalRegexSet = {
   fillerRegex: RegExp;
 };
 
-
 export interface PrunedSession {
   metadata: PruneMetadata;
   finalTranscript: Session;
 };
-
-
-
-export interface AggregatedTurn {
-  text: string;
-  tags: string[];
-  score: number;
-  matchedWords: string[];
-}
-
-export interface AggregatedTurnArray {
-  turns: AggregatedTurn[];
-}

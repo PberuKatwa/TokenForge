@@ -1,6 +1,6 @@
 import {
-  AggregatedTurnArray, Lexicons, PruneContext, PrunedSession, PruneMetadata,
-  RawTurn, ScoredTurn, Session, SignalIndices, SignalRegexSet, TurnIndices,
+  Lexicons, PruneContext, PrunedSession, PruneMetadata,
+  RawTurn, Session, SignalIndices, SignalRegexSet, TurnIndices,
   CompleteIndices
 } from "../types/pruner.types.js";
 
@@ -138,7 +138,7 @@ export class TranscriptPrunner{
 
     const { sessionTranscript, metadata, lexicons, completeIndices } = context;
     const { transcript } = sessionTranscript;
-    const { turnIndices, signalIndices, finalIndices } = completeIndices;
+    const { turnIndices, signalIndices } = completeIndices;
 
     const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
 
@@ -172,7 +172,6 @@ export class TranscriptPrunner{
     context.metadata = metadata;
     context.completeIndices = { turnIndices, signalIndices, finalIndices:allIndices };
     return context;
-
   }
 
   private addRange(
