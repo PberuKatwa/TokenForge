@@ -96,12 +96,15 @@ export class TranscriptPrunner{
         sessionTranscript
       )
       const { transcript } = sessionTranscript;
-      const { scoredTurns, metadata, turnIndices } = this.scoreTurns(context);
+      const { scoredTurns, metadata, turnIndices, allIndices } = this.scoreTurns(context);
       const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
       // const finalScript = transcript.filter((_, index) => keptIndices.has(index));
 
-      const finalScript = transcript.filter((_, index) => turnIndices.keptIndices.has(index));
+      // const finalScript = transcript.filter((_, index) => turnIndices.keptIndices.has(index));
 
+      const finalScript = this.buildFinalTranscript(transcript,allIndices.finalIndices)
+
+      console.log("final script", finalScript, transcript.length)
 
       const finalSession: Session = {
         session_topic: sessionTranscript.session_topic,
@@ -410,19 +413,32 @@ export class TranscriptPrunner{
   ): RawTurn[] {
 
     const finalScript: RawTurn[] = [];
+    const transcriptLength = transcript.length;
 
-    if (finalIndices.size === 0) return finalScript;
+    if (finalIndices.size === 0) {
+      finalScript.push({
+        speaker: "SYSTEM",
+        text: `[${transcriptLength} turn(s) omitted]`
+      });
+      return finalScript;
+    }
 
     const sortedIndices = Array.from(finalIndices).sort((a, b) => a - b);
+    const firstIncluded = sortedIndices[0];
+
+    if (firstIncluded > 0) {
+      finalScript.push({
+        speaker: "SYSTEM",
+        text: `[${firstIncluded} turn(s) omitted]`
+      });
+    }
 
     let previousIndex: number | null = null;
 
     for (const currentIndex of sortedIndices) {
 
       if (previousIndex !== null) {
-
         const gapSize = currentIndex - previousIndex - 1;
-
         if (gapSize > 0) {
           finalScript.push({
             speaker: "SYSTEM",
@@ -435,8 +451,18 @@ export class TranscriptPrunner{
       previousIndex = currentIndex;
     }
 
+    const lastIncluded = sortedIndices[sortedIndices.length - 1];
+    if (lastIncluded < transcriptLength - 1) {
+      const trailingGap = transcriptLength - lastIncluded - 1;
+      finalScript.push({
+        speaker: "SYSTEM",
+        text: `[${trailingGap} turn(s) omitted]`
+      });
+    }
+
     return finalScript;
   }
+
 
 
   private computeKeptIndices(
