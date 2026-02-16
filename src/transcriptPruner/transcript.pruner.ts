@@ -7,20 +7,14 @@ import {
 export class TranscriptPrunner{
 
   private readonly windowPadding: number;
-  private readonly maximumCharactersPerTurn: number;
-  private readonly minimumSignalScore: number;
-  private readonly keepOnlySignalTurns: boolean;
+  private readonly capPercentage: number;
 
   constructor(
     windowPadding: number,
-    maximumCharactersPerTurn: number,
-    minimumSignalScore: number,
-    keepOnlySignalTurns: boolean
+    capPercentage:number
   ) {
     this.windowPadding = windowPadding;
-    this.maximumCharactersPerTurn = maximumCharactersPerTurn;
-    this.minimumSignalScore = minimumSignalScore;
-    this.keepOnlySignalTurns = keepOnlySignalTurns;
+    this.capPercentage = capPercentage;
   }
 
 
@@ -244,7 +238,12 @@ export class TranscriptPrunner{
 
     });
 
-    signalIndices.pedagogyIndices.forEach(index => {
+    const cappedPedagogy = this.capIndices(
+      signalIndices.pedagogyIndices,
+      transcriptLength
+    );
+
+    cappedPedagogy.forEach(index => {
       this.addForward(index, padding, transcriptLength, finalIndices);
     });
 
@@ -360,5 +359,44 @@ export class TranscriptPrunner{
 
     return finalPayload;
   }
+
+  private capIndices(
+    set: Set<number>,
+    transcriptLength: number
+  ): number[] {
+
+    const sorted = Array.from(set).sort((a, b) => a - b);
+
+    const maxAllowed = Math.floor(transcriptLength * ((this.capPercentage) / 100));
+
+    if (sorted.length <= maxAllowed) {
+      return sorted;
+    }
+
+    if (sorted.length <= maxAllowed) return sorted;
+
+    const result = new Set<number>();
+
+    const first = sorted[0];
+    const last = sorted[sorted.length - 1];
+
+    result.add(first);
+    result.add(last);
+
+    const middle = sorted.slice(1, -1);
+
+    for (let i = middle.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [middle[i], middle[j]] = [middle[j], middle[i]];
+    }
+
+    for (const index of middle) {
+      if (result.size >= maxAllowed) break;
+      result.add(index);
+    }
+
+    return Array.from(result).sort((a, b) => a - b);
+  }
+
 
 }

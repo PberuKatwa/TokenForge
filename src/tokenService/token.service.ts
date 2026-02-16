@@ -22,10 +22,10 @@ export async function tokenService(jsonData:string) {
     console.log("===============================================BEGINNING================================================")
     console.log("========================================================================================================");
 
-    const pruner = initializePruner(0, 100, 20, true);
+    const pruner = initializePruner(0, 20);
     const prunedSession = pruner.pruneTranscript(allLexicons, sessionData)
 
-    // console.log("PrunedSession", prunedSession)
+    console.log("PrunedSession", prunedSession)
 
     // console.time("Unoptimized Gemini Response Time");
     // const unoptimizedGemini = await evaluateFullTranscript(sessionData)

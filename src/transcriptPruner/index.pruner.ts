@@ -2,17 +2,13 @@ import { TranscriptPrunner } from "./transcript.pruner.js";
 
 export function initializePruner(
   windowPadding: number,
-  maximumCharactersPerTurn: number,
-  minimumSignalScore: number,
-  keepOnlySignalTurns: boolean,
+  capPercentage: number
 ) {
   try {
 
     const pruner = new TranscriptPrunner(
       windowPadding,
-      maximumCharactersPerTurn,
-      minimumSignalScore,
-      keepOnlySignalTurns
+      capPercentage
     )
 
     return pruner;
