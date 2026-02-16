@@ -63,9 +63,30 @@ export class TranscriptPrunner{
 
   private initializeContext(
     lexicons:Lexicons,
-    sessionTranscript: Session,
-    indices:CompleteIndices
+    sessionTranscript: Session
   ): PruneContext{
+
+    const turnIndices: TurnIndices = {
+      fellowIndices: new Set<number>(),
+      memberIndices: new Set<number>(),
+      keptIndices: new Set<number>()
+    }
+
+    const signalIndices:SignalIndices = {
+      safetyIndices: new Set<number>(),
+      pedagogyIndices: new Set<number>(),
+      reflectionIndices: new Set<number>(),
+      empathyIndices: new Set<number>(),
+      understandingIndices: new Set<number>(),
+      fillerIndices: new Set<number>(),
+    }
+
+    const indices: CompleteIndices = {
+      turnIndices,
+      signalIndices,
+      finalIndices: new Set<number>()
+    }
+
     return{
       sessionTranscript,
       metadata: {
@@ -114,8 +135,9 @@ export class TranscriptPrunner{
         sessionTranscript,
         indices
       )
+
       const { transcript } = sessionTranscript;
-      const { scoredTurns, metadata, allIndices } = this.scoreTurns(context);
+      const { scoredTurns, metadata, completeIndices } = this.scoreTurns(context);
       const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
       // const finalScript = transcript.filter((_, index) => keptIndices.has(index));
 
@@ -168,9 +190,6 @@ export class TranscriptPrunner{
         regexSet.pedagogyRegex.lastIndex = 0;
       }
     )
-
-    // console.log("turn indicess", completeIndices.turnIndices);
-    // console.log("signal indices", completeIndices.signalIndices)
 
     const computedIndices = this.computeFinalIndices(transcript, completeIndices.turnIndices, completeIndices.signalIndices)
     const sortedIndices = Array.from(computedIndices).sort((a, b) => a - b);
