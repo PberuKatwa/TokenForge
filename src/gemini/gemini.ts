@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import {  PrunedSession } from "../types/pruner.types.js";
 import dotenv from 'dotenv';
 import { LLMEvaluation } from "../types/evaluation.types.js";
-import { LLMEvaluationResponseSchema } from "../validators/evaluation.schema.js";
+import {  LLMEvaluationSchema } from "../validators/evaluation.schema.js";
 dotenv.config();
 
 export async function evaluateWithGemini(prunedSession: PrunedSession):Promise<LLMEvaluation> {
@@ -65,13 +65,13 @@ export async function evaluateWithGemini(prunedSession: PrunedSession):Promise<L
       throw new Error("LLM returned invalid JSON");
     }
 
-    const validation = LLMEvaluationResponseSchema.safeParse(parsedJson);
+    const validation = LLMEvaluationSchema.safeParse(parsedJson);
     if (!validation.success) {
       console.error("Zod validation error:", validation.error.format());
       throw new Error("LLM response failed schema validation");
     }
 
-    return validation;
+    return validation.data;
   } catch (error) {
     console.error("Gemini Eval Error:", error);
     throw new Error(`Error in getting gemini ${error}`)
