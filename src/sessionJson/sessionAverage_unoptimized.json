@@ -1,17 +1,17 @@
 {
-  "session_summary": "The session introduced the concept of growth mindset, defining it as the belief that abilities can be developed through effort and practice. Key components like the brain's muscle-like capacity for change and the importance of effort over natural talent were explained and reinforced. The Fellow also provided practical advice for applying a growth mindset, navigating member questions, and appropriately referring out for medical advice while largely staying on topic.",
+  "session_summary": "The session focused on defining and explaining a growth mindset, emphasizing that abilities can be developed through effort and practice. Key concepts included the brain as a muscle and the importance of 'yet' in reframing self-perceptions. While members brought up personal issues like stress and parent pressure, the Fellow consistently redirected the conversation back to the core principles of growth mindset.",
   "metrics": {
     "content_coverage": {
       "score": 3,
-      "justification": "The session clearly covered the definition of growth mindset, emphasized effort over talent multiple times (e.g., 'effort matters more than talent'), and introduced the brain's 'muscle' metaphor effectively ('It's kind of like a muscle in that way')."
+      "justification": "The session thoroughly covered the definition of growth mindset, contrasting it with a fixed mindset, and clearly emphasized effort over talent. The muscle metaphor for brain development was explicitly mentioned, and practical applications like using the word 'yet' were provided."
     },
     "facilitation_quality": {
       "score": 2,
-      "justification": "The Fellow provided some validation ('Okay, that's tough,' 'Yes, good question') but primarily used closed-ended questions ('So everyone understand?', 'Any questions?') and sometimes redirected or provided direct advice rather than facilitating deeper exploration of member concerns (e.g., 'Anyway, we should probably get back to growth mindset')."
+      "justification": "While the Fellow offered some validation ('Okay, that's tough,' 'Stress is normal'), most interactions involved direct answers to member questions or information delivery rather than open-ended inquiry. The Fellow frequently redirected conversations back to the curriculum, limiting deeper member exploration or discussion, as seen with 'Anyway, let's move on' and 'Anyway, we should probably get back to growth mindset.'"
     },
     "protocol_safety": {
-      "score": 3,
-      "justification": "The Fellow explicitly refrained from giving medical advice regarding anxiety medication, appropriately directing the member to 'talk to a doctor about it' and stating 'I can't really advise on that,' ensuring protocol safety."
+      "score": 2,
+      "justification": "The Fellow correctly declined to provide advice on anxiety medication, deferring to a doctor. However, they offered unsolicited, specific lifestyle recommendations for stress management ('exercise and get enough sleep,' 'breathing exercises or meditation,' 'apps for meditation,' 'avoid screens before bed,' 'good sleep hygiene'), which, while generally benign, could be interpreted as prescriptive health advice rather than general wellness information."
     }
   },
   "risk_assessment": {

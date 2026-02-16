@@ -23,20 +23,12 @@
       "text": "Yes, that's a great example. Studying differently or putting in more effort can help you improve."
     },
     {
-      "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "That's a common thought, and I'm glad you brought it up. People may start at different levels, but research shows the brain is like a muscle. The more you use it, the stronger it becomes. What happens to a muscle if you train it consistently?"
-    },
-    {
-      "speaker": "Member4",
-      "text": "It gets stronger."
+      "speaker": "Member3",
+      "text": "But some people are naturally smarter."
     },
     {
       "speaker": "SYSTEM",
-      "text": "[2 turn(s) omitted]"
+      "text": "[4 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -52,7 +44,15 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[7 turn(s) omitted]"
+      "text": "[5 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "That confidence you built came from effort and practice. That's the power of growth mindset."
+    },
+    {
+      "speaker": "Member2",
+      "text": "I improved in football after training more."
     },
     {
       "speaker": "Fellow",
@@ -88,7 +88,11 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[2 turn(s) omitted]"
+      "text": "[1 turn(s) omitted]"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Exactly. Asking for help and seeking different explanations are both growth mindset strategies."
     },
     {
       "speaker": "Fellow",
@@ -115,8 +119,8 @@
       "text": "That frustration is completely normal. Everyone feels that way sometimes. Growth mindset doesn't mean we never feel frustrated—it means we recognize that feeling and choose to keep going anyway. What's something small you could try when you feel that frustration coming?"
     },
     {
-      "speaker": "Member1",
-      "text": "Maybe take a break and come back to it?"
+      "speaker": "SYSTEM",
+      "text": "[1 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -148,23 +152,27 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[4 turn(s) omitted]"
+      "text": "[1 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
-      "text": "That persistence really paid off. What kept you going even when it was difficult?"
+      "text": "That's the growth mindset shift right there. You moved from 'I'm terrible' to 'I haven't learned yet.' That's powerful."
     },
     {
-      "speaker": "Member3",
-      "text": "I really wanted to pass, and my friend helped me study differently."
+      "speaker": "Fellow",
+      "text": "Sometimes when we fail, we feel embarrassed or ashamed. Those feelings are valid and normal. Growth mindset doesn't mean we ignore feelings. It means we acknowledge them and then ask ourselves: 'What can I learn from this?' Has anyone experienced that shift before?"
+    },
+    {
+      "speaker": "SYSTEM",
+      "text": "[3 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
       "text": "So you had a goal, and you were willing to try a new strategy by studying with your friend. Those are both growth mindset actions. Thank you for sharing that."
     },
     {
-      "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
+      "speaker": "Fellow",
+      "text": "Let's do a quick activity. I want everyone to think silently for a moment about one challenge you're currently facing—it could be academic, social, or personal. Just hold that in your mind."
     },
     {
       "speaker": "Fellow",
@@ -180,19 +188,7 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Good examples. Notice how those thoughts close the door on possibility. Now, how could we reframe each of those with a growth mindset?"
-    },
-    {
-      "speaker": "Member1",
-      "text": "Math is hard for me right now, but I can improve with practice?"
-    },
-    {
-      "speaker": "SYSTEM",
-      "text": "[3 turn(s) omitted]"
+      "text": "[6 turn(s) omitted]"
     },
     {
       "speaker": "Member4",
@@ -203,16 +199,8 @@
       "text": "Beautiful. You're all getting this. The language we use with ourselves really matters."
     },
     {
-      "speaker": "Fellow",
-      "text": "Now let's make this practical. What is one small action you could take this week toward your challenge? It doesn't have to be big—small steps count."
-    },
-    {
-      "speaker": "Member2",
-      "text": "Practice guitar 15 minutes daily instead of trying to do an hour when I feel like it."
-    },
-    {
       "speaker": "SYSTEM",
-      "text": "[8 turn(s) omitted]"
+      "text": "[10 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -287,8 +275,16 @@
       "text": "Such a small word with such big impact. I'm glad that resonated with you."
     },
     {
+      "speaker": "Member5",
+      "text": "That asking for help is part of growth mindset, not weakness."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Absolutely. Some of the most successful people are those who know when to seek support."
+    },
+    {
       "speaker": "SYSTEM",
-      "text": "[3 turn(s) omitted]"
+      "text": "[1 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",

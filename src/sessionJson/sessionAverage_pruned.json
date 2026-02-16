@@ -11,8 +11,28 @@
       "text": "What's that?"
     },
     {
+      "speaker": "Fellow",
+      "text": "Growth mindset is the idea that you can get better at things through effort and practice."
+    },
+    {
+      "speaker": "Member2",
+      "text": "Like studying more?"
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Yes, exactly. So the main point is that effort matters. If you work hard, you can improve."
+    },
+    {
+      "speaker": "Fellow",
+      "text": "Let me read you the definition from the manual. Growth mindset is the belief that abilities can be developed through dedication and hard work. This view creates a love of learning and resilience."
+    },
+    {
+      "speaker": "Member3",
+      "text": "But some people are just naturally smarter, right?"
+    },
+    {
       "speaker": "SYSTEM",
-      "text": "[6 turn(s) omitted]"
+      "text": "[1 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -24,19 +44,11 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[3 turn(s) omitted]"
+      "text": "[5 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
-      "text": "So, to summarize: growth mindset means you can improve. Fixed mindset means you think you can't. You should have a growth mindset."
-    },
-    {
-      "speaker": "Member5",
-      "text": "Can you give us an example?"
-    },
-    {
-      "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
+      "text": "Sure. Like, if you're bad at something, instead of saying 'I'm bad at this,' you say 'I'm not good at this yet.' The word 'yet' is important."
     },
     {
       "speaker": "Member2",
@@ -51,12 +63,8 @@
       "text": "According to the research, the brain can change. It's kind of like a muscle in that way. When you practice, you get better."
     },
     {
-      "speaker": "Member6",
-      "text": "So anyone can be good at anything?"
-    },
-    {
       "speaker": "SYSTEM",
-      "text": "[4 turn(s) omitted]"
+      "text": "[5 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -80,11 +88,7 @@
     },
     {
       "speaker": "SYSTEM",
-      "text": "[1 turn(s) omitted]"
-    },
-    {
-      "speaker": "Fellow",
-      "text": "Just be honest about your feelings. Tell them you're trying your best. Anyway, we should probably get back to growth mindset."
+      "text": "[2 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",
@@ -95,24 +99,16 @@
       "text": "Is there anything we should practice this week?"
     },
     {
-      "speaker": "SYSTEM",
-      "text": "[6 turn(s) omitted]"
-    },
-    {
       "speaker": "Fellow",
-      "text": "Okay good. So the main points are: effort matters, you can improve through practice, and don't have a fixed mindset. Those are the key takeaways."
+      "text": "Yes, good question. Try to notice when you have negative thoughts about your abilities. Then try to reframe them more positively with a growth mindset perspective."
     },
     {
-      "speaker": "Fellow",
-      "text": "Let me check my notes... yes, I think we've covered everything. Growth mindset is about believing you can develop your abilities. That's what you need to remember."
-    },
-    {
-      "speaker": "Member5",
-      "text": "This was helpful."
+      "speaker": "Member3",
+      "text": "Like what?"
     },
     {
       "speaker": "SYSTEM",
-      "text": "[3 turn(s) omitted]"
+      "text": "[10 turn(s) omitted]"
     },
     {
       "speaker": "Fellow",

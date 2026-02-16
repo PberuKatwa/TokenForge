@@ -1,17 +1,17 @@
 {
-  "session_summary": "The session introduced the concept of growth mindset, defining it as the belief in one's ability to improve through effort and practice, contrasting it with a fixed mindset. Key aspects covered included the brain-as-a-muscle metaphor and the importance of effort over inherent talent. The Fellow addressed questions about academic pressure and medication appropriately, while aiming to reinforce the core message of developing abilities.",
+  "session_summary": "The session introduced the concept of growth mindset, defining it as the belief that abilities can be developed through effort and practice. Key ideas included the brain as a muscle that can grow and the importance of effort over natural talent. The facilitator also addressed member questions regarding parent pressure and appropriate referrals for medical advice.",
   "metrics": {
     "content_coverage": {
       "score": 3,
-      "justification": "The session explicitly covered the brain-as-a-muscle metaphor ('brain can change. It's kind of like a muscle') and emphasized effort over talent ('effort matters more than talent')."
+      "justification": "The session clearly covered the definition of growth mindset, the muscle metaphor for the brain, and explicitly stated the importance of effort over talent, fulfilling all key content requirements."
     },
     "facilitation_quality": {
       "score": 2,
-      "justification": "While the Fellow offered validation and an open-ended question regarding parental pressure ('Have you tried talking to them about how you feel?'), most of the session involved direct instruction and checking for understanding ('So everyone understand? Great. Let's continue.'), rather than using open-ended questions to explore growth mindset concepts."
+      "justification": "The facilitator provided some validation ('Yes, exactly,' 'Good,' 'Yes, good question') and one good open-ended question ('Have you tried talking to them about how you feel?'). However, many questions were closed-ended ('So everyone understand?') or direct information delivery, limiting deeper member engagement."
     },
     "protocol_safety": {
       "score": 3,
-      "justification": "The Fellow explicitly declined to give medical advice regarding anxiety medication, appropriately deferring to a doctor ('That's something you'd need to talk to a doctor about. I can't really advise on that.')."
+      "justification": "The facilitator appropriately responded to a question about anxiety medication by referring the member to a doctor and stating an inability to advise on the matter, demonstrating excellent adherence to safety protocols."
     }
   },
   "risk_assessment": {
