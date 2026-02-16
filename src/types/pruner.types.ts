@@ -57,7 +57,6 @@ export interface SignalScores {
 }
 
 export interface PruneMetadata {
-  participationScore: number;
   originalWordCount: number;
   originalTurns: number;
   finalTurns: number;
@@ -65,43 +64,10 @@ export interface PruneMetadata {
   reductionRatioPercentage: number;
 }
 
-export interface PruneContext {
-  sessionTranscript: Session;
-  signalsScores: SignalScores;
-  metadata: PruneMetadata;
-  lexicons: Lexicons;
-}
-
-export type SignalRegexSet = {
-  safetyRegex: RegExp;
-  pedagogyRegex: RegExp;
-  reflectionRegex: RegExp;
-  empathyRegex: RegExp;
-  understandingRegex: RegExp;
-  fillerRegex: RegExp;
-};
-
-export interface PrunedSession {
-  metadata: PruneMetadata;
-  signalScores: SignalScores;
-  finalTranscript: Session;
-};
-
 export interface TurnIndices {
   fellowIndices: Set<number>;
   memberIndices: Set<number>;
   keptIndices:Set<number>;
-}
-
-export interface AggregatedTurn {
-  text: string;
-  tags: string[];
-  score: number;
-  matchedWords: string[];
-}
-
-export interface AggregatedTurnArray {
-  turns: AggregatedTurn[];
 }
 
 export interface SignalIndices{
@@ -113,8 +79,45 @@ export interface SignalIndices{
   fillerIndices: Set<number>;
 }
 
-export interface AllIndices{
+export interface CompleteIndices{
   signalIndices: SignalIndices;
   turnIndices: TurnIndices;
   finalIndices:Set<number>;
+}
+
+export interface PruneContext {
+  sessionTranscript: Session;
+  signalsScores: SignalScores;
+  metadata: PruneMetadata;
+  lexicons: Lexicons;
+  allIndices: AllIndices;
+}
+
+export type SignalRegexSet = {
+  safetyRegex: RegExp;
+  pedagogyRegex: RegExp;
+  reflectionRegex: RegExp;
+  empathyRegex: RegExp;
+  understandingRegex: RegExp;
+  fillerRegex: RegExp;
+};
+
+
+export interface PrunedSession {
+  metadata: PruneMetadata;
+  signalScores: SignalScores;
+  finalTranscript: Session;
+};
+
+
+
+export interface AggregatedTurn {
+  text: string;
+  tags: string[];
+  score: number;
+  matchedWords: string[];
+}
+
+export interface AggregatedTurnArray {
+  turns: AggregatedTurn[];
 }

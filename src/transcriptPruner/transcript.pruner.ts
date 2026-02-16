@@ -62,7 +62,8 @@ export class TranscriptPrunner{
 
   private initializeContext(
     lexicons:Lexicons,
-    sessionTranscript: Session
+    sessionTranscript: Session,
+    indices:AllIndices
   ): PruneContext{
     return{
       sessionTranscript,
@@ -72,7 +73,6 @@ export class TranscriptPrunner{
         facilitation: 0
       },
       metadata: {
-        participationScore: 0,
         originalWordCount: 0,
         originalTurns: sessionTranscript.transcript.length,
         finalTurns: 0,
@@ -91,12 +91,34 @@ export class TranscriptPrunner{
   ):PrunedSession {
     try {
 
+      const turnIndices: TurnIndices = {
+        fellowIndices: new Set<number>(),
+        memberIndices: new Set<number>(),
+        keptIndices: new Set<number>()
+      }
+
+      const signalIndices:SignalIndices = {
+        safetyIndices: new Set<number>(),
+        pedagogyIndices: new Set<number>(),
+        reflectionIndices: new Set<number>(),
+        empathyIndices: new Set<number>(),
+        understandingIndices: new Set<number>(),
+        fillerIndices: new Set<number>(),
+      }
+
+      const indices: AllIndices = {
+        turnIndices,
+        signalIndices,
+        finalIndices: new Set<number>()
+      }
+
       const context: PruneContext = this.initializeContext(
         lexicons,
-        sessionTranscript
+        sessionTranscript,
+        indices
       )
       const { transcript } = sessionTranscript;
-      const { scoredTurns, metadata, turnIndices, allIndices } = this.scoreTurns(context);
+      const { scoredTurns, metadata, allIndices } = this.scoreTurns(context);
       const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
       // const finalScript = transcript.filter((_, index) => keptIndices.has(index));
 
@@ -122,7 +144,7 @@ export class TranscriptPrunner{
 
   private scoreTurns(context: PruneContext) {
 
-    const { sessionTranscript, signalsScores, metadata, lexicons } = context;
+    const { sessionTranscript, metadata, lexicons } = context;
     const { transcript } = sessionTranscript;
 
     const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
@@ -141,38 +163,36 @@ export class TranscriptPrunner{
       fillerIndices: new Set<number>(),
     }
 
-    const detailedTurn:any[] = []
-
     const scoredTurns: ScoredTurn[] = [];
     transcript.forEach(
       (turn, index) => {
 
         const isFellow = turn.speaker === "Fellow";
-        const isMember = turn.speaker.startsWith("Member")
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
-        if (isFellow) {
+        if ( turn.speaker === "Fellow" ) {
           turnIndices.fellowIndices.add(index);
-        }
-
-        if (isMember) {
+        } else {
           turnIndices.memberIndices.add(index);
         }
 
-        const score = this.calculateScoreTurn(index,turn, signalsScores, regexSet,detailedTurn,signalIndices)
-        if (!isFellow && wordCount > 3) metadata.participationScore++;
+        if (regexSet.safetyRegex.test(turn.text)) signalIndices.safetyIndices.add(index);
+        if (regexSet.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
+        if (regexSet.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
+        if (regexSet.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
+        if(regexSet. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
 
-        // Only track turns that meet minimum threshold
-        if (score >= this.minimumSignalScore || !this.keepOnlySignalTurns) {
-
-          turnIndices.keptIndices.add(index)
-          scoredTurns.push({ ...turn, index, score });
-        }
+        // if (isFellow) {
+        //   turnIndices.fellowIndices.add(index);
+        //   if (regexSet.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
+        //   if (regexSet.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
+        //   if (regexSet.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
+        //   if(regexSet. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
+        // }
 
         regexSet.safetyRegex.lastIndex = 0;
         regexSet.pedagogyRegex.lastIndex = 0;
-
       }
     )
 
@@ -311,7 +331,7 @@ export class TranscriptPrunner{
   }
 
 
-  private calculateScoreTurn(index:number,turn:RawTurn,signals:SignalScores,regex:SignalRegexSet,detailed:any[],signalIndices:SignalIndices) {
+  private calculateScoreTurn(index:number,turn:RawTurn,regex:SignalRegexSet,signalIndices:SignalIndices) {
 
     const isFellow = turn.speaker === "Fellow";
 
