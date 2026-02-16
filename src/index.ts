@@ -3,6 +3,8 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { logger } from './utils/logger/index.logger.js';
 import { getLLMEvaluation } from './tokenService/token.index.js';
+import { Session } from './types/pruner.types.js';
+import { evaluateFullTranscript } from './gemini/gemini.full.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +21,24 @@ async function runPruner() {
 
     const data = await fs.readFile(filePath, "utf-8");
 
-    const llmEvaluation = await getLLMEvaluation(data);
+    console.log("===============================================BEGINNING================================================")
+    console.log("========================================================================================================");
+
+    const { llmEvaluation, prunedTranscript } = await getLLMEvaluation(data);
+    console.log("pruneddd", prunedTranscript)
+
+    console.log("========================================================================================================");
+    console.log("\n========================================================================================================");
+
+    const session: Session = JSON.parse(data);
+
+    console.time("Unoptimized Gemini Response Time");
+    const unoptimizedGemini = await evaluateFullTranscript(session)
+    console.timeEnd("Unoptimized Gemini Response Time");
+
+    console.log("===============================================ENDDDDDDD================================================")
+    console.log("========================================================================================================");
+
 
     if (llmEvaluation) {
       const evalFileName = inputFileName.replace(".json", "_evaluation.json");
@@ -27,14 +46,10 @@ async function runPruner() {
       await fs.writeFile(evalPath, JSON.stringify(llmEvaluation, null, 2));
     }
 
-    console.log("pruneddd", prunedSession)
-    // console.log("unoptimizedGemini", unoptimizedGemini)
-    // console.log("finalEvaluation", finalEvaluation)
-
-    if (prunedSession) {
+    if (prunedTranscript) {
       const evalFileName = inputFileName.replace(".json", "_pruned.json");
       const evalPath = path.join(__dirname, "sessionJson", evalFileName);
-      await fs.writeFile(evalPath, JSON.stringify(prunedSession.finalTranscript, null, 2));
+      await fs.writeFile(evalPath, JSON.stringify(prunedTranscript.finalTranscript, null, 2));
     }
 
     if (unoptimizedGemini) {
@@ -43,44 +58,10 @@ async function runPruner() {
       await fs.writeFile(evalPath, JSON.stringify(unoptimizedGemini, null, 2));
     }
 
-    if (finalEvaluation) {
-      const evalFileName = inputFileName.replace(".json", "_evaluation.json");
-      const evalPath = path.join(__dirname, "sessionJson", evalFileName);
-      await fs.writeFile(evalPath, JSON.stringify(finalEvaluation, null, 2));
-    }
 
   } catch (error) {
     logger.error(`Error in running pruner`, error)
   }
 }
 
-runPruner()
-
-
-// console.log("===============================================BEGINNING================================================")
-// console.log("========================================================================================================");
-
-// const prunedSession = await getPrunedSession(allLexicons,sessionData)
-
-
-// console.time("Gemini Response Time");
-// const finalEvaluation = await evaluateWithGemini(prunedSession);
-// console.timeEnd("Gemini Response Time");
-
-// // console.log("Optimized Evaluation", finalEvaluation)
-
-// // console.log("PrunedSession", prunedSession)
-// // console.log(JSON.stringify(prunedSession.finalTranscript, null, 2));
-
-// console.log("========================================================================================================");
-// console.log("\n========================================================================================================");
-
-
-// console.time("Unoptimized Gemini Response Time");
-// const unoptimizedGemini = await evaluateFullTranscript(sessionData)
-// console.timeEnd("Unoptimized Gemini Response Time");
-
-// // console.log("Unoptimized Evaluation", unoptimizedGemini)
-
-// console.log("===============================================ENDDDDDDD================================================")
-// console.log("========================================================================================================");
+runPruner();
