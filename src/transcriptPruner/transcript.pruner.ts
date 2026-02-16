@@ -1,6 +1,7 @@
 import {
-  AggregatedTurnArray, AllIndices, Lexicons, PruneContext, PrunedSession, PruneMetadata,
-  RawTurn, ScoredTurn, Session, SignalIndices, SignalRegexSet, SignalScores, TurnIndices
+  AggregatedTurnArray, Lexicons, PruneContext, PrunedSession, PruneMetadata,
+  RawTurn, ScoredTurn, Session, SignalIndices, SignalRegexSet, TurnIndices,
+  CompleteIndices
 } from "../types/pruner.types.js";
 
 export class TranscriptPrunner{
@@ -63,15 +64,10 @@ export class TranscriptPrunner{
   private initializeContext(
     lexicons:Lexicons,
     sessionTranscript: Session,
-    indices:AllIndices
+    indices:CompleteIndices
   ): PruneContext{
     return{
       sessionTranscript,
-      signalsScores: {
-        safety: 0,
-        pedagogy: 0,
-        facilitation: 0
-      },
       metadata: {
         originalWordCount: 0,
         originalTurns: sessionTranscript.transcript.length,
@@ -81,7 +77,8 @@ export class TranscriptPrunner{
       },
       lexicons: {
         ...lexicons
-      }
+      },
+      completeIndices:indices
     }
   }
 
@@ -106,7 +103,7 @@ export class TranscriptPrunner{
         fillerIndices: new Set<number>(),
       }
 
-      const indices: AllIndices = {
+      const indices: CompleteIndices = {
         turnIndices,
         signalIndices,
         finalIndices: new Set<number>()
@@ -144,78 +141,48 @@ export class TranscriptPrunner{
 
   private scoreTurns(context: PruneContext) {
 
-    const { sessionTranscript, metadata, lexicons } = context;
+    const { sessionTranscript, metadata, lexicons, completeIndices } = context;
     const { transcript } = sessionTranscript;
 
     const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
-    const turnIndices: TurnIndices = {
-      fellowIndices: new Set<number>(),
-      memberIndices: new Set<number>(),
-      keptIndices: new Set<number>()
-    }
-
-    const signalIndices:SignalIndices = {
-      safetyIndices: new Set<number>(),
-      pedagogyIndices: new Set<number>(),
-      reflectionIndices: new Set<number>(),
-      empathyIndices: new Set<number>(),
-      understandingIndices: new Set<number>(),
-      fillerIndices: new Set<number>(),
-    }
 
     const scoredTurns: ScoredTurn[] = [];
     transcript.forEach(
       (turn, index) => {
-
-        const isFellow = turn.speaker === "Fellow";
         const wordCount = turn.text.trim().split(/\s+/).length;
         metadata.originalWordCount += wordCount;
 
         if ( turn.speaker === "Fellow" ) {
-          turnIndices.fellowIndices.add(index);
+          completeIndices.turnIndices.fellowIndices.add(index);
         } else {
-          turnIndices.memberIndices.add(index);
+          completeIndices.turnIndices.memberIndices.add(index);
         }
 
-        if (regexSet.safetyRegex.test(turn.text)) signalIndices.safetyIndices.add(index);
-        if (regexSet.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
-        if (regexSet.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
-        if (regexSet.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
-        if(regexSet. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
-
-        // if (isFellow) {
-        //   turnIndices.fellowIndices.add(index);
-        //   if (regexSet.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
-        //   if (regexSet.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
-        //   if (regexSet.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
-        //   if(regexSet. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
-        // }
+        if (regexSet.safetyRegex.test(turn.text)) completeIndices.signalIndices.safetyIndices.add(index);
+        if (regexSet.pedagogyRegex.test(turn.text)) completeIndices.signalIndices.pedagogyIndices.add(index);
+        if (regexSet.reflectionRegex.test(turn.text)) completeIndices.signalIndices.reflectionIndices.add(index);
+        if (regexSet.empathyRegex.test(turn.text)) completeIndices.signalIndices.empathyIndices.add(index);
+        if(regexSet. understandingRegex.test(turn.text)) completeIndices.signalIndices.empathyIndices.add(index);
 
         regexSet.safetyRegex.lastIndex = 0;
         regexSet.pedagogyRegex.lastIndex = 0;
       }
     )
 
-    console.log("turn indicess", turnIndices);
-    console.log("signal indices", signalIndices)
+    // console.log("turn indicess", completeIndices.turnIndices);
+    // console.log("signal indices", completeIndices.signalIndices)
 
-    const computedIndices = this.computeFinalIndices(transcript, turnIndices, signalIndices)
-
+    const computedIndices = this.computeFinalIndices(transcript, completeIndices.turnIndices, completeIndices.signalIndices)
     const sortedIndices = Array.from(computedIndices).sort((a, b) => a - b);
-    const finalIndices = new Set(sortedIndices);
+    const allIndices = new Set(sortedIndices);
     // console.log("sorted indices", finalIndices)
 
-    const allIndices: AllIndices = {
-      signalIndices,
-      turnIndices,
-      finalIndices
-    }
+    completeIndices.finalIndices = allIndices;
 
-
-    console.log("our indices", allIndices)
+    console.log("our indices", completeIndices)
 
     metadata.finalTurns = scoredTurns.length;
-    return { scoredTurns, metadata, turnIndices, allIndices };
+    return { scoredTurns, metadata, completeIndices };
   }
 
   private addRange(
@@ -330,23 +297,6 @@ export class TranscriptPrunner{
     return finalIndices;
   }
 
-
-  private calculateScoreTurn(index:number,turn:RawTurn,regex:SignalRegexSet,signalIndices:SignalIndices) {
-
-    const isFellow = turn.speaker === "Fellow";
-
-    if (regex.safetyRegex.test(turn.text)) signalIndices.safetyIndices.add(index);
-
-    if (isFellow) {
-      if (regex.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
-      if (regex.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
-      if (regex.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
-      if(regex. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
-    }
-
-    return signalIndices;
-  }
-
   private buildFinalTranscript(
     transcript: RawTurn[],
     finalIndices: Set<number>
@@ -441,7 +391,6 @@ export class TranscriptPrunner{
 
   private buildPrunedSession(
     metadata: PruneMetadata,
-    signals:SignalScores,
     prunedTranscript: Session
   ): PrunedSession {
 

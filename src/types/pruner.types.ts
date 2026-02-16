@@ -50,12 +50,6 @@ export interface Lexicons {
   fillerWords: string[];
 }
 
-export interface SignalScores {
-  safety: number;
-  pedagogy: number;
-  facilitation: number;
-}
-
 export interface PruneMetadata {
   originalWordCount: number;
   originalTurns: number;
@@ -87,10 +81,9 @@ export interface CompleteIndices{
 
 export interface PruneContext {
   sessionTranscript: Session;
-  signalsScores: SignalScores;
   metadata: PruneMetadata;
   lexicons: Lexicons;
-  allIndices: AllIndices;
+  completeIndices: CompleteIndices;
 }
 
 export type SignalRegexSet = {
@@ -105,7 +98,6 @@ export type SignalRegexSet = {
 
 export interface PrunedSession {
   metadata: PruneMetadata;
-  signalScores: SignalScores;
   finalTranscript: Session;
 };
 
