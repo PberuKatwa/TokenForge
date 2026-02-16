@@ -56,7 +56,11 @@ export async function getLLMEvaluation(jsonData: string): Promise<{
       }
     `;
 
+    console.time("OPTIMIZED Time");
     const llmEvaluation = await useGeminiLLMApi(systemPrompt, prunedSession.finalTranscript);
+    console.timeEnd("OPTIMIZED Time");
+
+    // const llmEvaluation = await useGeminiLLMApi(systemPrompt, prunedSession.finalTranscript);
 
     return { llmEvaluation, prunedTranscript: prunedSession };
   } catch (error) {

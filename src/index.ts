@@ -32,9 +32,9 @@ async function runPruner() {
 
     const session: Session = JSON.parse(data);
 
-    console.time("Unoptimized Gemini Response Time");
+    console.time("NAIVE Time");
     const unoptimizedGemini = await evaluateFullTranscript(session)
-    console.timeEnd("Unoptimized Gemini Response Time");
+    console.timeEnd("NAIVE Time");
 
     console.log("===============================================ENDDDDDDD================================================")
     console.log("========================================================================================================");
