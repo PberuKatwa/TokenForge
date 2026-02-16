@@ -315,28 +315,13 @@ export class TranscriptPrunner{
 
     const isFellow = turn.speaker === "Fellow";
 
-    if (regex.safetyRegex.test(turn.text)) {
-      signalIndices.safetyIndices.add(index)
-    }
+    if (regex.safetyRegex.test(turn.text)) signalIndices.safetyIndices.add(index);
 
     if (isFellow) {
-
-      if (regex.pedagogyRegex.test(turn.text)) {
-        signalIndices.pedagogyIndices.add(index);
-      }
-
-      if (regex.reflectionRegex.test(turn.text)) {
-        signalIndices.reflectionIndices.add(index)
-      }
-
-      if (regex.empathyRegex.test(turn.text)) {
-        signalIndices.empathyIndices.add(index);
-      }
-
-      if(regex. understandingRegex.test(turn.text)){
-        signalIndices.empathyIndices.add(index);
-      }
-
+      if (regex.pedagogyRegex.test(turn.text)) signalIndices.pedagogyIndices.add(index);
+      if (regex.reflectionRegex.test(turn.text)) signalIndices.reflectionIndices.add(index);
+      if (regex.empathyRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
+      if(regex. understandingRegex.test(turn.text)) signalIndices.empathyIndices.add(index);
     }
 
     return signalIndices;
