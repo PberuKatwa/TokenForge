@@ -67,12 +67,9 @@ export async function runPruner(config: RunConfig): Promise<void> {
     );
     const durationMs = performance.now() - startTime;
 
-    logger.info("Unoptimized Gemini complete", {
-      durationMs: Math.round(durationMs),
-    });
-
-
+    logger.info("Unoptimized Gemini complete", { durationMs: Math.round(durationMs) });
     const baseName = inputFileName.replace(".json", "");
+
     if (llmEvaluation) {
       await writeJsonFile(
         path.join(OUTPUT_DIR, `${baseName}_evaluation.json`),
@@ -94,9 +91,7 @@ export async function runPruner(config: RunConfig): Promise<void> {
       );
     }
 
-    logger.info("Pruner run completed successfully", {
-      inputFileName,
-    });
+    logger.info("Pruner run completed successfully", { inputFileName });
 
   } catch (error) {
     logger.error("Pruner execution failed", {
