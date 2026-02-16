@@ -118,8 +118,6 @@ export class TranscriptPrunner{
       const { metadata, completeIndices } = this.scoreTurns(context);
       const finalScript = this.buildFinalTranscript(transcript, completeIndices.finalIndices);
 
-      console.log("final script", finalScript, transcript.length)
-
       const finalSession: Session = {
         session_topic: sessionTranscript.session_topic,
         duration_minutes: sessionTranscript.duration_minutes,
@@ -210,7 +208,6 @@ export class TranscriptPrunner{
 
     const target = isFellow ? "Member" : "Fellow";
 
-    // Prefer right side conversationally
     for (let i = index + 1; i < transcript.length; i++) {
       if (transcript[i].speaker.startsWith(target)) return i;
     }
