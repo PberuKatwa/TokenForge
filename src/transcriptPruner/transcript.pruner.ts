@@ -126,7 +126,7 @@ export class TranscriptPrunner{
         transcript:finalScript
       }
 
-      const finalPayload = this.buildPrunedSession(metadata, context.signalsScores, finalSession);
+      const finalPayload = this.buildPrunedSession(metadata, finalSession);
 
       return finalPayload;
     } catch (error) {
@@ -342,7 +342,6 @@ export class TranscriptPrunner{
     return finalScript;
   }
 
-
   private buildPrunedSession(
     metadata: PruneMetadata,
     prunedTranscript: Session
@@ -359,7 +358,6 @@ export class TranscriptPrunner{
     metadata.finalWordCount = prunedWordCount;
     const finalPayload: PrunedSession= {
       metadata,
-      signalScores: signals,
       finalTranscript:prunedTranscript
     }
 
