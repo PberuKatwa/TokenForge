@@ -1,5 +1,6 @@
 import { PrunedSession, Session } from '../types/pruner.types.js';
 import { initializePruner } from '../transcriptPruner/index.pruner.js';
+import { getPrunedSession } from './token.service.js';
 import { allLexicons } from './token.config.js';
 import { SessionSchema } from '../validators/session.schema.js';
 import { evaluateWithGemini } from '../gemini/gemini.js';

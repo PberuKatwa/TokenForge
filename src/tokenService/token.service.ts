@@ -1,7 +1,7 @@
 import { Lexicons, PrunedSession, Session } from '../types/pruner.types.js';
 import { initializePruner } from '../transcriptPruner/index.pruner.js';
 
-export async function tokenService(lexicons: Lexicons, session: Session):Promise<PrunedSession>{
+export async function getPrunedSession(lexicons: Lexicons, session: Session):Promise<PrunedSession>{
   try {
 
     const pruner = initializePruner(0, 20);
