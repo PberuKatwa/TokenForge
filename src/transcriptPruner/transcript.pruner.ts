@@ -109,41 +109,14 @@ export class TranscriptPrunner{
   ):PrunedSession {
     try {
 
-      const turnIndices: TurnIndices = {
-        fellowIndices: new Set<number>(),
-        memberIndices: new Set<number>(),
-        keptIndices: new Set<number>()
-      }
-
-      const signalIndices:SignalIndices = {
-        safetyIndices: new Set<number>(),
-        pedagogyIndices: new Set<number>(),
-        reflectionIndices: new Set<number>(),
-        empathyIndices: new Set<number>(),
-        understandingIndices: new Set<number>(),
-        fillerIndices: new Set<number>(),
-      }
-
-      const indices: CompleteIndices = {
-        turnIndices,
-        signalIndices,
-        finalIndices: new Set<number>()
-      }
-
       const context: PruneContext = this.initializeContext(
         lexicons,
         sessionTranscript,
-        indices
       )
 
       const { transcript } = sessionTranscript;
-      const { scoredTurns, metadata, completeIndices } = this.scoreTurns(context);
-      const keptIndices = this.computeKeptIndices(scoredTurns, transcript.length);
-      // const finalScript = transcript.filter((_, index) => keptIndices.has(index));
-
-      // const finalScript = transcript.filter((_, index) => turnIndices.keptIndices.has(index));
-
-      const finalScript = this.buildFinalTranscript(transcript,allIndices.finalIndices)
+      const { metadata, completeIndices } = this.scoreTurns(context);
+      const finalScript = this.buildFinalTranscript(transcript, completeIndices.finalIndices);
 
       console.log("final script", finalScript, transcript.length)
 
@@ -161,14 +134,16 @@ export class TranscriptPrunner{
     }
   }
 
-  private scoreTurns(context: PruneContext) {
+  private scoreTurns(context: PruneContext): {
+    metadata: PruneMetadata,
+    completeIndices:CompleteIndices
+  } {
 
     const { sessionTranscript, metadata, lexicons, completeIndices } = context;
     const { transcript } = sessionTranscript;
 
     const regexSet: SignalRegexSet = this.initializeScoringRegex(lexicons);
 
-    const scoredTurns: ScoredTurn[] = [];
     transcript.forEach(
       (turn, index) => {
         const wordCount = turn.text.trim().split(/\s+/).length;
@@ -199,9 +174,7 @@ export class TranscriptPrunner{
     completeIndices.finalIndices = allIndices;
 
     console.log("our indices", completeIndices)
-
-    metadata.finalTurns = scoredTurns.length;
-    return { scoredTurns, metadata, completeIndices };
+    return { metadata, completeIndices };
   }
 
   private addRange(
@@ -373,41 +346,6 @@ export class TranscriptPrunner{
   }
 
 
-
-  private computeKeptIndices(
-    scoredTurns: ScoredTurn[],
-    transcriptLength: number
-  ): Set<number> {
-    const keptIndices = new Set<number>();
-
-    scoredTurns.forEach(turn => {
-      for (
-        let i = turn.index - this.windowPadding;
-        i <= turn.index + this.windowPadding;
-        i++
-      ) {
-        if (i >= 0 && i < transcriptLength) {
-          keptIndices.add(i);
-        }
-      }
-    });
-
-    // scoredTurns.forEach(turn => {
-    //   for (
-    //     let i = turn.index;
-    //     i <= turn.index + this.windowPadding;
-    //     i++
-    //   ) {
-    //     if (i < transcriptLength) {
-    //       keptIndices.add(i);
-    //     }
-    //   }
-    // });
-
-
-    return keptIndices;
-  }
-
   private buildPrunedSession(
     metadata: PruneMetadata,
     prunedTranscript: Session
@@ -430,9 +368,5 @@ export class TranscriptPrunner{
 
     return finalPayload;
   }
-
-
-
-
 
 }
