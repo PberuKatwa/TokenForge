@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import { logger } from './utils/logger/index.logger.js';
 import { getLLMEvaluation } from './tokenService/token.index.js';
 import { Session } from './types/pruner.types.js';
-import { evaluateFullTranscript } from './gemini/gemini.full.js';
 import { useGeminiLLMApi } from './gemini/gemini.api.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,7 +25,6 @@ async function runPruner() {
     console.log("========================================================================================================");
 
     const { llmEvaluation, prunedTranscript } = await getLLMEvaluation(data);
-
 
     console.log("========================================================================================================");
     console.log("\n\n========================================================================================================");
