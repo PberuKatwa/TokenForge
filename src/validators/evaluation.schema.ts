@@ -12,7 +12,7 @@ export const MetricsSchema = z.object({
 });
 
 export const RiskAssessmentSchema = z.object({
-  flag: z.union([z.literal("SAFE"), z.literal("UNSAFE")]),
+  flag: z.union([z.literal("SAFE"), z.literal("RISK")]),
   quote: z.string().nullable(),
 });
 

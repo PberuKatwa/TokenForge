@@ -5,9 +5,10 @@ import { allLexicons } from './token.config.js';
 import { SessionSchema } from '../validators/session.schema.js';
 import { evaluateWithGemini } from '../gemini/gemini.js';
 import { evaluateFullTranscript } from '../gemini/gemini.full.js';
+import { LLMEvaluation } from '../types/evaluation.types.js';
 
 
-export async function tokenService(jsonData:string) {
+export async function tokenService(jsonData:string):LLMEvaluation {
   try {
 
     const parsedJson: Session = JSON.parse(jsonData);
@@ -19,38 +20,12 @@ export async function tokenService(jsonData:string) {
     }
     const sessionData = result.data;
 
-    console.log("===============================================BEGINNING================================================")
-    console.log("========================================================================================================");
-
     const prunedSession = await getPrunedSession(allLexicons,sessionData)
 
-
-    console.time("Gemini Response Time");
     const finalEvaluation = await evaluateWithGemini(prunedSession);
-    console.timeEnd("Gemini Response Time");
-
-    // console.log("Optimized Evaluation", finalEvaluation)
-
-    // console.log("PrunedSession", prunedSession)
-    // console.log(JSON.stringify(prunedSession.finalTranscript, null, 2));
-
-    console.log("========================================================================================================");
-    console.log("\n========================================================================================================");
-
-
-    console.time("Unoptimized Gemini Response Time");
-    const unoptimizedGemini = await evaluateFullTranscript(sessionData)
-    console.timeEnd("Unoptimized Gemini Response Time");
-
-    // console.log("Unoptimized Evaluation", unoptimizedGemini)
-
-    console.log("===============================================ENDDDDDDD================================================")
-    console.log("========================================================================================================");
 
     // const unoptimizedGemini = null;
     // const finalEvaluation = null;
-    //
-    // com
 
     return { prunedSession, unoptimizedGemini, finalEvaluation };
   } catch (error) {

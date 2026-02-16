@@ -16,6 +16,6 @@ export interface MetricCategory {
 }
 
 export interface RiskAssessment {
-  flag: "SAFE" | "UNSAFE";
+  flag: "SAFE" | "RISK";
   quote: string | null;
 }

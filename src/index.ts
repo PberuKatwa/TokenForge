@@ -50,3 +50,32 @@ async function runPruner() {
 }
 
 runPruner()
+
+
+// console.log("===============================================BEGINNING================================================")
+// console.log("========================================================================================================");
+
+// const prunedSession = await getPrunedSession(allLexicons,sessionData)
+
+
+// console.time("Gemini Response Time");
+// const finalEvaluation = await evaluateWithGemini(prunedSession);
+// console.timeEnd("Gemini Response Time");
+
+// // console.log("Optimized Evaluation", finalEvaluation)
+
+// // console.log("PrunedSession", prunedSession)
+// // console.log(JSON.stringify(prunedSession.finalTranscript, null, 2));
+
+// console.log("========================================================================================================");
+// console.log("\n========================================================================================================");
+
+
+// console.time("Unoptimized Gemini Response Time");
+// const unoptimizedGemini = await evaluateFullTranscript(sessionData)
+// console.timeEnd("Unoptimized Gemini Response Time");
+
+// // console.log("Unoptimized Evaluation", unoptimizedGemini)
+
+// console.log("===============================================ENDDDDDDD================================================")
+// console.log("========================================================================================================");
