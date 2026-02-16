@@ -2,9 +2,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import {  PrunedSession } from "../types/pruner.types.js";
 import dotenv from 'dotenv';
 import { LLMEvaluation } from "../types/evaluation.types.js";
+import { LLMEvaluationResponseSchema } from "../validators/evaluation.schema.js";
 dotenv.config();
 
-export async function evaluateWithGemini(prunedSession: PrunedSession):LLMEvaluation {
+export async function evaluateWithGemini(prunedSession: PrunedSession):Promise<LLMEvaluation> {
 
   const api_key = process.env.GEMINI_API_KEY;
   if (!api_key) throw new Error(`NO api key for gemini was found`)
@@ -55,13 +56,22 @@ export async function evaluateWithGemini(prunedSession: PrunedSession):LLMEvalua
 
   try {
     const result = await model.generateContent([systemPrompt, promptInput]);
-    console.log("result 134455", result)
+    const rawText = result.response.text();
 
+    let parsedJson: unknown;
+    try {
+      parsedJson = JSON.parse(rawText);
+    } catch (parseError) {
+      throw new Error("LLM returned invalid JSON");
+    }
 
-    const response = result.response;
+    const validation = LLMEvaluationResponseSchema.safeParse(parsedJson);
+    if (!validation.success) {
+      console.error("Zod validation error:", validation.error.format());
+      throw new Error("LLM response failed schema validation");
+    }
 
-
-    return JSON.parse(response.text());
+    return validation;
   } catch (error) {
     console.error("Gemini Eval Error:", error);
     throw new Error(`Error in getting gemini ${error}`)

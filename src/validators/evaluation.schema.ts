@@ -20,6 +20,4 @@ export const LLMEvaluationSchema = z.object({
   session_summary: z.string().min(1),
   metrics: MetricsSchema,
   risk_assessment: RiskAssessmentSchema,
-});
-
-export const LLMEvaluationResponseSchema = z.array(LLMEvaluationSchema);
+}).strict();
