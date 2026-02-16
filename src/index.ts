@@ -11,8 +11,8 @@ const __dirname = path.dirname(__filename);
 async function runPruner() {
   try {
 
-    // const inputFileName = "sessionFail.json";
-    const inputFileName = "sessionAverage.json";
+    const inputFileName = "sessionFail.json";
+    // const inputFileName = "sessionAverage.json";
     // const inputFileName = "sessionPerfect.json";
 
     const filePath = path.join(__dirname, "OriginalSessions", inputFileName);
@@ -21,6 +21,10 @@ async function runPruner() {
     const data = await fs.readFile(filePath, "utf-8");
 
     const { prunedSession, unoptimizedGemini, finalEvaluation } = await tokenService(data);
+
+    console.log("pruneddd", prunedSession)
+    // console.log("unoptimizedGemini", unoptimizedGemini)
+    // console.log("finalEvaluation", finalEvaluation)
 
     if (prunedSession) {
       const evalFileName = inputFileName.replace(".json", "_pruned.json");
