@@ -33,9 +33,7 @@ export async function getLLMEvaluation(   jsonData: string): Promise<LLMEvaluati
     const sessionData = validationResult.data;
     logger.info("Session validated successfully");
 
-
     const prunedSession = await getPrunedSession(allLexicons, sessionData);
-
     const systemPrompt = buildSystemPrompt();
 
     logger.info("Calling Gemini LLM (optimized)");
@@ -46,10 +44,7 @@ export async function getLLMEvaluation(   jsonData: string): Promise<LLMEvaluati
 
     logger.info("Gemini LLM evaluation complete", { durationMs: Math.round(llmDuration) });
 
-    return {
-      llmEvaluation,
-      prunedTranscript: prunedSession,
-    };
+    return { llmEvaluation, prunedTranscript: prunedSession};
 
   } catch (error) {
     logger.error("LLM evaluation pipeline failed", {

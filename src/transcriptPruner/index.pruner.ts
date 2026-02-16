@@ -5,12 +5,7 @@ export function initializePruner(
   capPercentage: number
 ) {
   try {
-
-    const pruner = new TranscriptPrunner(
-      windowPadding,
-      capPercentage
-    )
-
+    const pruner = new TranscriptPrunner(windowPadding, capPercentage);
     return pruner;
   } catch (error) {
     throw error;
